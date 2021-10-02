@@ -23,7 +23,6 @@ bool LectorDeArchivo::seLlegoAlFinDelArchivo(){
 
 void LectorDeArchivo::obtenerDatosDeArchivo(int cantidadDeValores){
 	char valoresLeidos[cantidadDeValores];
-
 	this->archivo.getline(valoresLeidos, sizeof(valoresLeidos));
 
 }
