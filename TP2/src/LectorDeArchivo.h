@@ -9,20 +9,24 @@
 #define LECTORDEARCHIVO_H_
 #include <string>
 #include <fstream>
+#include <iostream>
+#include "LectorDeArchivo.h"
 
 
 class LectorDeArchivo {
 
 private:
 	std::string pathDeArchivo;
-	std::ifstream archivo;
+	std::fstream archivo;
+	int cantidadDeColumnas;
+	int numeroDeColumna;
 
 public:
-	LectorDeArchivo(std::string pathPorLeer);
+	LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols);
 
 	void leerArchivoBinario();
 
-	void obtenerDatosDeArchivo(int cantidadDeValores);
+	int obtenerDatosDeArchivo();
 
 	bool seLlegoAlFinDelArchivo();
 

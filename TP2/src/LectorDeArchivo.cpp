@@ -7,13 +7,14 @@
 
 #include "LectorDeArchivo.h"
 
-LectorDeArchivo::LectorDeArchivo(std::string pathPorLeer) {
+LectorDeArchivo::LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols) {
 	this->pathDeArchivo = pathPorLeer;
+	this->cantidadDeColumnas = cantidadCols;
+	this->numeroDeColumna = nroCols;
 }
 
 void LectorDeArchivo::leerArchivoBinario(){
-	std::ifstream archivo;
-	this->archivo.open(this->pathDeArchivo.c_str(),std::ifstream::binary);
+	this->archivo.open(this->pathDeArchivo.c_str(),std::ifstream::in |std::ifstream::out |std::ifstream::binary);
 }
 
 bool LectorDeArchivo::seLlegoAlFinDelArchivo(){
@@ -21,12 +22,18 @@ bool LectorDeArchivo::seLlegoAlFinDelArchivo(){
 }
 
 
-void LectorDeArchivo::obtenerDatosDeArchivo(int cantidadDeValores){
-	char valoresLeidos[cantidadDeValores];
-	this->archivo.getline(valoresLeidos, sizeof(valoresLeidos));
+int LectorDeArchivo::obtenerDatosDeArchivo(){
+	uint16_t valorLeido;
+	for(int i = 0; i < this->cantidadDeColumnas ; i++){
 
+		if(i == this->numeroDeColumna){
+
+			this->archivo.read((char *)&valorLeido, sizeof(uint16_t));
+
+		}
+	}
+	return valorLeido;
 }
-
 LectorDeArchivo::~LectorDeArchivo() {
 }
 
