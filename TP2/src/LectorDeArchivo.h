@@ -8,6 +8,7 @@
 #ifndef LECTORDEARCHIVO_H_
 #define LECTORDEARCHIVO_H_
 #include <string>
+#include <arpa/inet.h>
 #include <fstream>
 #include <iostream>
 #include "LectorDeArchivo.h"

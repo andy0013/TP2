@@ -32,7 +32,8 @@ int LectorDeArchivo::obtenerDatosDeArchivo(){
 
 		}
 	}
-	return valorLeido;
+	uint16_t numeroLeido = ntohs(valorLeido);
+	return numeroLeido;
 }
 LectorDeArchivo::~LectorDeArchivo() {
 }

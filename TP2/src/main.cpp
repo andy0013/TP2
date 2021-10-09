@@ -11,21 +11,32 @@
 #include <stdlib.h>
 #include "OperacionStrategy.h"
 #include "LectorDeArchivo.h"
+#include "SplitApplyCombineImpl.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	LectorDeArchivo* lector = new LectorDeArchivo("dataset",strtol(argv[2],NULL,10),1);
-	lector->leerArchivoBinario();
-	int numeroLeido = lector->obtenerDatosDeArchivo();
 
-	OperacionStrategy* name = new OperacionStrategy();
-	name->StrategyCrearOperacion("max");
-	name->StrategyRealizarOperacion(4);
-	name->StrategyRealizarOperacion(2);
-	name->StrategyRealizarOperacion(100);
-	name->StrategyRealizarOperacion(8);
-	delete lector;
-	delete name;
+	std::string dataset = argv[1];
+	int cantidadColumnasDataset = strtol(argv[2],NULL,10);
+//	char *hilos = argv[3];
+	char *input = NULL;
+	size_t leido = 0;
+	getline(&input,&leido,stdin);
+	char filaInicio = input[0];
+	char filaFin = input[2];
+	char nroParticiones = input[4];
+	char columna = input[6];
+	std::string operacion;
+	for(int i = 7; i < (int)(strlen(input)-1); i++){
+		operacion += input[i];
+	}
+
+	SplitApplyCombineImpl* servicio = new SplitApplyCombineImpl(filaInicio, filaFin , operacion, nroParticiones);
+
+	servicio->cargarDatosParaResolverOperaciones(dataset, cantidadColumnasDataset, columna);
+
+	servicio->SplitApplyCombineImplementarOperacion();
+
 	return 0;
 }
