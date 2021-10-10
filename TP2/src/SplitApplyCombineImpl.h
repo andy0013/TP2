@@ -34,6 +34,10 @@ public:
 
 	void SplitApplyCombineImplementarOperacion();
 
+	void SplitApply(OperacionStrategy* name);
+
+	void Combine(OperacionStrategy* name);
+
 	virtual ~SplitApplyCombineImpl();
 };
 

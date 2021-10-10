@@ -11,7 +11,9 @@
 class Operacion {
 public:
 	virtual void resolverOperacion(int valor) = 0;
-//	~Operacion();
+	virtual void combineOperacion(int valor, int particiones) = 0;
+protected:
+	~Operacion();
 };
 
 
@@ -32,6 +34,13 @@ public:
 		this->valorActual += valor;
 	}
 
+	void combineOperacion(int valor, int particiones){
+		this->resolverOperacion(valor);
+	}
+protected:
+	~OperacionSuma(){
+
+	}
 };
 
 
@@ -53,6 +62,16 @@ public:
 			this->valorActual = valor;
 
 		}
+	}
+
+	void combineOperacion(int valor, int particiones){
+		this->resolverOperacion(valor);
+	}
+
+protected:
+
+	~OperacionMax(){
+
 	}
 
 };
@@ -80,6 +99,16 @@ public:
 		}
 	}
 
+	void combineOperacion(int valor, int particiones){
+		this->resolverOperacion(valor);
+	}
+
+protected:
+
+	~OperacionMin(){
+
+	}
+
 };
 
 
@@ -101,6 +130,17 @@ public:
 	void resolverOperacion(int valor){
 		this->cantidadDeValores ++;
 		this->valorActual += valor;
+	}
+
+	void combineOperacion(int valor, int particiones){
+		this->cantidadDeValores += particiones;
+		this->valorActual += valor;
+	}
+
+protected:
+
+	~OperacionMean(){
+
 	}
 
 };

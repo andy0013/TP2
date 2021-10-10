@@ -18,16 +18,27 @@ SplitApplyCombineImpl::SplitApplyCombineImpl(int filaInicio, int filaFin, std::s
 void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(std::string nombreDataset, int cantidadColumnas, int columnaDondeOperar){
 	this->gestorDeDatos = new LectorDeArchivo(nombreDataset,cantidadColumnas,columnaDondeOperar);
 	this->gestorDeDatos->leerArchivoBinario();
+	this->gestorDeDatos->situarLectorEnFilaInicial(this->filaInicio);
 }
 
 
 void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion(){
 	OperacionStrategy* name = new OperacionStrategy();
-	for(int i = 0; i < this->nroParticiones; i++){
-		int numeroLeido = this->gestorDeDatos->obtenerDatosDeArchivo();
-		name->StrategyCrearOperacion(this->operacion);
+	name->StrategyCrearOperacion(this->operacion);
+	this->SplitApply(name);
+}
 
+void SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
+	for(int i = 0; i < this->nroParticiones; i++){
+		if(!this->gestorDeDatos->siguienteFilaValida(this->filaFin))
+			break;
+		int numeroLeido = this->gestorDeDatos->obtenerDatosDeArchivo();
+		name->StrategyRealizarOperacion(numeroLeido);
 	}
+}
+
+void SplitApplyCombineImpl::Combine(OperacionStrategy* name){
+
 }
 
 

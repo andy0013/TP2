@@ -20,6 +20,7 @@ private:
 	std::string pathDeArchivo;
 	std::fstream archivo;
 	int cantidadDeColumnas;
+	int filaEnLaQueEstaSituado;
 	int numeroDeColumna;
 
 public:
@@ -27,9 +28,11 @@ public:
 
 	void leerArchivoBinario();
 
+	void situarLectorEnFilaInicial(int nroDeFila);
+
 	int obtenerDatosDeArchivo();
 
-	bool seLlegoAlFinDelArchivo();
+	bool siguienteFilaValida(int filaFinal);
 
 	virtual ~LectorDeArchivo();
 };
