@@ -8,7 +8,6 @@
 #ifndef OPERACIONSTRATEGY_H_
 #define OPERACIONSTRATEGY_H_
 #include "Operacion.h"
-#include "Lista.h"
 using namespace std;
 #include <string>
 #include <cstring>
@@ -22,7 +21,11 @@ public:
 	OperacionStrategy();
 	void StrategyCrearOperacion(std::string operacion);
 	void StrategyRealizarOperacion(int valor);
+	int StrategyObtenerValorFinalOperacion();
+	void StrategyCombineOperacion(OperacionStrategy* particionNueva, int nroParticiones);
 	virtual ~OperacionStrategy();
+private:
+	int StrategyObtenerValorOperacion();
 };
 
 #endif /* OPERACIONSTRATEGY_H_ */

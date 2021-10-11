@@ -24,21 +24,28 @@ private:
 
 	std::string operacion;
 
+	OperacionStrategy* particion;
+
 	LectorDeArchivo* gestorDeDatos;
 
 public:
 
 	SplitApplyCombineImpl(int filaInicio, int filaFin, std::string operacion, int nroParticiones);
 
-	void cargarDatosParaResolverOperaciones(std::string nombreDataset, int cantidadColumnas, int columnaDondeOperar);
+	void cargarDatosParaResolverOperaciones(char *argv[], int columnaDondeOperar);
 
 	void SplitApplyCombineImplementarOperacion();
 
-	void SplitApply(OperacionStrategy* name);
-
-	void Combine(OperacionStrategy* name);
+	int SplitApplyCombineResultadoOperacion();
 
 	virtual ~SplitApplyCombineImpl();
+
+private:
+
+	bool SplitApply(OperacionStrategy* particion);
+
+	void Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion);
+
 };
 
 #endif /* SPLITAPPLYCOMBINEIMPL_H_ */

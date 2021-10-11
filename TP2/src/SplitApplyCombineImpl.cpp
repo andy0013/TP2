@@ -13,33 +13,53 @@ SplitApplyCombineImpl::SplitApplyCombineImpl(int filaInicio, int filaFin, std::s
 	this->operacion = operacion;
 	this->nroParticiones = nroParticiones;
 	this->gestorDeDatos = NULL;
+	this->particion = new OperacionStrategy();
 }
 
-void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(std::string nombreDataset, int cantidadColumnas, int columnaDondeOperar){
+void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[], int columnaDondeOperar){
+	std::string nombreDataset = argv[1];
+	int cantidadColumnas = strtol(argv[2],NULL,10);
+//	char *hilos = argv[3];
 	this->gestorDeDatos = new LectorDeArchivo(nombreDataset,cantidadColumnas,columnaDondeOperar);
 	this->gestorDeDatos->leerArchivoBinario();
 	this->gestorDeDatos->situarLectorEnFilaInicial(this->filaInicio);
+	this->particion->StrategyCrearOperacion(this->operacion);
 }
 
 
 void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion(){
-	OperacionStrategy* name = new OperacionStrategy();
-	name->StrategyCrearOperacion(this->operacion);
-	this->SplitApply(name);
+	bool terminamosDeLeerParticiones = false;
+	terminamosDeLeerParticiones = this->SplitApply(particion);
+	while(!terminamosDeLeerParticiones){
+		OperacionStrategy* particionNueva = new OperacionStrategy();
+		particionNueva->StrategyCrearOperacion(this->operacion);
+		terminamosDeLeerParticiones = this->SplitApply(particion);
+		this->Combine(particion, particionNueva);
+	}
+
 }
 
-void SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
+bool SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
+	bool terminamosFilasValidas = false;
 	for(int i = 0; i < this->nroParticiones; i++){
-		if(!this->gestorDeDatos->siguienteFilaValida(this->filaFin))
+		if(!this->gestorDeDatos->siguienteFilaValida(this->filaFin)){
+			terminamosFilasValidas = true;
 			break;
+		}
 		int numeroLeido = this->gestorDeDatos->obtenerDatosDeArchivo();
 		name->StrategyRealizarOperacion(numeroLeido);
 	}
+	return terminamosFilasValidas;
 }
 
-void SplitApplyCombineImpl::Combine(OperacionStrategy* name){
-
+void SplitApplyCombineImpl::Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion){
+	particion->StrategyCombineOperacion(nuevaParticion, this->nroParticiones);
 }
+
+int SplitApplyCombineImpl::SplitApplyCombineResultadoOperacion(){
+	return this->particion->StrategyObtenerValorFinalOperacion();
+}
+
 
 
 SplitApplyCombineImpl::~SplitApplyCombineImpl() {

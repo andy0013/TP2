@@ -14,16 +14,16 @@ OperacionStrategy::OperacionStrategy() {
 
 void OperacionStrategy::StrategyCrearOperacion(std::string operacion){
 	//no puedo usar un switch
-	if(!operacion.compare("max")){
+	if(!strcmp("max",operacion.c_str())){
 		this->operacion = new OperacionMax();
 	}
-	if(!operacion.compare("min")){
+	if(!strcmp("min",operacion.c_str())){
 		this->operacion = new OperacionMin();
 	}
-	if(!operacion.compare("mean")){
+	if(!strcmp("mean",operacion.c_str())){
 		this->operacion = new OperacionMean();
 	}
-	if(!operacion.compare("sum")){
+	if(!strcmp("sum",operacion.c_str())){
 		this->operacion = new OperacionSuma();
 	}
 }
@@ -32,7 +32,18 @@ void OperacionStrategy::StrategyRealizarOperacion(int valor){
 	this->operacion->resolverOperacion(valor);
 }
 
+int OperacionStrategy::StrategyObtenerValorOperacion(){
+	return this->operacion->obtenerValorActual();
+}
 
+int OperacionStrategy::StrategyObtenerValorFinalOperacion(){
+	return this->operacion->obtenerValorFinal();
+}
+
+
+void OperacionStrategy::StrategyCombineOperacion(OperacionStrategy* particionNueva, int nroParticiones){
+	this->operacion->combineOperacion(particionNueva->StrategyObtenerValorOperacion(), nroParticiones);
+}
 
 OperacionStrategy::~OperacionStrategy() {
 	// TODO Auto-generated destructor stub

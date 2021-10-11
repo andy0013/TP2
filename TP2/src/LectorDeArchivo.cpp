@@ -19,7 +19,7 @@ void LectorDeArchivo::leerArchivoBinario(){
 }
 
 bool LectorDeArchivo::siguienteFilaValida(int filaFinal){
-	return this->filaEnLaQueEstaSituado > filaFinal ? true : false;
+	return (this->filaEnLaQueEstaSituado < filaFinal) ? true : false;
 }
 
 void LectorDeArchivo::situarLectorEnFilaInicial(int nroDeFila){
@@ -28,7 +28,7 @@ void LectorDeArchivo::situarLectorEnFilaInicial(int nroDeFila){
 //		this->archivo.read((char *)&valorLeido, sizeof(uint16_t));
 //		this->filaEnLaQueEstaSituado++;
 //	}
-	this->archivo.seekg(nroDeFila*this->cantidadDeColumnas*2, this->archivo.beg);
+//	this->archivo.seekg(nroDeFila*this->cantidadDeColumnas*2, this->archivo.beg);
 }
 
 int LectorDeArchivo::obtenerDatosDeArchivo(){
