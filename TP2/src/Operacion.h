@@ -158,12 +158,11 @@ public:
 	}
 
 	void resolverOperacion(int valor){
-		this->cantidadDeValores ++;
 		this->valorActual += valor;
 	}
 
 	void combineOperacion(int valor, int particiones){
-		this->cantidadDeValores += particiones;
+		this->cantidadDeValores = particiones;
 		this->valorActual += valor;
 	}
 

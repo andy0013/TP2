@@ -53,13 +53,12 @@ bool SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
 }
 
 void SplitApplyCombineImpl::Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion){
-	particion->StrategyCombineOperacion(nuevaParticion, this->nroParticiones);
+	particion->StrategyCombineOperacion(nuevaParticion, this->filaFin-this->filaInicio);
 }
 
 int SplitApplyCombineImpl::SplitApplyCombineResultadoOperacion(){
 	return this->particion->StrategyObtenerValorFinalOperacion();
 }
-
 
 
 SplitApplyCombineImpl::~SplitApplyCombineImpl() {
