@@ -40,8 +40,8 @@ Link : https://github.com/andy0013/TP2.git
  hacemos el combine, por lo tanto, tenemos la informacion resultante del combine, y no las distintas particiones.
  
  
- **Pregunta: Al agregar hilos, en mi caso actual leo una Particion a la vez, deberia leer N particiones dependiendo de cantidad de hilos
- y luego dispararlos en simultaneo, una vez terminaron el procesamiento repetir continuamente. Pero, puedo reutilizar mi estrucutra
+ **Pregunta:** En mi caso actual leo una Particion a la vez, cuando se agrege Hilos deberia leer N particiones dependiendo de cantidad de hilos
+ a usar, luego dispararlos en simultaneo, y una vez terminaron el procesamiento repetir continuamente. **Pero, puedo reutilizar mi estrucutra
  actual de ir combinando por lectura los datos?, o deberia hacer como se sugiere en el enunciado que el Hilo principal detecte
  que se finalizo de leer particiones y hacer el combine de todo junto?**
  
