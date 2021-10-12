@@ -13,7 +13,6 @@
 #include "OperacionStrategy.h"
 
 class SplitApplyCombineImpl {
-
 private:
 	int filaInicio;
 
@@ -44,5 +43,4 @@ private:
 	void Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion);
 
 };
-
 #endif /* SPLITAPPLYCOMBINEIMPL_H_ */

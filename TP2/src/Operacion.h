@@ -59,8 +59,8 @@ protected:
  */
 class OperacionMax : public Operacion{
 	int valorActual;
-public:
 
+public:
 	/*
 	 *
 	 */
@@ -107,7 +107,7 @@ public:
 	}
 
 	void resolverOperacion(int valor)override{
-		if(valor == 0){
+		if (valor == 0){
 			this->valorActual = valor;
 		}else if(this->valorActual > valor){
 			this->valorActual = valor;
@@ -128,7 +128,6 @@ public:
 
 protected:
 	~OperacionMin(){}
-
 };
 
 
@@ -167,7 +166,6 @@ public:
 
 protected:
 	~OperacionMean(){}
-
 };
 
 #endif /* OPERACION_H_ */

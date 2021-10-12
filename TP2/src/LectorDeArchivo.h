@@ -15,7 +15,6 @@
 
 
 class LectorDeArchivo {
-
 private:
 	std::string pathDeArchivo;
 	std::fstream archivo;
