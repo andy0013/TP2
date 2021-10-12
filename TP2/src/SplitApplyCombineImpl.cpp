@@ -35,7 +35,7 @@ void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion() {
 	while (!terminamosDeLeerParticiones) {
 		OperacionStrategy *particionNueva = new OperacionStrategy();
 		particionNueva->StrategyCrearOperacion(this->operacion);
-		terminamosDeLeerParticiones = this->SplitApply(particion);
+		terminamosDeLeerParticiones = this->SplitApply(particionNueva);
 		this->Combine(particion, particionNueva);
 	}
 }

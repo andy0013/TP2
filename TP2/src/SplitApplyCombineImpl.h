@@ -27,19 +27,44 @@ private:
 	LectorDeArchivo* gestorDeDatos;
 
 public:
+	/*
+	 * Iniciamos clase, recibe como parametro sus atributos.
+	 */
 	SplitApplyCombineImpl(int filaInicio, int filaFin, std::string operacion, int nroParticiones);
 
+	/*
+	 * PRE: Recibe los argumentos de la consulta, recibe la columna ingresad por input.
+	 * POST: void
+	 * Inicializa el atributo LectorDeArchivo, y conociendo los argumentos
+	 * inicializa la Operacion.
+	 */
 	void cargarDatosParaResolverOperaciones(char *argv[], int columnaDondeOperar);
 
+	/*
+	 * POST: void
+	 * Realiza la creacion de cada particion y itera mientras
+	 * es necesario, luego combina las particiones.
+	 */
 	void SplitApplyCombineImplementarOperacion();
 
+	/*
+	 * POST: Retorna el resultado (int) final de una particion.
+	 */
 	int SplitApplyCombineResultadoOperacion();
 
 	virtual ~SplitApplyCombineImpl();
 
 private:
+	/*
+	 * POST: retorna un bool, se ocupa de leer los datos de la particion
+	 * el bool indica si en medio de la lectura de la particion
+	 * llegamos a la fila final permitida
+	 */
 	bool SplitApply(OperacionStrategy* particion);
 
+	/*
+	 * Combina los datos de 2 particiones.
+	 */
 	void Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion);
 };
 #endif /* SPLITAPPLYCOMBINEIMPL_H_ */

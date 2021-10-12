@@ -20,7 +20,11 @@ class ConsolaOperacionesDataset {
 
 public:
 	ConsolaOperacionesDataset();
-
+	/*
+	 * Manda a solicitar valores a usuario
+	 * Mientras el usuario solicite, envia
+	 * a ejecutar el splitApplycombine
+	 */
 	void solicitarYDispararSolicitudUsuario(char *argv[]);
 
 	virtual ~ConsolaOperacionesDataset();

@@ -24,13 +24,22 @@ private:
 
 public:
 	LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols);
-
+	/*
+	 * Open de archivo binario-Lo carga en el atributo.
+	 */
 	void leerArchivoBinario();
-
+	/*
+	 * Situa el puntero de lectura en la ubicacion de la
+	 * fila inicial de donde leer valores.
+	 */
 	void situarLectorEnFilaInicial(int nroDeFila);
-
+	/*
+	 * POST: el valor de la columna leido.
+	 */
 	int obtenerDatosDeArchivo();
-
+	/*
+	 * POST: True si la siguiente fila a leer es valida.
+	 */
 	bool siguienteFilaValida(int filaFinal);
 
 	virtual ~LectorDeArchivo();
