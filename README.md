@@ -33,7 +33,7 @@ Link : https://github.com/andy0013/TP2.git
  
  Una breve explicacion de la forma en la que se esta realizando en este momento el procesamiento de datos, la siguiente:
  
- ![error](imagenes/SEC.PNG)
+ ![error](imagenes/SEC.png)
  
  
  Como se puede observar, en el loop que estamos utilizando, creamos dos particiones distintas, antes de seguir con la particion siguiente
