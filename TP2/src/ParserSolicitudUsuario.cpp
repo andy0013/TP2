@@ -36,7 +36,7 @@ void ParserSolicitudUsuario::identificarInformacionIngresadaStdin(char *input){
 	i = this->obtenerValor(&this->filaFin,input,i);
 	i = this->obtenerValor(&this->nroParticiones,input,i);
 	i = this->obtenerValor(&this->columnaPorUsar,input,i);
-	i = this->obtenerValor(&this->operacion,input,i);
+	this->obtenerValor(&this->operacion,input,i);
 
 }
 

@@ -7,7 +7,7 @@
 
 #ifndef SPLITAPPLYCOMBINEIMPL_H_
 #define SPLITAPPLYCOMBINEIMPL_H_
-
+#include <string>
 #include "LectorDeArchivo.h"
 #include "Operacion.h"
 #include "OperacionStrategy.h"
@@ -15,7 +15,6 @@
 class SplitApplyCombineImpl {
 
 private:
-
 	int filaInicio;
 
 	int nroParticiones;
@@ -29,7 +28,6 @@ private:
 	LectorDeArchivo* gestorDeDatos;
 
 public:
-
 	SplitApplyCombineImpl(int filaInicio, int filaFin, std::string operacion, int nroParticiones);
 
 	void cargarDatosParaResolverOperaciones(char *argv[], int columnaDondeOperar);
@@ -41,7 +39,6 @@ public:
 	virtual ~SplitApplyCombineImpl();
 
 private:
-
 	bool SplitApply(OperacionStrategy* particion);
 
 	void Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion);

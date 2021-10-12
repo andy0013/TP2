@@ -24,6 +24,7 @@ protected:
  */
 class OperacionSuma : public Operacion{
 	int valorActual;
+
 public:
 	/*
 	 *
@@ -32,27 +33,24 @@ public:
 		this->valorActual = 0;
 	}
 
-	void resolverOperacion(int valor) {
+	void resolverOperacion(int valor)override {
 		this->valorActual += valor;
 	}
 
-	void combineOperacion(int valor, int particiones){
+	void combineOperacion(int valor, int particiones)override{
 		this->resolverOperacion(valor);
 	}
 
-	int obtenerValorActual(){
+	int obtenerValorActual()override{
 		return this->valorActual;
 	}
 
-	int obtenerValorFinal(){
+	int obtenerValorFinal()override{
 		return this->valorActual;
 	}
-
 
 protected:
-	~OperacionSuma(){
-
-	}
+	~OperacionSuma(){}
 };
 
 
@@ -62,6 +60,7 @@ protected:
 class OperacionMax : public Operacion{
 	int valorActual;
 public:
+
 	/*
 	 *
 	 */
@@ -69,32 +68,27 @@ public:
 		this->valorActual = 0;
 	}
 
-	void resolverOperacion(int valor){
-		if(valor > this->valorActual ){
+	void resolverOperacion(int valor)override{
+		if(valor > this->valorActual){
 			this->valorActual = valor;
-
 		}
 	}
 
-	void combineOperacion(int valor, int particiones){
+	void combineOperacion(int valor, int particiones)override{
 		this->resolverOperacion(valor);
 	}
 
-	int obtenerValorActual(){
+	int obtenerValorActual()override{
 		return this->valorActual;
 	}
 
-	int obtenerValorFinal(){
+	int obtenerValorFinal()override{
 		return this->valorActual;
 	}
 
 
 protected:
-
-	~OperacionMax(){
-
-	}
-
+	~OperacionMax(){}
 };
 
 
@@ -103,6 +97,7 @@ protected:
  */
 class OperacionMin : public Operacion{
 	int valorActual;
+
 public:
 	/*
 	 *
@@ -111,8 +106,7 @@ public:
 		this->valorActual = 0;
 	}
 
-
-	void resolverOperacion(int valor){
+	void resolverOperacion(int valor)override{
 		if(valor == 0){
 			this->valorActual = valor;
 		}else if(this->valorActual > valor){
@@ -120,24 +114,20 @@ public:
 		}
 	}
 
-	void combineOperacion(int valor, int particiones){
+	void combineOperacion(int valor, int particiones)override{
 		this->resolverOperacion(valor);
 	}
 
-	int obtenerValorActual(){
+	int obtenerValorActual()override{
 		return this->valorActual;
 	}
 
-	int obtenerValorFinal(){
+	int obtenerValorFinal()override{
 		return this->valorActual;
 	}
-
 
 protected:
-
-	~OperacionMin(){
-
-	}
+	~OperacionMin(){}
 
 };
 
@@ -148,6 +138,7 @@ protected:
 class OperacionMean : public Operacion{
 	int valorActual;
 	int cantidadDeValores;
+
 public:
 	/*
 	 *
@@ -157,32 +148,26 @@ public:
 		this->valorActual = 0;
 	}
 
-	void resolverOperacion(int valor){
+	void resolverOperacion(int valor)override{
 		this->valorActual += valor;
 	}
 
-	void combineOperacion(int valor, int particiones){
+	void combineOperacion(int valor, int particiones)override{
 		this->cantidadDeValores = particiones;
 		this->valorActual += valor;
 	}
 
-	int obtenerValorActual(){
+	int obtenerValorActual()override{
 		return this->valorActual;
 	}
 
-	int obtenerValorFinal(){
+	int obtenerValorFinal()override{
 		return (this->valorActual/this->cantidadDeValores);
 	}
 
-
 protected:
-
-	~OperacionMean(){
-
-	}
+	~OperacionMean(){}
 
 };
-
-
 
 #endif /* OPERACION_H_ */

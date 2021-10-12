@@ -10,11 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ConsolaOperacionesDataset.h"
-using namespace std;
 
 
 int main(int argc, char *argv[]) {
-
 	ConsolaOperacionesDataset* consola = new ConsolaOperacionesDataset();
 
 	consola->solicitarYDispararSolicitudUsuario(argv);

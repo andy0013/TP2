@@ -8,7 +8,6 @@
 #ifndef OPERACIONSTRATEGY_H_
 #define OPERACIONSTRATEGY_H_
 #include "Operacion.h"
-using namespace std;
 #include <string>
 #include <cstring>
 

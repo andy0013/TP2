@@ -7,7 +7,8 @@
 
 #include "SplitApplyCombineImpl.h"
 
-SplitApplyCombineImpl::SplitApplyCombineImpl(int filaInicio, int filaFin, std::string operacion, int nroParticiones) {
+SplitApplyCombineImpl::SplitApplyCombineImpl(int filaInicio, int filaFin,
+		const std::string operacion, int nroParticiones) {
 	this->filaInicio = filaInicio;
 	this->filaFin = filaFin;
 	this->operacion = operacion;
@@ -16,33 +17,33 @@ SplitApplyCombineImpl::SplitApplyCombineImpl(int filaInicio, int filaFin, std::s
 	this->particion = new OperacionStrategy();
 }
 
-void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[], int columnaDondeOperar){
+void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[],
+		int columnaDondeOperar) {
 	std::string nombreDataset = argv[1];
-	int cantidadColumnas = strtol(argv[2],NULL,10);
+	int cantidadColumnas = strtol(argv[2], NULL, 10);
 //	char *hilos = argv[3];
-	this->gestorDeDatos = new LectorDeArchivo(nombreDataset,cantidadColumnas,columnaDondeOperar);
+	this->gestorDeDatos = new LectorDeArchivo(nombreDataset, cantidadColumnas,
+			columnaDondeOperar);
 	this->gestorDeDatos->leerArchivoBinario();
 	this->gestorDeDatos->situarLectorEnFilaInicial(this->filaInicio);
 	this->particion->StrategyCrearOperacion(this->operacion);
 }
 
-
-void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion(){
+void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion() {
 	bool terminamosDeLeerParticiones = false;
 	terminamosDeLeerParticiones = this->SplitApply(particion);
-	while(!terminamosDeLeerParticiones){
-		OperacionStrategy* particionNueva = new OperacionStrategy();
+	while (!terminamosDeLeerParticiones) {
+		OperacionStrategy *particionNueva = new OperacionStrategy();
 		particionNueva->StrategyCrearOperacion(this->operacion);
 		terminamosDeLeerParticiones = this->SplitApply(particion);
 		this->Combine(particion, particionNueva);
 	}
-
 }
 
-bool SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
+bool SplitApplyCombineImpl::SplitApply(OperacionStrategy *name) {
 	bool terminamosFilasValidas = false;
-	for(int i = 0; i < this->nroParticiones; i++){
-		if(!this->gestorDeDatos->siguienteFilaValida(this->filaFin)){
+	for (int i = 0; i < this->nroParticiones; i++) {
+		if (!this->gestorDeDatos->siguienteFilaValida(this->filaFin)) {
 			terminamosFilasValidas = true;
 			break;
 		}
@@ -52,14 +53,15 @@ bool SplitApplyCombineImpl::SplitApply(OperacionStrategy* name){
 	return terminamosFilasValidas;
 }
 
-void SplitApplyCombineImpl::Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion){
-	particion->StrategyCombineOperacion(nuevaParticion, this->filaFin-this->filaInicio);
+void SplitApplyCombineImpl::Combine(OperacionStrategy *particion,
+		OperacionStrategy *nuevaParticion) {
+	particion->StrategyCombineOperacion(nuevaParticion,
+			this->filaFin - this->filaInicio);
 }
 
-int SplitApplyCombineImpl::SplitApplyCombineResultadoOperacion(){
+int SplitApplyCombineImpl::SplitApplyCombineResultadoOperacion() {
 	return this->particion->StrategyObtenerValorFinalOperacion();
 }
-
 
 SplitApplyCombineImpl::~SplitApplyCombineImpl() {
 }

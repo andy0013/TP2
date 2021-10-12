@@ -15,7 +15,6 @@
 #define PARSERSOLICITUDUSUARIO_H_
 
 class ParserSolicitudUsuario {
-
 	std::string filaInicio;
 	std::string  filaFin;
 	std::string  operacion;
@@ -34,11 +33,9 @@ public:
 	void identificarInformacionIngresadaStdin(char *input);
 
 private:
-
 	void prepararValoresParaNuevaSolicitud();
 
 	int obtenerValor(std::string* value, char* input, int inicio);
-
 };
 
 #endif /* PARSERSOLICITUDUSUARIO_H_ */
