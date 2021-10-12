@@ -28,6 +28,15 @@ Link : https://github.com/andy0013/TP2.git
  
  ![modelo](imagenes/modelo.png)
  
+ 
+## MODELO APLICADO - FINAL (COMPRENION)
+ 
+ Una breve explicacion de la forma en la que se esta realizando en este momento el procesamiento de datos, la siguiente:
+ 
+ 
+ 
+ Como se puede observar
+ 
  # PROBLEMAS ENTREGA 12/10
  
  ## SERCOM
