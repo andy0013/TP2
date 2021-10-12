@@ -36,7 +36,7 @@ Link : https://github.com/andy0013/TP2.git
   python que desconozco como destrabar. Por esta razon, varias de las entregas se repitieron para ir eliminando estos errores de espacios, lineas mayores a 80
   caracteres, etc.
   
-  Sin embargo, quedo pendiente por solucionar un mensaje que no me fue sencillo interpretar, y aun no solucione.
+  Sin embargo, quedo pendiente por solucionar un mensaje que no me fue sencillo interpretar:
  
  ![error](imagenes/Captura.PNG)
  
