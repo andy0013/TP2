@@ -41,6 +41,5 @@ private:
 	bool SplitApply(OperacionStrategy* particion);
 
 	void Combine(OperacionStrategy* particion, OperacionStrategy* nuevaParticion);
-
 };
 #endif /* SPLITAPPLYCOMBINEIMPL_H_ */

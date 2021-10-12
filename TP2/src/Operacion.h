@@ -109,7 +109,7 @@ public:
 	void resolverOperacion(int valor)override{
 		if (valor == 0){
 			this->valorActual = valor;
-		}else if(this->valorActual > valor){
+		}else if (this->valorActual > valor){
 			this->valorActual = valor;
 		}
 	}
