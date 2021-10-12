@@ -29,5 +29,35 @@ Link : https://github.com/andy0013/TP2.git
  ![modelo](imagenes/modelo.png)
  
  
+## MODELO APLICADO - FINAL (COMPRENION)
  
+ Una breve explicacion de la forma en la que se esta realizando en este momento el procesamiento de datos, la siguiente:
+ 
+ 
+ 
+ Como se puede observar
+ 
+ # PROBLEMAS ENTREGA 12/10
+ 
+ ## SERCOM
+ 
+  Se realizaron varias entregas, por una razon que aun desconozco, no me es posible ejecutar el CPP desde mi local con el Bash, tiene que ver con una cuestion de 
+  python que desconozco como destrabar. Por esta razon, varias de las entregas se repitieron para ir eliminando estos errores de espacios, lineas mayores a 80
+  caracteres, etc.
+  
+  Sin embargo, quedo pendiente por solucionar un mensaje que no me fue sencillo interpretar:
+ 
+ ![error](imagenes/Captura.PNG)
+ 
+ 
+ ## DESARROLLO
+ 
+  De momento se realizo la logica correspondiente al flujo sin utilizar hilos para cada particion, se espera que la estructura propuesta sea util para luego complementar con la nueva herramienta por aprender (hilos).
+  Por parte de este desarrollo de logica sin hilos, aun quedo pendiente solucionar que el "getline" no identifica el #EOF. Para esta prueba intentamos desde consola (utilizamos Eclipse) (Ctrl + Z) o (Ctrl + D), pero no se enviaba el #EOF. Tambien se realizo la prueba levantando los input desde el archivo __stdin__ provisto por la catedra (con una configuracion del Eclipse), Y aun asi no lo reconoce. Para esto se uso tambien en codigo el "feof(stdin)". 
+ Recapitulando:
+ 
+  * Falta incorporar Hilos.
+  * Detectar EOF.
+  * Refactor.
+  
   
