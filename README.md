@@ -38,7 +38,7 @@ Link : https://github.com/andy0013/TP2.git
   
   Sin embargo, quedo pendiente por solucionar un mensaje que no me fue sencillo interpretar, y aun no solucione.
  
- ![error](imagenes/captura.PNG)
+ ![error](imagenes/Captura.PNG)
  
  
  ## DESARROLLO
