@@ -38,6 +38,9 @@ Link : https://github.com/andy0013/TP2.git
   
   Sin embargo, quedo pendiente por solucionar un mensaje que no me fue sencillo interpretar, y aun no solucione.
  
+ ![error](imagenes/captura.PNG)
+ 
+ 
  ## DESARROLLO
  
   De momento se realizo la logica correspondiente al flujo sin utilizar hilos para cada particion, se espera que la estructura propuesta sea util para luego complementar con la nueva herramienta por aprender (hilos).
