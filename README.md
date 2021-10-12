@@ -37,7 +37,7 @@ Link : https://github.com/andy0013/TP2.git
  
  
  Como se puede observar, en el loop que estamos utilizando, creamos dos particiones distintas, antes de seguir con la particion siguiente
- hacemos el combine, por lo tanto, tenemos la informacion combinada en memoria permanentemente.
+ hacemos el combine, por lo tanto, tenemos la informacion resultante del combine, y no las distintas particiones.
  
  
  **Pregunta: Al agregar hilos, en mi caso actual leo una Particion a la vez, deberia leer N particiones dependiendo de cantidad de hilos
