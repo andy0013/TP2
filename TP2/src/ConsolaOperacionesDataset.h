@@ -15,7 +15,6 @@
 #include <string>
 
 class ConsolaOperacionesDataset {
-
 	ParserSolicitudUsuario* solicitudUsuario;
 	SplitApplyCombineImpl* ejecutorSolicitudes;
 
@@ -28,7 +27,5 @@ public:
 
 private:
 	void imprimirValorAUsuario();
-
 };
-
 #endif /* CONSOLAOPERACIONESDATASET_H_ */

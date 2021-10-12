@@ -12,10 +12,12 @@ ConsolaOperacionesDataset::ConsolaOperacionesDataset() {
 	this->ejecutorSolicitudes = NULL;
 }
 
-void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(char *argv[]){
-	while(this->solicitudUsuario->solicitarRequerimientosUsuario()){
-
-		this->ejecutorSolicitudes = this->solicitudUsuario->crearSplitApplyCombineConInformacionIngresada(argv);
+void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
+		char *argv[]) {
+	while (this->solicitudUsuario->solicitarRequerimientosUsuario()) {
+		this->ejecutorSolicitudes =
+				this->solicitudUsuario->
+				crearSplitApplyCombineConInformacionIngresada(argv);
 
 		this->ejecutorSolicitudes->SplitApplyCombineImplementarOperacion();
 
@@ -24,14 +26,10 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(char *argv[])
 }
 
 ConsolaOperacionesDataset::~ConsolaOperacionesDataset() {
-
 }
-
-
 
 void ConsolaOperacionesDataset::imprimirValorAUsuario() {
-
-	std::cout << this->ejecutorSolicitudes->SplitApplyCombineResultadoOperacion() << '\n';
+	std::cout
+			<< this->ejecutorSolicitudes->SplitApplyCombineResultadoOperacion()
+			<< '\n';
 }
-
-
