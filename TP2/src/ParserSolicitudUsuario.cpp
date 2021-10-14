@@ -43,9 +43,11 @@ void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
 SplitApplyCombineImpl*
 	ParserSolicitudUsuario::crearSplitApplyCombineConInformacionIngresada
 	(char *argv[]) {
-	SplitApplyCombineImpl *ejecutorSplitApplyCombine =
+	OperacionStrategy* strategySolicitadaPorUser = new OperacionStrategy();
+	strategySolicitadaPorUser->StrategyCrearOperacion(operacion);
+	SplitApplyCombineImpl* ejecutorSplitApplyCombine =
 			new SplitApplyCombineImpl(std::stoi(this->filaInicio),
-					std::stoi(this->filaFin), this->operacion,
+					std::stoi(this->filaFin), strategySolicitadaPorUser,
 					std::stoi(this->nroParticiones));
 	ejecutorSplitApplyCombine->cargarDatosParaResolverOperaciones(argv,
 			std::stoi(this->columnaPorUsar));

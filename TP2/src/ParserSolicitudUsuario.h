@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include "SplitApplyCombineImpl.h"
+#include "OperacionStrategy.h"
 
 
 #ifndef PARSERSOLICITUDUSUARIO_H_

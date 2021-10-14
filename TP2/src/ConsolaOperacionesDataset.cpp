@@ -21,7 +21,7 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 
 		this->ejecutorSolicitudes->SplitApplyCombineImplementarOperacion();
 
-		this->imprimirValorAUsuario();
+//		this->imprimirValorAUsuario();
 	}
 }
 

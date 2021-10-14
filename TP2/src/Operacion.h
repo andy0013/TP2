@@ -149,6 +149,7 @@ public:
 
 	void resolverOperacion(int valor)override{
 		this->valorActual += valor;
+		this->cantidadDeValores++;
 	}
 
 	void combineOperacion(int valor, int particiones)override{
