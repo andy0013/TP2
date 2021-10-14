@@ -29,13 +29,22 @@ Link : https://github.com/andy0013/TP2.git
  ![modelo](imagenes/modelo.png)
  
  
-## MODELO APLICADO - FINAL (COMPRENION)
+## MODELO APLICADO
  
  Una breve explicacion de la forma en la que se esta realizando en este momento el procesamiento de datos, la siguiente:
  
+ ![error](imagenes/SEC.png)
  
  
- Como se puede observar
+ Como se puede observar, en el loop que estamos utilizando, creamos dos particiones distintas, antes de seguir con la particion siguiente
+ hacemos el combine, por lo tanto, tenemos la informacion resultante del combine, y no las distintas particiones.
+ 
+ 
+ **Pregunta:** En mi caso actual leo una Particion a la vez, cuando se agrege Hilos deberia leer N particiones dependiendo de cantidad de hilos
+ a usar, luego dispararlos en simultaneo, y una vez terminaron el procesamiento repetir continuamente. **Pero, puedo reutilizar mi estrucutra
+ actual de ir combinando por lectura los datos?, o deberia hacer como se sugiere en el enunciado que el Hilo principal detecte
+ que se finalizo de leer particiones y hacer el combine de todo junto?**
+ 
  
  # PROBLEMAS ENTREGA 12/10
  
