@@ -31,9 +31,9 @@ void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[],
 void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion() {
 	bool terminamosDeLeerParticiones = false;
 	OperacionMonitor colaDeEjecuciones(this->operacionStrategy);
+	std::vector<std::thread*> threads;
 	while(this->gestorDeDatos->siguienteFilaValida(this->filaFin)){
 		std::vector<Particion> counters;
-		std::vector<std::thread*> threads;
 		for(int i = 0; i < hilos ; i++){
 			Particion particion(colaDeEjecuciones, this->gestorDeDatos,this->nroParticiones);
 			counters.push_back(particion);

@@ -14,7 +14,7 @@ Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo
 }
 
 
-void Particion::operator()() {
+void Particion::execute() {
 	this->monitor.cargarDatosParaOperacionSiEsNecesario(this->archivo,this->filasPorParticiones);
 }
 

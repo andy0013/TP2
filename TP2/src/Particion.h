@@ -18,7 +18,7 @@ private:
 	int filasPorParticiones;
 public:
 	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones);
-	void operator()();
+	void execute();
 	virtual ~Particion();
 };
 
