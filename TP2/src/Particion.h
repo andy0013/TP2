@@ -16,6 +16,7 @@ private:
 	OperacionMonitor& monitor;
 	LectorDeArchivo* archivo;
 	int filasPorParticiones;
+
 public:
 	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones);
 	void execute();

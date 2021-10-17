@@ -10,25 +10,30 @@
 
 ProtecetedQueue::ProtecetedQueue(int threadsToUse) {
 	this->limitThreads = threadsToUse;
+	this->terminamos = false;
 }
 
-void ProtecetedQueue::addTaskIfPossible(Particion party) {
-	std::unique_lock<std::mutex> lock(m);
+void ProtecetedQueue::addTaskIfPossible(Particion* party) {
+	std::unique_lock<std::mutex> unique_lock(this->m);
 	 while (this->threads.size() == this->limitThreads)
-		 taskFull.wait(lock);
+		 this->taskFull.wait(unique_lock);
 
 	 this->threads.push(party);
-	 this->taskFull.notify_all();
+	 this->taskVoid.notify_all();
 }
 
-Particion ProtecetedQueue::consumeTaskIfPosible() {
-	 std::unique_lock<std::mutex> lock(m);
-	 while (this->threads.size() == 0)
-		 taskVoid.wait(lock);
+void ProtecetedQueue::closeTask() {
+	std::unique_lock<std::mutex> unique_lock(this->m);
+	this->terminamos = true;
+}
+Particion* ProtecetedQueue::consumeTaskIfPosible() {
+	 std::unique_lock<std::mutex> unique_lock(this->m);
+	 while ((this->threads.size() == 0))
+		 this->taskVoid.wait(unique_lock);
 
-	 Particion name = this->threads.front();
+	 Particion* name = this->threads.front();
 	 this->threads.pop();
-	 this->taskVoid.notify_all();
+	 this->taskFull.notify_all();
 	 return name;
 }
 

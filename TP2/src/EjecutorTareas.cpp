@@ -11,15 +11,10 @@ EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar) :
 	colaCompartidaConTareas(colaPorUsar){}
 
 void EjecutorTareas::operator()() {
-    bool keepWriting = true;
-	while (keepWriting) {
-
-		Particion block = this->colaCompartidaConTareas.consumeTaskIfPosible();
-		block.execute();
-//			keepWriting &= block.valid();
-//			block.write(*streamTowrite);
-
-	}
+	Particion* particionPorEjecutar = this->colaCompartidaConTareas.consumeTaskIfPosible();
+	if(particionPorEjecutar != NULL)
+		particionPorEjecutar->execute();
+	std::cout << "entro" << '\n';
 }
 
 

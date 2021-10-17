@@ -18,8 +18,9 @@ private:
 	OperacionStrategy *operacion;
     std::mutex m;
     bool lecturaValida;
+    int filaFinal;
 public:
-	OperacionMonitor(OperacionStrategy* strat);
+	OperacionMonitor(OperacionStrategy* strat,int filaFinal);
 
 	void cargarDatosParaOperacionSiEsNecesario(LectorDeArchivo* archivoPorUsar, int filasPorParticiones);
 

@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
 	int filaFin = 15;
 	int hilos = 2;
 	ProtecetedQueue colaDeEjecuciones(hilos);
-	std::vector<EjecutorTareas> threads(hilos);
-
-	for (int i = 0; i < threads.size(); i++) {
+	std::vector<EjecutorTareas> threads;
+	std::vector<std::thread*> trya;
+	for (int i = 0; i < hilos; i++) {
 		EjecutorTareas hilo(colaDeEjecuciones);
 		threads.push_back(hilo);
 	}
@@ -36,17 +36,22 @@ int main(int argc, char *argv[]) {
 	LectorDeArchivo *gestorDeDatos = new LectorDeArchivo("dataset", 4, 1);
 	OperacionStrategy *operacionStrategy = new OperacionStrategy();
 	operacionStrategy->StrategyCrearOperacion("sum");
-	OperacionMonitor operacion(operacionStrategy);
+	OperacionMonitor operacion(operacionStrategy,filaFin);
 	std::vector<Particion> particiones;
+	for (size_t i = 0; i < threads.size(); i++) {
+		trya.push_back(new std::thread(std::ref(threads[i])));
+	}
+
 	for (int i = 0; i < 8; i++) {
 		Particion particion(operacion,gestorDeDatos,2);
-		colaDeEjecuciones.addTaskIfPossible(particion);
+		colaDeEjecuciones.addTaskIfPossible(&particion);
 	}
 
-	for (int i = 0; i < threads.size(); i++) {
-		std::thread(threads[i]);
+	for (size_t i = 0; i < threads.size(); i++) {
+		trya[i]->join();
 	}
 
+	operacion.imprimirResultado();
 
 
 	return 0;

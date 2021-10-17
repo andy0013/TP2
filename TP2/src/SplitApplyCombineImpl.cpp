@@ -29,24 +29,24 @@ void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[],
 }
 
 void SplitApplyCombineImpl::SplitApplyCombineImplementarOperacion() {
-	bool terminamosDeLeerParticiones = false;
-	OperacionMonitor colaDeEjecuciones(this->operacionStrategy);
-	std::vector<std::thread*> threads;
-	while(this->gestorDeDatos->siguienteFilaValida(this->filaFin)){
-		std::vector<Particion> counters;
-		for(int i = 0; i < hilos ; i++){
-			Particion particion(colaDeEjecuciones, this->gestorDeDatos,this->nroParticiones);
-			counters.push_back(particion);
-		}
-		for(size_t i = 0; i < counters.size() ; i++){
-			threads.push_back(new std::thread(std::ref(counters[i])));
-		}
-
-		for(size_t i = 0; i < threads.size() ; i++){
-			threads[i]->join();
-		}
-	}
-	colaDeEjecuciones.imprimirResultado();
+//	bool terminamosDeLeerParticiones = false;
+//	OperacionMonitor colaDeEjecuciones(this->operacionStrategy);
+//	std::vector<std::thread*> threads;
+//	while(this->gestorDeDatos->siguienteFilaValida(this->filaFin)){
+//		std::vector<Particion> counters;
+//		for(int i = 0; i < hilos ; i++){
+//			Particion particion(colaDeEjecuciones, this->gestorDeDatos,this->nroParticiones);
+//			counters.push_back(particion);
+//		}
+//		for(size_t i = 0; i < counters.size() ; i++){
+//			threads.push_back(new std::thread(std::ref(counters[i])));
+//		}
+//
+//		for(size_t i = 0; i < threads.size() ; i++){
+//			threads[i]->join();
+//		}
+//	}
+//	colaDeEjecuciones.imprimirResultado();
 }
 
 //bool SplitApplyCombineImpl::SplitApply(OperacionStrategy *name) {

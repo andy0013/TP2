@@ -7,8 +7,9 @@
 
 #include "OperacionMonitor.h"
 
-OperacionMonitor::OperacionMonitor(OperacionStrategy* strat) {
+OperacionMonitor::OperacionMonitor(OperacionStrategy* strat,int filaFinal) {
 	this->lecturaValida = true;
+	this->filaFinal = filaFinal;
 	this->operacion = strat;
 }
 
@@ -18,7 +19,7 @@ void OperacionMonitor::cargarDatosParaOperacionSiEsNecesario(LectorDeArchivo* ar
 		if(this->lecturaValida){
 			this->operacion->StrategyRealizarOperacion(archivoPorUsar->obtenerDatosDeArchivo());
 		}
-		this->lecturaValida = archivoPorUsar->siguienteFilaValida(15);
+		this->lecturaValida = archivoPorUsar->siguienteFilaValida(this->filaFinal);
     }
 }
 

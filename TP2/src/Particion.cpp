@@ -13,10 +13,10 @@ Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo
 	this->filasPorParticiones = filasPorParticiones;
 }
 
-
 void Particion::execute() {
 	this->monitor.cargarDatosParaOperacionSiEsNecesario(this->archivo,this->filasPorParticiones);
 }
+
 
 
 Particion::~Particion() {
