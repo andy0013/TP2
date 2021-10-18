@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	LectorDeArchivo *gestorDeDatos = new LectorDeArchivo("dataset", 4, 1);
+	gestorDeDatos->leerArchivoBinario();
 	OperacionStrategy *operacionStrategy = new OperacionStrategy();
 	operacionStrategy->StrategyCrearOperacion("sum");
 	OperacionMonitor operacion(operacionStrategy,filaFin);
