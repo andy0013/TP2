@@ -25,12 +25,16 @@ void ProtecetedQueue::addTaskIfPossible(Particion* party) {
 void ProtecetedQueue::closeTask() {
 	std::unique_lock<std::mutex> unique_lock(this->m);
 	this->terminamos = true;
+	this->taskVoid.notify_all();
+	this->taskFull.notify_all();
 }
 Particion* ProtecetedQueue::consumeTaskIfPosible() {
 	 std::unique_lock<std::mutex> unique_lock(this->m);
-	 while ((this->threads.size() == 0))
+	 while ((this->threads.size() == 0) && !this->terminamos)
 		 this->taskVoid.wait(unique_lock);
 
+	 if(this->terminamos)
+		 return NULL;
 	 Particion* name = this->threads.front();
 	 this->threads.pop();
 	 this->taskFull.notify_all();

@@ -47,6 +47,8 @@ int main(int argc, char *argv[]) {
 		colaDeEjecuciones.addTaskIfPossible(&particion);
 	}
 
+	colaDeEjecuciones.closeTask();
+
 	for (size_t i = 0; i < threads.size(); i++) {
 		trya[i]->join();
 	}
