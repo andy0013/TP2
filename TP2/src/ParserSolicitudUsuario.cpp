@@ -29,6 +29,14 @@ bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
 	return ingreso;
 }
 
+void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones, LectorDeArchivo *gestorDeDatos){
+//	for (int i = 0; i < 8; i++) {
+//		Particion particion(operacion,gestorDeDatos,nroParticiones);
+//		colaDeEjecuciones.addTaskIfPossible(&particion);
+//	}
+
+}
+
 void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
 	(char *input) {
 	int i = 0;

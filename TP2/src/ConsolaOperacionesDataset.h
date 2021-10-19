@@ -12,14 +12,16 @@
 #include <iostream>
 #include "SplitApplyCombineImpl.h"
 #include "ParserSolicitudUsuario.h"
+#include "ProtecetedQueue.h"
 #include <string>
 
 class ConsolaOperacionesDataset {
+	ProtecetedQueue& colaDeEjecuciones;
 	ParserSolicitudUsuario* solicitudUsuario;
 	SplitApplyCombineImpl* ejecutorSolicitudes;
 
 public:
-	ConsolaOperacionesDataset();
+	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
 	/*
 	 * Manda a solicitar valores a usuario
 	 * Mientras el usuario solicite, envia

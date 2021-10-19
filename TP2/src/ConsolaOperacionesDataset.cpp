@@ -7,7 +7,8 @@
 
 #include "ConsolaOperacionesDataset.h"
 
-ConsolaOperacionesDataset::ConsolaOperacionesDataset() {
+ConsolaOperacionesDataset::ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue):
+    colaDeEjecuciones(protecetedQueue){
 	this->solicitudUsuario = new ParserSolicitudUsuario();
 	this->ejecutorSolicitudes = NULL;
 }
@@ -15,11 +16,9 @@ ConsolaOperacionesDataset::ConsolaOperacionesDataset() {
 void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		char *argv[]) {
 	while (this->solicitudUsuario->solicitarRequerimientosUsuario()) {
-		this->ejecutorSolicitudes =
-				this->solicitudUsuario->
-				crearSplitApplyCombineConInformacionIngresada(argv);
+		LectorDeArchivo *gestorDeDatos = new LectorDeArchivo("dataset", 4, 0);
+//		this->solicitudUsuario->crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,gestorDeDatos);
 
-		this->ejecutorSolicitudes->SplitApplyCombineImplementarOperacion();
 
 //		this->imprimirValorAUsuario();
 	}

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include "SplitApplyCombineImpl.h"
+#include "ProtecetedQueue.h"
 #include "OperacionStrategy.h"
 
 
@@ -36,6 +37,8 @@ public:
 	 */
 	SplitApplyCombineImpl* crearSplitApplyCombineConInformacionIngresada(char *argv[]);
 
+	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones, LectorDeArchivo *gestorDeDatos);
+
 	virtual ~ParserSolicitudUsuario();
 
 	/*
@@ -45,7 +48,6 @@ public:
 	 */
 	void identificarInformacionIngresadaStdin(char *input);
 
-private:
 	/*
 	 * POST: limpia los atributos para cuando el usuario vuelva
 	 * a ingresar datos.

@@ -13,11 +13,8 @@ LectorDeArchivo::LectorDeArchivo(const std::string pathPorLeer, int cantidadCols
 	this->cantidadDeColumnas = cantidadCols;
 	this->numeroDeColumna = nroCols;
 	this->filaEnLaQueEstaSituado = 0;
-}
-
-void LectorDeArchivo::leerArchivoBinario() {
 	this->archivo.open(this->pathDeArchivo.c_str(),
-			std::ifstream::in | std::ifstream::out | std::ifstream::binary);
+				std::ifstream::in | std::ifstream::out | std::ifstream::binary);
 }
 
 bool LectorDeArchivo::siguienteFilaValida(int filaFinal) {

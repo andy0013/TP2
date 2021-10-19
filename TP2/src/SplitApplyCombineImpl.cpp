@@ -24,7 +24,6 @@ void SplitApplyCombineImpl::cargarDatosParaResolverOperaciones(char *argv[],
 	this->hilos = strtol(argv[3], NULL, 10);
 	this->gestorDeDatos = new LectorDeArchivo(nombreDataset, cantidadColumnas,
 			columnaDondeOperar);
-	this->gestorDeDatos->leerArchivoBinario();
 	this->gestorDeDatos->situarLectorEnFilaInicial(this->filaInicio);
 }
 
