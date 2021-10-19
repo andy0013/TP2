@@ -10,6 +10,7 @@
 
 #include <string.h>
 #include <iostream>
+#include "EjecutorTareas.h"
 #include "ParserSolicitudUsuario.h"
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
@@ -19,7 +20,7 @@
 
 class ConsolaOperacionesDataset {
 	ProtecetedQueue& colaDeEjecuciones;
-	ParserSolicitudUsuario* solicitudUsuario;
+	ParserSolicitudUsuario solicitudUsuario;
 public:
 	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
 	/*

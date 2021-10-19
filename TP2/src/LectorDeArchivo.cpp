@@ -17,6 +17,7 @@ LectorDeArchivo::LectorDeArchivo(const std::string pathPorLeer, int cantidadCols
 				std::ifstream::in | std::ifstream::out | std::ifstream::binary);
 }
 
+
 bool LectorDeArchivo::siguienteFilaValida(int filaFinal) {
 	return (this->filaEnLaQueEstaSituado < filaFinal) ? true : false;
 }

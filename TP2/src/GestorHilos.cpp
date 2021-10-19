@@ -16,13 +16,14 @@ void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(){
 		this->hilosEnCurso.push_back(new std::thread(std::ref(this->operacionPorDisparar[i])));
 	}
 
-	for (size_t i = 0; i < this->cantidadHilos; i++) {
-		this->hilosEnCurso[i]->join();
-	}
-
 
 }
 
+void GestorHilos::verificarFinalizacionHilos(){
+	for (size_t i = 0; i < this->cantidadHilos; i++) {
+		this->hilosEnCurso[i]->join();
+	}
+}
 
 GestorHilos::~GestorHilos() {
 }

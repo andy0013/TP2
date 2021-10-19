@@ -13,6 +13,7 @@ public:
 	virtual void resolverOperacion(int valor) = 0;
 	virtual void combineOperacion(int valor, int particiones) = 0;
 	virtual int obtenerValorActual() = 0;
+	virtual int obtenerCantiadDeVAloresActual() = 0;
 	virtual int obtenerValorFinal() = 0;
 protected:
 	~Operacion();
@@ -43,6 +44,10 @@ public:
 
 	int obtenerValorActual()override{
 		return this->valorActual;
+	}
+
+	int obtenerCantiadDeVAloresActual()override{
+			return 0;
 	}
 
 	int obtenerValorFinal()override{
@@ -80,6 +85,10 @@ public:
 
 	int obtenerValorActual()override{
 		return this->valorActual;
+	}
+
+	int obtenerCantiadDeVAloresActual()override{
+			return 0;
 	}
 
 	int obtenerValorFinal()override{
@@ -122,6 +131,10 @@ public:
 		return this->valorActual;
 	}
 
+	int obtenerCantiadDeVAloresActual()override{
+		return 0;
+	}
+
 	int obtenerValorFinal()override{
 		return this->valorActual;
 	}
@@ -153,12 +166,16 @@ public:
 	}
 
 	void combineOperacion(int valor, int particiones)override{
-		this->cantidadDeValores = particiones;
+		this->cantidadDeValores += particiones;
 		this->valorActual += valor;
 	}
 
 	int obtenerValorActual()override{
 		return this->valorActual;
+	}
+
+	int obtenerCantiadDeVAloresActual()override{
+		return this->cantidadDeValores;
 	}
 
 	int obtenerValorFinal()override{

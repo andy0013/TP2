@@ -15,7 +15,7 @@ Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo
 
 
 void Particion::execute() {
-//	this->monitor.cargarDatosParaOperacionSiEsNecesario(this->archivo,this->filasPorParticiones);
+	this->monitor.splitApplyCombine(this->archivo,this->filasPorParticiones);
 }
 
 

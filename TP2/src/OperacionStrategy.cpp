@@ -39,10 +39,14 @@ int OperacionStrategy::StrategyObtenerValorFinalOperacion() {
 	return this->operacion->obtenerValorFinal();
 }
 
+int OperacionStrategy::StrategyObtenerCantidadDeFilasUsadasParcial(){
+	return this->operacion->obtenerCantiadDeVAloresActual();
+}
+
 void OperacionStrategy::StrategyCombineOperacion(
-		OperacionStrategy *particionNueva, int nroParticiones) {
+		OperacionStrategy *particionNueva) {
 	this->operacion->combineOperacion(
-			particionNueva->StrategyObtenerValorOperacion(), nroParticiones);
+			particionNueva->StrategyObtenerValorOperacion(), particionNueva->StrategyObtenerCantidadDeFilasUsadasParcial());
 }
 
 OperacionStrategy::~OperacionStrategy() {

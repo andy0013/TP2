@@ -28,13 +28,27 @@ bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
 		ingreso = false;
 	return ingreso;
 }
-
-void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
-	for (int i = 0; i < 8; i++) {
+void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
+	for (int i = 0; i < nroParticionesPorUsar; i++) {
 		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones));
 		colaDeEjecuciones.addTaskIfPossible(&particion);
 	}
+}
 
+void ParserSolicitudUsuario::prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion){
+	operacion.datosIngresadosPorUser(std::stoi(this->filaFin), this->operacion);
+}
+
+
+void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
+	int filasPorUsar = std::stoi(this->filaFin)-std::stoi(this->filaInicio);
+	int resto = filasPorUsar % std::stoi(this->nroParticiones);
+	int nroParticionesPorUsar = filasPorUsar/std::stoi(this->nroParticiones);
+	if(resto == 0){
+		enviarParticiones(nroParticionesPorUsar, colaDeEjecuciones, operacion, gestorDeDatos);
+	}else{
+		enviarParticiones(nroParticionesPorUsar+1, colaDeEjecuciones, operacion, gestorDeDatos);
+	}
 }
 
 void ParserSolicitudUsuario::identificarInformacionIngresadaStdin

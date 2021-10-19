@@ -36,13 +36,17 @@ public:
 	/*
 	 * Combina los valores de su operacion - con otra operacion.
 	 */
-	void StrategyCombineOperacion(OperacionStrategy* particionNueva, int nroParticiones);
+	void StrategyCombineOperacion(OperacionStrategy* particionNueva);
 	virtual ~OperacionStrategy();
 private:
 	/*
 	 * POST: Valor de la operacion que contiene.
 	 */
 	int StrategyObtenerValorOperacion();
+	/*
+	 * POST: Valor de la cantidad de valores usados en la particion actual.
+	 */
+	int StrategyObtenerCantidadDeFilasUsadasParcial();
 };
 
 #endif /* OPERACIONSTRATEGY_H_ */

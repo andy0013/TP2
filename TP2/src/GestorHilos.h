@@ -29,6 +29,8 @@ public:
 
 	void iniciarOperacionHilosHastaQueUserFinaliceInput();
 
+	void verificarFinalizacionHilos();
+
 	virtual ~GestorHilos();
 };
 #endif /* GESTORHILOS_H_ */

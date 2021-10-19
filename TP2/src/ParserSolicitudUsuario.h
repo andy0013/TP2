@@ -20,11 +20,13 @@
 class ParserSolicitudUsuario {
 	std::string filaInicio;
 	std::string  filaFin;
-	std::string  operacion;
+//	std::string  operacion;
 	std::string  nroParticiones;
-	std::string  columnaPorUsar;
+//	std::string  columnaPorUsar;
 
 public:
+	std::string  columnaPorUsar;
+	std::string  operacion;
 	ParserSolicitudUsuario();
 	/*
 	 * POST: Bool que indica si el usuario dejo de ingresar
@@ -32,15 +34,17 @@ public:
 	 */
 	bool solicitarRequerimientosUsuario();
 
-	/*
-	 * POST: retorna el implementador de las operaciones con los
-	 * datos leidos del usuario.
-	 */
+	void prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion);
 
 	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos);
+	/*
+	 * POST: limpia los atributos para cuando el usuario vuelva
+	 * a ingresar datos.
+	 */
+	void prepararValoresParaNuevaSolicitud();
 
 	virtual ~ParserSolicitudUsuario();
-
+private:
 	/*
 	 * PRE: Input user.
 	 * POST: parsea el string recibido por input
@@ -48,11 +52,7 @@ public:
 	 */
 	void identificarInformacionIngresadaStdin(char *input);
 
-	/*
-	 * POST: limpia los atributos para cuando el usuario vuelva
-	 * a ingresar datos.
-	 */
-	void prepararValoresParaNuevaSolicitud();
+	void enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos);
 
 	/*
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo

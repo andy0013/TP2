@@ -18,16 +18,18 @@ private:
 	OperacionStrategy operacionCompartida;
     std::mutex m;
     bool lecturaValida;
+    std::string operacion;
     int filaFinal;
 
-	void splitApply(int filasPorParticiones, OperacionStrategy operacionParcial,
+	void splitApply(int filasPorParticiones, OperacionStrategy& operacionParcial,
 			LectorDeArchivo *archivoPorUsar);
 
 	void combine(OperacionStrategy operacionParcial);
 
-
 public:
-	OperacionMonitor(int filaFinal);
+	OperacionMonitor();
+
+	void datosIngresadosPorUser(int filaFinal,std::string operacion);
 
 	void splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones);
 

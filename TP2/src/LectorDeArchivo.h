@@ -22,6 +22,7 @@ private:
 	int filaEnLaQueEstaSituado;
 	int numeroDeColumna;
 
+
 public:
 	LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols);
 	/*
