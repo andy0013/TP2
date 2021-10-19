@@ -10,16 +10,16 @@
 
 #include <string.h>
 #include <iostream>
-#include "SplitApplyCombineImpl.h"
 #include "ParserSolicitudUsuario.h"
+#include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
 #include <string>
+
+#include "GestorHilos.h"
 
 class ConsolaOperacionesDataset {
 	ProtecetedQueue& colaDeEjecuciones;
 	ParserSolicitudUsuario* solicitudUsuario;
-	SplitApplyCombineImpl* ejecutorSolicitudes;
-
 public:
 	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
 	/*
@@ -30,8 +30,5 @@ public:
 	void solicitarYDispararSolicitudUsuario(char *argv[]);
 
 	virtual ~ConsolaOperacionesDataset();
-
-private:
-	void imprimirValorAUsuario();
 };
 #endif /* CONSOLAOPERACIONESDATASET_H_ */

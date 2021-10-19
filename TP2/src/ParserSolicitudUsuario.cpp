@@ -29,11 +29,11 @@ bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
 	return ingreso;
 }
 
-void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones, LectorDeArchivo *gestorDeDatos){
-//	for (int i = 0; i < 8; i++) {
-//		Particion particion(operacion,gestorDeDatos,nroParticiones);
-//		colaDeEjecuciones.addTaskIfPossible(&particion);
-//	}
+void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
+	for (int i = 0; i < 8; i++) {
+		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones));
+		colaDeEjecuciones.addTaskIfPossible(&particion);
+	}
 
 }
 
@@ -48,19 +48,6 @@ void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
 	this->obtenerValor(&this->operacion, input, i);
 }
 
-SplitApplyCombineImpl*
-	ParserSolicitudUsuario::crearSplitApplyCombineConInformacionIngresada
-	(char *argv[]) {
-	OperacionStrategy* strategySolicitadaPorUser = new OperacionStrategy();
-	strategySolicitadaPorUser->StrategyCrearOperacion(operacion);
-	SplitApplyCombineImpl* ejecutorSplitApplyCombine =
-			new SplitApplyCombineImpl(std::stoi(this->filaInicio),
-					std::stoi(this->filaFin), strategySolicitadaPorUser,
-					std::stoi(this->nroParticiones));
-	ejecutorSplitApplyCombine->cargarDatosParaResolverOperaciones(argv,
-			std::stoi(this->columnaPorUsar));
-	return ejecutorSplitApplyCombine;
-}
 
 int ParserSolicitudUsuario::obtenerValor(std::string *value, char *input,
 		int inicio) {

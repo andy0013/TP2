@@ -7,24 +7,38 @@
 
 #include "OperacionMonitor.h"
 
-OperacionMonitor::OperacionMonitor(OperacionStrategy* strat,int filaFinal) {
+OperacionMonitor::OperacionMonitor(int filaFinal) {
 	this->lecturaValida = true;
 	this->filaFinal = filaFinal;
-	this->operacion = strat;
+	this->operacionCompartida = OperacionStrategy();
 }
 
-void OperacionMonitor::cargarDatosParaOperacionSiEsNecesario(LectorDeArchivo* archivoPorUsar, int filasPorParticiones){
-    std::lock_guard<std::mutex> l(m);
-    for(int i = 0; i < filasPorParticiones ; i++){
-		if(this->lecturaValida){
-			this->operacion->StrategyRealizarOperacion(archivoPorUsar->obtenerDatosDeArchivo());
+void OperacionMonitor::splitApply(int filasPorParticiones,
+		OperacionStrategy operacionParcial, LectorDeArchivo *archivoPorUsar) {
+	for (int i = 0; i < filasPorParticiones; i++) {
+		if (this->lecturaValida) {
+			operacionParcial.StrategyRealizarOperacion(
+					archivoPorUsar->obtenerDatosDeArchivo());
 		}
-		this->lecturaValida = archivoPorUsar->siguienteFilaValida(this->filaFinal);
-    }
+		this->lecturaValida = archivoPorUsar->siguienteFilaValida(
+				this->filaFinal);
+	}
 }
+
+void OperacionMonitor::splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones){
+    std::lock_guard<std::mutex> l(m);
+    OperacionStrategy operacionParcial;
+	splitApply(filasPorParticiones, operacionParcial, archivoPorUsar);
+
+}
+
+void OperacionMonitor::combine(OperacionStrategy operacionParcial){
+	this->operacionCompartida.StrategyCombineOperacion(&operacionParcial, 15);
+}
+
 
 void OperacionMonitor::imprimirResultado(){
-	std::cout << this->operacion->StrategyObtenerValorFinalOperacion();
+	std::cout << this->operacionCompartida.StrategyObtenerValorFinalOperacion();
 }
 
 OperacionMonitor::~OperacionMonitor() {

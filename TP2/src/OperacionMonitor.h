@@ -15,14 +15,21 @@
 
 class OperacionMonitor {
 private:
-	OperacionStrategy *operacion;
+	OperacionStrategy operacionCompartida;
     std::mutex m;
     bool lecturaValida;
     int filaFinal;
-public:
-	OperacionMonitor(OperacionStrategy* strat,int filaFinal);
 
-	void cargarDatosParaOperacionSiEsNecesario(LectorDeArchivo* archivoPorUsar, int filasPorParticiones);
+	void splitApply(int filasPorParticiones, OperacionStrategy operacionParcial,
+			LectorDeArchivo *archivoPorUsar);
+
+	void combine(OperacionStrategy operacionParcial);
+
+
+public:
+	OperacionMonitor(int filaFinal);
+
+	void splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones);
 
 	void imprimirResultado();
 

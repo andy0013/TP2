@@ -8,7 +8,8 @@
 #include <string.h>
 #include <iostream>
 #include <string>
-#include "SplitApplyCombineImpl.h"
+
+#include "GestorHilos.h"
 #include "ProtecetedQueue.h"
 #include "OperacionStrategy.h"
 
@@ -35,9 +36,8 @@ public:
 	 * POST: retorna el implementador de las operaciones con los
 	 * datos leidos del usuario.
 	 */
-	SplitApplyCombineImpl* crearSplitApplyCombineConInformacionIngresada(char *argv[]);
 
-	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones, LectorDeArchivo *gestorDeDatos);
+	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos);
 
 	virtual ~ParserSolicitudUsuario();
 
