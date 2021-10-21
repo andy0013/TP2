@@ -4,11 +4,12 @@
 GestorHilos::GestorHilos(ProtecetedQueue& colaCompartida,int cantidadHilos):
 	colaCompartida(colaCompartida){
 	this->cantidadHilos = cantidadHilos;
+	this->hilosSiguenEjecutando = true;
 }
 
 void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(){
 	for (int i = 0; i < this->cantidadHilos; i++) {
-		EjecutorTareas hilo(this->colaCompartida);
+		EjecutorTareas hilo(this->colaCompartida,this->hilosSiguenEjecutando);
 		this->operacionPorDisparar.push_back(hilo);
 	}
 

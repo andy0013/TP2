@@ -14,8 +14,10 @@
 class EjecutorTareas {
 private:
 	ProtecetedQueue& colaCompartidaConTareas;
+	bool& hilosSiguenEjecutando;
+
 public:
-	EjecutorTareas(ProtecetedQueue& colaPorUsar);
+	EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando);
 
 	void operator()();
 

@@ -7,17 +7,17 @@
 
 #include "EjecutorTareas.h"
 
-EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar) :
-	colaCompartidaConTareas(colaPorUsar){}
+EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando) :
+	colaCompartidaConTareas(colaPorUsar),hilosSiguenEjecutando(hilosSiguenEjecutando){}
 
 void EjecutorTareas::operator()() {
 	bool hilosEnCurso = true;
-	while(hilosEnCurso){
+	while(hilosSiguenEjecutando){
 		Particion particionPorEjecutar = this->colaCompartidaConTareas.consumeTaskIfPosible();
 		if(!particionPorEjecutar.isToken()){
 			particionPorEjecutar.execute();
 		}else{
-			hilosEnCurso= false;
+			hilosSiguenEjecutando = false;
 		}
 	}
 }
