@@ -15,8 +15,6 @@ void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(){
 	for (size_t i = 0; i < this->cantidadHilos; i++) {
 		this->hilosEnCurso.push_back(new std::thread(std::ref(this->operacionPorDisparar[i])));
 	}
-
-
 }
 
 void GestorHilos::verificarFinalizacionHilos(){

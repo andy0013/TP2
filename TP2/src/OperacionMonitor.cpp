@@ -11,44 +11,49 @@
 OperacionMonitor::OperacionMonitor() {
 	this->lecturaValida = true;
 	this->filaFinal = 0;
-	this->operacionCompartida = OperacionStrategy();
+//	this->operacionCompartida = OperacionStrategy();
 }
 
 
 void OperacionMonitor::datosIngresadosPorUser(int filaFinal,std::string operacion) {
 	this->filaFinal = filaFinal;
 	this->operacion = operacion;
-	this->operacionCompartida.StrategyCrearOperacion(operacion);
+//	this->operacionCompartida.StrategyCrearOperacion(operacion);
+	OperacionStrategy operacionPorGuardar;
+	operacionPorGuardar.StrategyCrearOperacion(operacion);
+	this->operacionCompartida.push_back(operacionPorGuardar);
 }
 
 
 void OperacionMonitor::splitApply(int filasPorParticiones,
-		OperacionStrategy& operacionParcial, LectorDeArchivo *archivoPorUsar) {
+		OperacionStrategy& operacionParcial, LectorDeArchivo *archivoPorUsar,int filaFinal,int filaInicial) {
+	archivoPorUsar->situarLectorEnFilaInicial(filaInicial);
 	for (int i = 0; i < filasPorParticiones; i++) {
-		if (this->lecturaValida) {
+		int fila = i + filaInicial;
+		if(fila < filaFinal)
 			operacionParcial.StrategyRealizarOperacion(
-					archivoPorUsar->obtenerDatosDeArchivo());
-		}
-		this->lecturaValida = archivoPorUsar->siguienteFilaValida(
-				this->filaFinal);
+				archivoPorUsar->obtenerDatosDeArchivo());
 	}
 }
 
-void OperacionMonitor::splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones){
+void OperacionMonitor::splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones,int filaInicial,int ii,int filaFinal){
     std::lock_guard<std::mutex> l(m);
     OperacionStrategy operacionParcial;
     operacionParcial.StrategyCrearOperacion(this->operacion);
-	this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar);
-	this->combine(operacionParcial);
+    this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar,filaFinal,filaInicial);
+	this->combine(operacionParcial,ii);
 }
 
-void OperacionMonitor::combine(OperacionStrategy operacionParcial){
-	this->operacionCompartida.StrategyCombineOperacion(&operacionParcial);
+void OperacionMonitor::combine(OperacionStrategy& operacionParcial,int i){
+	this->operacionCompartida[i].StrategyCombineOperacion(&operacionParcial);
 }
 
 
 void OperacionMonitor::imprimirResultado(){
-	std::cout << this->operacionCompartida.StrategyObtenerValorFinalOperacion() << '\n';
+    std::lock_guard<std::mutex> l(m);
+    for (int t = 0; t < 5; t++) {
+		std::cout << this->operacionCompartida[t].StrategyObtenerValorFinalOperacion() << '\n';
+    }
 }
 
 OperacionMonitor::~OperacionMonitor() {

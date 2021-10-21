@@ -15,6 +15,7 @@
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
 #include <string>
+#include <vector>
 
 #include "GestorHilos.h"
 

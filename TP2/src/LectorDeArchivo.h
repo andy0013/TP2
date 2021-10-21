@@ -19,7 +19,6 @@ private:
 	std::string pathDeArchivo;
 	std::fstream archivo;
 	int cantidadDeColumnas;
-	int filaEnLaQueEstaSituado;
 	int numeroDeColumna;
 
 
@@ -34,10 +33,6 @@ public:
 	 * POST: el valor de la columna leido.
 	 */
 	int obtenerDatosDeArchivo();
-	/*
-	 * POST: True si la siguiente fila a leer es valida.
-	 */
-	bool siguienteFilaValida(int filaFinal);
 
 	virtual ~LectorDeArchivo();
 };

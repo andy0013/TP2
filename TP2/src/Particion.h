@@ -16,10 +16,14 @@ private:
 	OperacionMonitor& monitor;
 	LectorDeArchivo* archivo;
 	int filasPorParticiones;
+	int i;
+	int filaFinal;
+	int filaInicial;
 
 public:
-	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones);
+	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones, int ii,int filaFinal,int filaInicial);
 	void execute();
+	bool isToken();
 	virtual ~Particion();
 };
 

@@ -28,26 +28,50 @@ bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
 		ingreso = false;
 	return ingreso;
 }
-void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
+void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
+	int filaInicial = std::stoi(this->filaInicio);
+	int salto = 1;
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones));
-		colaDeEjecuciones.addTaskIfPossible(&particion);
+		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->nroParticiones)*salto,filaInicial);
+		colaDeEjecuciones.addTaskIfPossible(particion);
+		filaInicial = std::stoi(this->nroParticiones)*salto;
+		salto++;
 	}
 }
+
+void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,int nose,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
+	int filaInicial = std::stoi(this->filaInicio);
+	int salto = 1;
+	for (int i = 0; i < nroParticionesPorUsar; i++) {
+		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->nroParticiones)*salto,filaInicial);
+		colaDeEjecuciones.addTaskIfPossible(particion);
+		filaInicial = std::stoi(this->nroParticiones)*salto;
+		salto++;
+	}
+	Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->filaFin),filaInicial);
+		colaDeEjecuciones.addTaskIfPossible(particion);
+}
+
 
 void ParserSolicitudUsuario::prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion){
 	operacion.datosIngresadosPorUser(std::stoi(this->filaFin), this->operacion);
 }
 
+void ParserSolicitudUsuario::enviarToken(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i){
+	Particion particion(operacion,gestorDeDatos,0,(-1),0,0);
+		colaDeEjecuciones.addTaskIfPossible(particion);
+}
 
-void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos){
+
+
+void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos,int i){
 	int filasPorUsar = std::stoi(this->filaFin)-std::stoi(this->filaInicio);
 	int resto = filasPorUsar % std::stoi(this->nroParticiones);
 	int nroParticionesPorUsar = filasPorUsar/std::stoi(this->nroParticiones);
 	if(resto == 0){
-		enviarParticiones(nroParticionesPorUsar, colaDeEjecuciones, operacion, gestorDeDatos);
+		enviarParticiones(nroParticionesPorUsar, colaDeEjecuciones, operacion, gestorDeDatos,i);
 	}else{
-		enviarParticiones(nroParticionesPorUsar+1, colaDeEjecuciones, operacion, gestorDeDatos);
+		enviarParticiones(nroParticionesPorUsar,1, colaDeEjecuciones, operacion, gestorDeDatos,i);
 	}
 }
 

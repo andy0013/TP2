@@ -11,13 +11,13 @@ EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar) :
 	colaCompartidaConTareas(colaPorUsar){}
 
 void EjecutorTareas::operator()() {
-	bool hiloEnCurso = true;
-	while(hiloEnCurso){
-		Particion* particionPorEjecutar = this->colaCompartidaConTareas.consumeTaskIfPosible();
-		if(particionPorEjecutar != NULL)
-			particionPorEjecutar->execute();
-		else{
-			hiloEnCurso = false;
+	bool hilosEnCurso = true;
+	while(hilosEnCurso){
+		Particion particionPorEjecutar = this->colaCompartidaConTareas.consumeTaskIfPosible();
+		if(!particionPorEjecutar.isToken()){
+			particionPorEjecutar.execute();
+		}else{
+			hilosEnCurso= false;
 		}
 	}
 }

@@ -7,15 +7,23 @@
 
 #include "Particion.h"
 
-Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones):
+Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones,int ii,int filaFinal,int filaInicial):
 	monitor(operacionMonitor){
 	this->archivo = archivo;
+	this->i = ii;
 	this->filasPorParticiones = filasPorParticiones;
+	this->filaFinal = filaFinal;
+	this->filaInicial = filaInicial;
 }
 
 
 void Particion::execute() {
-	this->monitor.splitApplyCombine(this->archivo,this->filasPorParticiones);
+	this->monitor.splitApplyCombine(this->archivo,this->filasPorParticiones,this->filaInicial,this->i,this->filaFinal);
+//	this->monitor.imprimirResultado();
+}
+
+bool Particion::isToken(){
+	return this->i == (-1) ? true : false;
 }
 
 

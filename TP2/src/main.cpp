@@ -26,5 +26,6 @@ int main(int argc, char *argv[]) {
 	ConsolaOperacionesDataset consola(colaDeEjecuciones);
 	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput();
 	consola.solicitarYDispararSolicitudUsuario(argv);
+	gestorHilos.verificarFinalizacionHilos();
 	return 0;
 }

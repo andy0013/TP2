@@ -34,9 +34,11 @@ public:
 	 */
 	bool solicitarRequerimientosUsuario();
 
+	void enviarToken(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i);
+
 	void prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion);
 
-	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos);
+	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i);
 	/*
 	 * POST: limpia los atributos para cuando el usuario vuelva
 	 * a ingresar datos.
@@ -52,7 +54,9 @@ private:
 	 */
 	void identificarInformacionIngresadaStdin(char *input);
 
-	void enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos);
+	void enviarParticiones(int nroParticionesPorUsar,int k,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int i);
+
+	void enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int i);
 
 	/*
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo

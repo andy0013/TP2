@@ -18,7 +18,7 @@
 
 class ProtecetedQueue {
 private:
-	std::queue<Particion*> threads;
+	std::queue<Particion> threads;
     std::mutex m;
     bool terminamos;
     int limitThreads;
@@ -29,9 +29,9 @@ public:
 
 	void closeTask();
 
-	void addTaskIfPossible(Particion* particion);
+	void addTaskIfPossible(Particion particion);
 
-	Particion* consumeTaskIfPosible();
+	Particion consumeTaskIfPosible();
 
 	virtual ~ProtecetedQueue();
 };
