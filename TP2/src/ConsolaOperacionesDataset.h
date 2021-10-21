@@ -14,6 +14,7 @@
 #include "ParserSolicitudUsuario.h"
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
+#include "LectorDeArchivo.h"
 #include <string>
 #include <vector>
 
@@ -21,6 +22,7 @@
 
 class ConsolaOperacionesDataset {
 	ProtecetedQueue& colaDeEjecuciones;
+	OperacionMonitor operacion;
 	ParserSolicitudUsuario solicitudUsuario;
 public:
 	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
@@ -30,6 +32,8 @@ public:
 	 * a ejecutar el splitApplycombine
 	 */
 	void solicitarYDispararSolicitudUsuario(char *argv[]);
+
+	void imprimir();
 
 	virtual ~ConsolaOperacionesDataset();
 };

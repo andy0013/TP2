@@ -22,16 +22,20 @@ void ProtecetedQueue::addTaskIfPossible(Particion party) {
 	 this->taskVoid.notify_all();
 }
 
-//void ProtecetedQueue::closeTask() {
-//	std::unique_lock<std::mutex> unique_lock(this->m);
-//	this->terminamos = true;
-//	this->taskVoid.notify_all();
-//}
+void ProtecetedQueue::closeTask() {
+	std::unique_lock<std::mutex> unique_lock(this->m);
+	this->terminamos = true;
+	this->taskVoid.notify_all();
+}
+
 Particion ProtecetedQueue::consumeTaskIfPosible() {
 	 std::unique_lock<std::mutex> unique_lock(this->m);
 	 while (this->threads.empty()){
-//		 if(this->terminamos)
-//			 return NULL;
+		 if(this->terminamos){
+			 OperacionMonitor gg;
+			 Particion token(gg);
+			 return token;
+		 }
 		 this->taskVoid.wait(unique_lock);
 	 }
 	 Particion name = this->threads.front();

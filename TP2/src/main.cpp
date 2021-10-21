@@ -27,5 +27,6 @@ int main(int argc, char *argv[]) {
 	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput();
 	consola.solicitarYDispararSolicitudUsuario(argv);
 	gestorHilos.verificarFinalizacionHilos();
+	consola.imprimir();
 	return 0;
 }

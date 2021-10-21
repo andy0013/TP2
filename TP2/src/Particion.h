@@ -21,6 +21,8 @@ private:
 	int filaInicial;
 
 public:
+	Particion(OperacionMonitor& operacionMonitor);
+
 	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones, int ii,int filaFinal,int filaInicial);
 	void execute();
 	bool isToken();

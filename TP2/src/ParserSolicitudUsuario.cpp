@@ -30,23 +30,21 @@ bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
 }
 void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
 	int filaInicial = std::stoi(this->filaInicio);
-	int salto = 1;
+	int salto = std::stoi(this->nroParticiones);
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->nroParticiones)*salto,filaInicial);
+		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,filaInicial+salto,filaInicial);
 		colaDeEjecuciones.addTaskIfPossible(particion);
-		filaInicial = std::stoi(this->nroParticiones)*salto;
-		salto++;
+		filaInicial = filaInicial+salto;
 	}
 }
 
 void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,int nose,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
 	int filaInicial = std::stoi(this->filaInicio);
-	int salto = 1;
+	int salto = std::stoi(this->nroParticiones);
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->nroParticiones)*salto,filaInicial);
+		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,filaInicial+salto,filaInicial);
 		colaDeEjecuciones.addTaskIfPossible(particion);
-		filaInicial = std::stoi(this->nroParticiones)*salto;
-		salto++;
+		filaInicial = filaInicial+salto;
 	}
 	Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->filaFin),filaInicial);
 		colaDeEjecuciones.addTaskIfPossible(particion);
@@ -58,8 +56,7 @@ void ParserSolicitudUsuario::prepararMonitorConValoresIngresadosPorUsuario(Opera
 }
 
 void ParserSolicitudUsuario::enviarToken(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i){
-	Particion particion(operacion,gestorDeDatos,0,(-1),0,0);
-		colaDeEjecuciones.addTaskIfPossible(particion);
+	colaDeEjecuciones.closeTask();
 }
 
 

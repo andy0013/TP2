@@ -112,7 +112,7 @@ public:
 	 *
 	 */
 	OperacionMin(){
-		this->valorActual = 0;
+		this->valorActual = 10000000;
 	}
 
 	void resolverOperacion(int valor)override{
