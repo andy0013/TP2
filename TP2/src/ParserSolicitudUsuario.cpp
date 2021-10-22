@@ -11,84 +11,54 @@ ParserSolicitudUsuario::ParserSolicitudUsuario() {
 	this->columnaPorUsar = "";
 	this->filaFin = "";
 	this->filaInicio = "";
-	this->nroParticiones = "";
+	this->nroFilasPorParticion = "";
 	this->operacion = "";
 }
 
-bool ParserSolicitudUsuario::solicitarRequerimientosUsuario() {
-	char *input = NULL;
-	bool ingreso = true;
-	size_t leido = 0;
-	int read = getline(&input, &leido, stdin);
-	if (read == -1) {
-		ingreso = false;
-	}
+void ParserSolicitudUsuario::parsearInputDeUsuario(std::string input){
 	this->identificarInformacionIngresadaStdin(input);
-	if (feof(stdin))
-		ingreso = false;
-	return ingreso;
-}
-void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
-	int filaInicial = std::stoi(this->filaInicio);
-	int salto = std::stoi(this->nroParticiones);
-	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,filaInicial+salto,filaInicial);
-		colaDeEjecuciones.addTaskIfPossible(particion);
-		filaInicial = filaInicial+salto;
-	}
-}
-
-void ParserSolicitudUsuario::enviarParticiones(int nroParticionesPorUsar,int nose,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int xd){
-	int filaInicial = std::stoi(this->filaInicio);
-	int salto = std::stoi(this->nroParticiones);
-	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,filaInicial+salto,filaInicial);
-		colaDeEjecuciones.addTaskIfPossible(particion);
-		filaInicial = filaInicial+salto;
-	}
-	Particion particion(operacion,gestorDeDatos,std::stoi(this->nroParticiones),xd,std::stoi(this->filaFin),filaInicial);
-		colaDeEjecuciones.addTaskIfPossible(particion);
 }
 
 
-void ParserSolicitudUsuario::prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion){
-	operacion.datosIngresadosPorUser(std::stoi(this->filaFin), this->operacion);
+int ParserSolicitudUsuario::obtenerFilaInicioDelInputRecibido(){
+	return std::stoi(this->filaInicio);
 }
 
-void ParserSolicitudUsuario::enviarToken(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i){
-	colaDeEjecuciones.closeTask();
+int ParserSolicitudUsuario::obtenerFilaFinDelInputRecibido(){
+	return std::stoi(this->filaFin);
 }
 
-
-
-void ParserSolicitudUsuario::crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos,int i){
-	int filasPorUsar = std::stoi(this->filaFin)-std::stoi(this->filaInicio);
-	int resto = filasPorUsar % std::stoi(this->nroParticiones);
-	int nroParticionesPorUsar = filasPorUsar/std::stoi(this->nroParticiones);
-	if(resto == 0){
-		enviarParticiones(nroParticionesPorUsar, colaDeEjecuciones, operacion, gestorDeDatos,i);
-	}else{
-		enviarParticiones(nroParticionesPorUsar,1, colaDeEjecuciones, operacion, gestorDeDatos,i);
-	}
+int ParserSolicitudUsuario::obtenerNroFilasPorParticionDelInputRecibido(){
+	return std::stoi(this->nroFilasPorParticion);
 }
+
+int ParserSolicitudUsuario::obtenerColumnaPorUsarDelInputRecibido(){
+	return std::stoi(this->columnaPorUsar);
+}
+
+std::string ParserSolicitudUsuario::obtenerOperacionDelInputRecibido(){
+	return this->operacion;
+}
+
 
 void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
-	(char *input) {
+	(std::string input) {
 	int i = 0;
+	int x = input.length();
 	this->prepararValoresParaNuevaSolicitud();
 	i = this->obtenerValor(&this->filaInicio, input, i);
 	i = this->obtenerValor(&this->filaFin, input, i);
-	i = this->obtenerValor(&this->nroParticiones, input, i);
+	i = this->obtenerValor(&this->nroFilasPorParticion, input, i);
 	i = this->obtenerValor(&this->columnaPorUsar, input, i);
 	this->obtenerValor(&this->operacion, input, i);
 }
 
 
-int ParserSolicitudUsuario::obtenerValor(std::string *value, char *input,
+int ParserSolicitudUsuario::obtenerValor(std::string *value, std::string input,
 		int inicio) {
 	int i;
-	for (i = inicio; inicio < (int) (strlen(input) - 1); i++) {
-		if (input[i] == ' ' || input[i] == '\n') {
+	for (i = inicio; inicio < (int) ((input.length()) - 1); i++) {
+		if (input[i] == ' ' || input[i] == '\n' || input[i] == '\0') {
 			i++;
 			break;
 		}
@@ -101,7 +71,7 @@ void ParserSolicitudUsuario::prepararValoresParaNuevaSolicitud() {
 	this->columnaPorUsar = "";
 	this->filaFin = "";
 	this->filaInicio = "";
-	this->nroParticiones = "";
+	this->nroFilasPorParticion = "";
 	this->operacion = "";
 }
 

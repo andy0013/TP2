@@ -14,6 +14,7 @@
 #include "ParserSolicitudUsuario.h"
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
+#include "MensajeroDeParticiones.h"
 #include "LectorDeArchivo.h"
 #include <string>
 #include <vector>
@@ -23,7 +24,7 @@
 class ConsolaOperacionesDataset {
 	ProtecetedQueue& colaDeEjecuciones;
 	OperacionMonitor operacion;
-	ParserSolicitudUsuario solicitudUsuario;
+
 public:
 	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
 	/*

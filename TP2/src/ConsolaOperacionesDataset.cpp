@@ -17,19 +17,21 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		char *argv[]) {
 	int columnas = atoi(argv[2]);
 	std::string nombreDataset = argv[1];
-	int i = 0;
-//	while (this->solicitudUsuario.solicitarRequerimientosUsuario()) {
-//		LectorDeArchivo gestorDeDatos(nombreDataset,columnas,std::stoi(this->solicitudUsuario.columnaPorUsar));
-	for (int t = 0; t < 4; t++) {
-		this->solicitudUsuario.solicitarRequerimientosUsuario();
-		LectorDeArchivo* gestorDeDatos = new LectorDeArchivo(nombreDataset,columnas,std::stoi(this->solicitudUsuario.columnaPorUsar));
-		this->solicitudUsuario.prepararMonitorConValoresIngresadosPorUsuario(operacion);
-		this->solicitudUsuario.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,operacion,gestorDeDatos,i);
-		this->solicitudUsuario.prepararValoresParaNuevaSolicitud();
-		i++;
+	int nroSolicitudUsuario = 0;
+	std::string line;
+	ParserSolicitudUsuario solicitudUsuario;
+	MensajeroDeParticiones mensajero(solicitudUsuario);
+	while (std::getline(std::cin,line)) {
+		solicitudUsuario.parsearInputDeUsuario(line);
+		LectorDeArchivo* gestorDeDatos = new LectorDeArchivo(nombreDataset,columnas,solicitudUsuario.obtenerColumnaPorUsarDelInputRecibido());
+		mensajero.prepararMonitorConValoresIngresadosPorUsuario(operacion);
+		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,operacion,gestorDeDatos,nroSolicitudUsuario);
+		solicitudUsuario.prepararValoresParaNuevaSolicitud();
+		nroSolicitudUsuario++;
+		if(nroSolicitudUsuario == 4)
+			break;
 	}
-	LectorDeArchivo* gestorDeDatos = new LectorDeArchivo(nombreDataset,columnas,0);
-	this->solicitudUsuario.enviarToken(this->colaDeEjecuciones,operacion,gestorDeDatos,i);
+	mensajero.enviarToken(this->colaDeEjecuciones,operacion,NULL);
 
 }
 
