@@ -34,5 +34,6 @@ int LectorDeArchivo::obtenerDatosDeArchivo() {
 	return numeroLeido;
 }
 LectorDeArchivo::~LectorDeArchivo() {
+	this->archivo.close();
 }
 

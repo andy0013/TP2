@@ -8,6 +8,7 @@
 #ifndef OPERACIONMEAN_H_
 #define OPERACIONMEAN_H_
 #include "Operacion.h"
+#include <iostream>
 
 class OperacionMean: public Operacion{
 	int valorActual;
@@ -18,7 +19,7 @@ public:
 	void combineOperacion(int valor, int particiones)override;
 	int obtenerValorActual()override;
 	int obtenerCantiadDeVAloresActual()override;
-	int obtenerValorFinal()override;
+	void obtenerValorFinal()override;
 	virtual ~OperacionMean();
 };
 

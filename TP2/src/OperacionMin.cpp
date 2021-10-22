@@ -31,8 +31,8 @@ int OperacionMin::obtenerCantiadDeVAloresActual(){
 	return 0;
 }
 
-int OperacionMin::obtenerValorFinal(){
-	return this->valorActual;
+void OperacionMin::obtenerValorFinal(){
+	std::cout << this->valorActual << std::endl;
 }
 
 

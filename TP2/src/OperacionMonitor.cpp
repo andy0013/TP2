@@ -36,13 +36,14 @@ void OperacionMonitor::splitApply(int filasPorParticiones,
 }
 
 void OperacionMonitor::splitApplyCombine(LectorDeArchivo *archivoPorUsar,
-		int filasPorParticiones, int filaInicial, int ii, int filaFinal) {
+		int filasPorParticiones, int filaInicial, int particion,
+		int filaFinal) {
 	std::lock_guard<std::mutex> l(m);
 	OperacionStrategy operacionParcial;
-	operacionParcial.StrategyCrearOperacion(this->operacion);
+	this->operacionCompartida[particion].StrategyCrearOperacionParcial(&operacionParcial);
 	this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar,
 			filaFinal, filaInicial);
-	this->combine(operacionParcial, ii);
+	this->combine(operacionParcial, particion);
 }
 
 void OperacionMonitor::combine(OperacionStrategy &operacionParcial, int i) {
@@ -52,9 +53,8 @@ void OperacionMonitor::combine(OperacionStrategy &operacionParcial, int i) {
 void OperacionMonitor::imprimirResultado() {
 	std::lock_guard<std::mutex> l(m);
 	for (int t = 0; t < 5; t++) {
-		std::cout
-				<< this->operacionCompartida[t]
-					.StrategyObtenerValorFinalOperacion() << '\n';
+		this->operacionCompartida[t]
+					.StrategyImprimirValorFinalOperacion();
 	}
 }
 

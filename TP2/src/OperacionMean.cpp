@@ -30,8 +30,8 @@ int OperacionMean::obtenerCantiadDeVAloresActual(){
 	return this->cantidadDeValores;
 }
 
-int OperacionMean::obtenerValorFinal(){
-	return (this->valorActual/this->cantidadDeValores);
+void OperacionMean::obtenerValorFinal(){
+	std::cout << this->valorActual << '/' << this->obtenerCantiadDeVAloresActual() <<  std::endl;
 }
 
 OperacionMean::~OperacionMean() {}

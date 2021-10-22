@@ -15,14 +15,15 @@ private:
 	OperacionMonitor &monitor;
 	LectorDeArchivo *archivo;
 	int filasPorParticiones;
-	int i;
+	int nroParticion;
 	int filaFinal;
 	int filaInicial;
 public:
 	explicit Particion(OperacionMonitor &operacionMonitor);
 
 	Particion(OperacionMonitor &operacionMonitor, LectorDeArchivo *archivo,
-			int filasPorParticiones, int ii, int filaFinal, int filaInicial);
+			int filasPorParticiones, int nroParticion, int filaFinal,
+			int filaInicial);
 
 	void execute();
 

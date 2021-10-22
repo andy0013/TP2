@@ -12,6 +12,7 @@ OperacionStrategy::OperacionStrategy() {
 }
 
 void OperacionStrategy::StrategyCrearOperacion(std::string operacion) {
+	this->tipoDeOperacion = operacion;
 	if (!strcmp("max", operacion.c_str())) {
 		this->operacion = new OperacionMax();
 	}
@@ -34,13 +35,18 @@ int OperacionStrategy::StrategyObtenerValorOperacion() {
 	return this->operacion->obtenerValorActual();
 }
 
-int OperacionStrategy::StrategyObtenerValorFinalOperacion() {
-	return this->operacion->obtenerValorFinal();
+void OperacionStrategy::StrategyImprimirValorFinalOperacion() {
+	this->operacion->obtenerValorFinal();
 }
 
 int OperacionStrategy::StrategyObtenerCantidadDeFilasUsadasParcial() {
 	return this->operacion->obtenerCantiadDeVAloresActual();
 }
+
+void OperacionStrategy::StrategyCrearOperacionParcial(OperacionStrategy* particionNueva){
+	particionNueva->StrategyCrearOperacion(this->tipoDeOperacion);
+}
+
 
 void OperacionStrategy::StrategyCombineOperacion(
 		OperacionStrategy *particionNueva) {

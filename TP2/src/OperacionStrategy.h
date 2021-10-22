@@ -20,7 +20,7 @@
 class OperacionStrategy {
 private:
 	Operacion *operacion;
-
+	std::string tipoDeOperacion;
 public:
 	OperacionStrategy();
 	/*
@@ -37,11 +37,14 @@ public:
 	 * Mediante la operacion se retorna el valor
 	 * final.
 	 */
-	int StrategyObtenerValorFinalOperacion();
+	void StrategyImprimirValorFinalOperacion();
 	/*
 	 * Combina los valores de su operacion - con otra operacion.
 	 */
 	void StrategyCombineOperacion(OperacionStrategy* particionNueva);
+
+	void StrategyCrearOperacionParcial(OperacionStrategy* particionNueva);
+
 	virtual ~OperacionStrategy();
 
 private:

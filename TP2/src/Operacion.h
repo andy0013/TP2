@@ -14,7 +14,7 @@ public:
 	virtual void combineOperacion(int valor, int particiones) = 0;
 	virtual int obtenerValorActual() = 0;
 	virtual int obtenerCantiadDeVAloresActual() = 0;
-	virtual int obtenerValorFinal() = 0;
+	virtual void obtenerValorFinal() = 0;
 	virtual ~Operacion(){}
 };
 #endif /* OPERACION_H_ */

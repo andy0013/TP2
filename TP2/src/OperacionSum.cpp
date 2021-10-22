@@ -27,8 +27,8 @@ int OperacionSum::obtenerCantiadDeVAloresActual(){
 		return 0;
 }
 
-int OperacionSum::obtenerValorFinal(){
-	return this->valorActual;
+void OperacionSum::obtenerValorFinal(){
+	std::cout << this->valorActual << std::endl;
 }
 
 

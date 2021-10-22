@@ -8,6 +8,7 @@
 #ifndef OPERACIONMAX_H_
 #define OPERACIONMAX_H_
 #include "Operacion.h"
+#include <iostream>
 
 class OperacionMax :public Operacion{
 	int valorActual;
@@ -17,7 +18,7 @@ public:
 	void combineOperacion(int valor, int particiones)override;
 	int obtenerValorActual()override;
 	int obtenerCantiadDeVAloresActual()override;
-	int obtenerValorFinal()override;
+	void obtenerValorFinal()override;
 	virtual ~OperacionMax();
 };
 

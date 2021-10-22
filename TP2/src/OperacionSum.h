@@ -8,6 +8,8 @@
 #ifndef OPERACIONSUM_H_
 #define OPERACIONSUM_H_
 #include "Operacion.h"
+#include <iostream>
+
 class OperacionSum :public Operacion{
 	int valorActual;
 public:
@@ -16,7 +18,7 @@ public:
 	void combineOperacion(int valor, int particiones)override;
 	int obtenerValorActual()override;
 	int obtenerCantiadDeVAloresActual()override;
-	int obtenerValorFinal()override;
+	void obtenerValorFinal()override;
 	~OperacionSum();
 };
 

@@ -29,8 +29,8 @@ int OperacionMax::obtenerCantiadDeVAloresActual(){
 		return 0;
 }
 
-int OperacionMax::obtenerValorFinal(){
-	return this->valorActual;
+void OperacionMax::obtenerValorFinal(){
+	std::cout << this->valorActual << std::endl;
 }
 
 
