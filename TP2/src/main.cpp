@@ -20,11 +20,13 @@
 #include "Particion.h"
 
 int main(int argc, char *argv[]) {
+	int columnas = atoi(argv[2]);
+	std::string nombreDataset = argv[1];
 	int hilos = atoi(argv[3]);
 	ProtecetedQueue colaDeEjecuciones(hilos);
 	GestorHilos gestorHilos(colaDeEjecuciones,hilos);
 	ConsolaOperacionesDataset consola(colaDeEjecuciones);
-	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput();
+	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput(nombreDataset,columnas);
 	consola.solicitarYDispararSolicitudUsuario(argv);
 	gestorHilos.verificarFinalizacionHilos();
 	consola.imprimir();

@@ -17,8 +17,7 @@
 
 class OperacionMonitor {
 private:
-	std::vector<OperacionStrategy> operacionCompartida;
-//	OperacionStrategy operacionCompartida;
+	std::vector<OperacionStrategy*> operacionCompartida;
 	std::mutex m;
 	bool lecturaValida;
 	std::string operacion;

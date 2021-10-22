@@ -3,13 +3,12 @@
 GestorHilos::GestorHilos(ProtecetedQueue &colaCompartida, int cantidadHilos) :
 		colaCompartida(colaCompartida) {
 	this->cantidadHilos = cantidadHilos;
-//	this->hilosSiguenEjecutando = true;
 }
 
-void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput() {
+void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
+		, int columnas) {
 	for (int i = 0; i < this->cantidadHilos; i++) {
-//		EjecutorTareas hilo(this->colaCompartida,this->hilosSiguenEjecutando);
-		EjecutorTareas hilo(this->colaCompartida);
+		EjecutorTareas hilo(this->colaCompartida,dataset,columnas);
 		this->operacionPorDisparar.push_back(hilo);
 	}
 
@@ -26,5 +25,8 @@ void GestorHilos::verificarFinalizacionHilos() {
 }
 
 GestorHilos::~GestorHilos() {
+	for (int i = 0; i < this->cantidadHilos; i++) {
+		delete this->hilosEnCurso[i];
+	}
 }
 

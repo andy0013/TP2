@@ -16,8 +16,8 @@ void OperacionMonitor::datosIngresadosPorUser(int filaFinal,
 		std::string operacion) {
 	this->filaFinal = filaFinal;
 	this->operacion = operacion;
-	OperacionStrategy operacionPorGuardar;
-	operacionPorGuardar.StrategyCrearOperacion(operacion);
+	OperacionStrategy* operacionPorGuardar = new OperacionStrategy();
+	operacionPorGuardar->StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
 }
 
@@ -38,25 +38,28 @@ void OperacionMonitor::splitApplyCombine(LectorDeArchivo *archivoPorUsar,
 		int filaFinal,int columna) {
 	std::lock_guard<std::mutex> l(m);
 	OperacionStrategy operacionParcial;
-	this->operacionCompartida[particion].StrategyCrearOperacionParcial(&operacionParcial);
+	this->operacionCompartida[particion]->StrategyCrearOperacionParcial(&operacionParcial);
 	this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar,
 			filaFinal, filaInicial,columna);
 	this->combine(operacionParcial, particion);
 }
 
 void OperacionMonitor::combine(OperacionStrategy &operacionParcial, int i) {
-	this->operacionCompartida[i].StrategyCombineOperacion(&operacionParcial);
+	this->operacionCompartida[i]->StrategyCombineOperacion(&operacionParcial);
 }
 
 void OperacionMonitor::imprimirResultado() {
 	std::lock_guard<std::mutex> l(m);
-	for (int t = 0; t < 5; t++) {
+	for (size_t t = 0; t < this->operacionCompartida.size(); t++) {
 		this->operacionCompartida[t]
-					.StrategyImprimirValorFinalOperacion();
+					->StrategyImprimirValorFinalOperacion();
 	}
 }
 
 OperacionMonitor::~OperacionMonitor() {
-	// TODO Auto-generated destructor stub
+	for (size_t t = 0; t < this->operacionCompartida.size(); t++) {
+		delete this->operacionCompartida[t];
+	}
+	this->operacionCompartida.clear();
 }
 

@@ -9,7 +9,6 @@
 
 Particion::Particion(OperacionMonitor &operacionMonitor) :
 		monitor(operacionMonitor) {
-	this->archivo = NULL;
 	this->nroParticion = (-1);
 	this->filasPorParticiones = 0;
 	this->columna = 0;
@@ -18,10 +17,9 @@ Particion::Particion(OperacionMonitor &operacionMonitor) :
 }
 
 Particion::Particion(OperacionMonitor &operacionMonitor,
-		LectorDeArchivo *archivo, int filasPorParticiones, int nroPart,
-		int filaFinal, int filaInicial,int columna) :
+		int filasPorParticiones, int nroPart, int filaFinal, int filaInicial,
+		int columna) :
 		monitor(operacionMonitor) {
-	this->archivo = archivo;
 	this->nroParticion = nroPart;
 	this->columna = columna;
 	this->filasPorParticiones = filasPorParticiones;
@@ -29,9 +27,11 @@ Particion::Particion(OperacionMonitor &operacionMonitor,
 	this->filaInicial = filaInicial;
 }
 
-void Particion::execute() {
-	this->monitor.splitApplyCombine(this->archivo, this->filasPorParticiones,
-			this->filaInicial, this->nroParticion, this->filaFinal,this->columna);
+void Particion::execute(std::string dataset , int columnas) {
+	LectorDeArchivo lector(dataset, columnas);
+	this->monitor.splitApplyCombine(&lector, this->filasPorParticiones,
+			this->filaInicial, this->nroParticion, this->filaFinal,
+			this->columna);
 }
 
 bool Particion::isToken() {

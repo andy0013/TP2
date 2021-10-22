@@ -14,7 +14,7 @@ MensajeroDeParticiones::MensajeroDeParticiones(
 
 void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 		bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
-		OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
+		OperacionMonitor &operacion,
 		int nroParticion, int columna) {
 	int filaInicial =
 			this->infoIngreasadaPorUsuario
@@ -23,13 +23,13 @@ void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 			this->infoIngreasadaPorUsuario
 			.obtenerNroFilasPorParticionDelInputRecibido();
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion, gestorDeDatos, salto, nroParticion,
+		Particion particion(operacion, salto, nroParticion,
 				filaInicial + salto, filaInicial,columna);
 		colaDeEjecuciones.addTaskIfPossible(particion);
 		filaInicial = filaInicial + salto;
 	}
 	if (agregarParticionIncompleta) {
-		Particion particion(operacion, gestorDeDatos, salto, nroParticion,
+		Particion particion(operacion, salto, nroParticion,
 				this->infoIngreasadaPorUsuario
 				.obtenerFilaFinDelInputRecibido(),
 				filaInicial,columna);
@@ -44,14 +44,13 @@ void MensajeroDeParticiones::prepararMonitorConValoresIngresadosPorUsuario(
 			this->infoIngreasadaPorUsuario.obtenerOperacionDelInputRecibido());
 }
 
-void MensajeroDeParticiones::enviarToken(ProtecetedQueue &colaDeEjecuciones,
-		OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos) {
+void MensajeroDeParticiones::enviarToken(ProtecetedQueue &colaDeEjecuciones) {
 	colaDeEjecuciones.closeTask();
 }
 
 void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
-		ProtecetedQueue &colaDeEjecuciones, OperacionMonitor &operacion,
-		LectorDeArchivo *gestorDeDatos, int nroParticion, int columna) {
+		ProtecetedQueue &colaDeEjecuciones, OperacionMonitor &operacion
+		, int nroParticion, int columna) {
 	int filasPorUsar =
 			this->infoIngreasadaPorUsuario.obtenerFilaFinDelInputRecibido()
 					- this->infoIngreasadaPorUsuario
@@ -69,7 +68,7 @@ void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
 		enviarParticionIncompleta = false;
 	}
 	enviarParticiones(nroParticionesPorUsar, enviarParticionIncompleta,
-			colaDeEjecuciones, operacion, gestorDeDatos, nroParticion,columna);
+			colaDeEjecuciones, operacion, nroParticion,columna);
 }
 
 MensajeroDeParticiones::~MensajeroDeParticiones() {

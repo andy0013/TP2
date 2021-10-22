@@ -56,6 +56,6 @@ void OperacionStrategy::StrategyCombineOperacion(
 }
 
 OperacionStrategy::~OperacionStrategy() {
-	// TODO Auto-generated destructor stub
+	delete this->operacion;
 }
 

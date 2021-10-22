@@ -14,11 +14,11 @@
 class EjecutorTareas {
 private:
 	ProtecetedQueue& colaCompartidaConTareas;
-//	bool& hilosSiguenEjecutando;
-
+	std::string dataset;
+	int columnas;
 public:
-//	EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando);
-	explicit EjecutorTareas(ProtecetedQueue& colaPorUsar);
+	EjecutorTareas(ProtecetedQueue& colaPorUsar,std::string dataset
+			, int columnas);
 
 	void operator()();
 

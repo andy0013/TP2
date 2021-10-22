@@ -15,8 +15,6 @@ class GestorHilos {
 private:
 	int cantidadHilos;
 
-//	bool hilosSiguenEjecutando;
-
 	ProtecetedQueue& colaCompartida;
 
 	std::vector<std::thread*> hilosEnCurso;
@@ -29,7 +27,8 @@ public:
 	 */
 	GestorHilos(ProtecetedQueue& colaCompartida,int cantidadHilos);
 
-	void iniciarOperacionHilosHastaQueUserFinaliceInput();
+	void iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
+			, int columnas);
 
 	void verificarFinalizacionHilos();
 

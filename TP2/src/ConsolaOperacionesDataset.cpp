@@ -14,22 +14,19 @@ ConsolaOperacionesDataset::ConsolaOperacionesDataset(
 
 void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		char *argv[]) {
-	int columnas = atoi(argv[2]);
-	std::string nombreDataset = argv[1];
 	int nroSolicitudUsuario = 0;
 	std::string line;
 	ParserSolicitudUsuario solicitudUsuario;
 	MensajeroDeParticiones mensajero(solicitudUsuario);
-	LectorDeArchivo* gestorDeDatos = new LectorDeArchivo(nombreDataset,columnas);
 	while (std::getline(std::cin, line)) {
 		solicitudUsuario.parsearInputDeUsuario(line);
 		mensajero.prepararMonitorConValoresIngresadosPorUsuario(operacion);
 		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
-				operacion, gestorDeDatos, nroSolicitudUsuario
+				operacion, nroSolicitudUsuario
 				,solicitudUsuario.obtenerColumnaPorUsarDelInputRecibido());
 		nroSolicitudUsuario++;
 	}
-	mensajero.enviarToken(this->colaDeEjecuciones, operacion, NULL);
+	mensajero.enviarToken(this->colaDeEjecuciones);
 }
 
 void ConsolaOperacionesDataset::imprimir() {

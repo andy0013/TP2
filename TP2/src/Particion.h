@@ -13,7 +13,6 @@
 class Particion {
 private:
 	OperacionMonitor &monitor;
-	LectorDeArchivo *archivo;
 	int filasPorParticiones;
 	int nroParticion;
 	int filaFinal;
@@ -22,11 +21,11 @@ private:
 public:
 	explicit Particion(OperacionMonitor &operacionMonitor);
 
-	Particion(OperacionMonitor &operacionMonitor, LectorDeArchivo *archivo,
+	Particion(OperacionMonitor &operacionMonitor,
 			int filasPorParticiones, int nroParticion, int filaFinal,
 			int filaInicial,int columna);
 
-	void execute();
+	void execute(std::string dataset , int columnas);
 
 	bool isToken();
 

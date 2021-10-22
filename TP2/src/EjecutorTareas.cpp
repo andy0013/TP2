@@ -7,11 +7,11 @@
 
 #include "EjecutorTareas.h"
 
-//EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando) :
-//	colaCompartidaConTareas(colaPorUsar),hilosSiguenEjecutando(hilosSiguenEjecutando){}
-
-EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar) :
+EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar,
+		std::string dataset , int columnas) :
 		colaCompartidaConTareas(colaPorUsar) {
+	this->columnas = columnas;
+	this->dataset = dataset;
 }
 
 void EjecutorTareas::operator()() {
@@ -20,7 +20,7 @@ void EjecutorTareas::operator()() {
 		Particion particionPorEjecutar =
 				this->colaCompartidaConTareas.consumeTaskIfPosible();
 		if (!particionPorEjecutar.isToken()) {
-			particionPorEjecutar.execute();
+			particionPorEjecutar.execute(this->dataset,this->columnas);
 		} else {
 			hilosSiguenEjecutando = false;
 		}
