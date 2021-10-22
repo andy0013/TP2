@@ -14,7 +14,7 @@ class OperacionMean: public Operacion{
 	int cantidadDeValores;
 public:
 	OperacionMean();
-	void resolverOperacion(int valor)override ;
+	void resolverOperacion(int valor)override;
 	void combineOperacion(int valor, int particiones)override;
 	int obtenerValorActual()override;
 	int obtenerCantiadDeVAloresActual()override;

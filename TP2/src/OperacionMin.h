@@ -12,7 +12,7 @@ class OperacionMin:public Operacion{
 	int valorActual;
 public:
 	OperacionMin();
-	void resolverOperacion(int valor)override ;
+	void resolverOperacion(int valor)override;
 	void combineOperacion(int valor, int particiones)override;
 	int obtenerValorActual()override;
 	int obtenerCantiadDeVAloresActual()override;

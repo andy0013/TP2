@@ -36,7 +36,5 @@ int OperacionMin::obtenerValorFinal(){
 }
 
 
-OperacionMin::~OperacionMin() {
-	// TODO Auto-generated destructor stub
-}
+OperacionMin::~OperacionMin() {}
 

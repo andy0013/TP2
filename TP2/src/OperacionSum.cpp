@@ -7,11 +7,11 @@
 
 #include "OperacionSum.h"
 
-OperacionSum::OperacionSum() {
+OperacionSum::OperacionSum(){
 		this->valorActual = 0;
 }
 
-void OperacionSum::resolverOperacion(int valor) {
+void OperacionSum::resolverOperacion(int valor){
 	this->valorActual += valor;
 }
 
@@ -32,7 +32,5 @@ int OperacionSum::obtenerValorFinal(){
 }
 
 
-OperacionSum::~OperacionSum() {
-
-}
+OperacionSum::~OperacionSum(){}
 

@@ -7,7 +7,7 @@
 
 #include "OperacionMean.h"
 
-OperacionMean::OperacionMean() {
+OperacionMean::OperacionMean(){
 	this->cantidadDeValores = 0;
 	this->valorActual = 0;
 }
@@ -34,7 +34,5 @@ int OperacionMean::obtenerValorFinal(){
 	return (this->valorActual/this->cantidadDeValores);
 }
 
-OperacionMean::~OperacionMean() {
-	// TODO Auto-generated destructor stub
-}
+OperacionMean::~OperacionMean() {}
 
