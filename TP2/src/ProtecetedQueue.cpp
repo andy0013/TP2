@@ -15,9 +15,9 @@ ProtecetedQueue::ProtecetedQueue(int threadsToUse) {
 
 void ProtecetedQueue::addTaskIfPossible(Particion party) {
 	std::unique_lock<std::mutex> unique_lock(this->m);
-	 while (this->threads.size() == this->limitThreads)
+	 while (this->threads.size() == this->limitThreads){
 		 this->taskFull.wait(unique_lock);
-
+	 }
 	 this->threads.push(party);
 	 this->taskVoid.notify_all();
 }
@@ -45,6 +45,4 @@ Particion ProtecetedQueue::consumeTaskIfPosible() {
 }
 
 
-ProtecetedQueue::~ProtecetedQueue(){
-
-}
+ProtecetedQueue::~ProtecetedQueue(){}

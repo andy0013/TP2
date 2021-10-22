@@ -15,34 +15,32 @@ ParserSolicitudUsuario::ParserSolicitudUsuario() {
 	this->operacion = "";
 }
 
-void ParserSolicitudUsuario::parsearInputDeUsuario(std::string input){
+void ParserSolicitudUsuario::parsearInputDeUsuario(std::string input) {
 	this->identificarInformacionIngresadaStdin(input);
 }
 
-
-int ParserSolicitudUsuario::obtenerFilaInicioDelInputRecibido(){
+int ParserSolicitudUsuario::obtenerFilaInicioDelInputRecibido() {
 	return std::stoi(this->filaInicio);
 }
 
-int ParserSolicitudUsuario::obtenerFilaFinDelInputRecibido(){
+int ParserSolicitudUsuario::obtenerFilaFinDelInputRecibido() {
 	return std::stoi(this->filaFin);
 }
 
-int ParserSolicitudUsuario::obtenerNroFilasPorParticionDelInputRecibido(){
+int ParserSolicitudUsuario::obtenerNroFilasPorParticionDelInputRecibido() {
 	return std::stoi(this->nroFilasPorParticion);
 }
 
-int ParserSolicitudUsuario::obtenerColumnaPorUsarDelInputRecibido(){
+int ParserSolicitudUsuario::obtenerColumnaPorUsarDelInputRecibido() {
 	return std::stoi(this->columnaPorUsar);
 }
 
-std::string ParserSolicitudUsuario::obtenerOperacionDelInputRecibido(){
+std::string ParserSolicitudUsuario::obtenerOperacionDelInputRecibido() {
 	return this->operacion;
 }
 
-
-void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
-	(std::string input) {
+void ParserSolicitudUsuario::identificarInformacionIngresadaStdin(
+		std::string input) {
 	int i = 0;
 	this->prepararValoresParaNuevaSolicitud();
 	i = this->obtenerValor(&this->filaInicio, input, i);
@@ -51,7 +49,6 @@ void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
 	i = this->obtenerValor(&this->columnaPorUsar, input, i);
 	this->obtenerValor(&this->operacion, input, i);
 }
-
 
 int ParserSolicitudUsuario::obtenerValor(std::string *value, std::string input,
 		int inicio) {
@@ -74,7 +71,5 @@ void ParserSolicitudUsuario::prepararValoresParaNuevaSolicitud() {
 	this->operacion = "";
 }
 
-ParserSolicitudUsuario::~ParserSolicitudUsuario() {
-	// TODO Auto-generated destructor stub
-}
+ParserSolicitudUsuario::~ParserSolicitudUsuario() {}
 

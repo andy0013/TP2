@@ -9,8 +9,9 @@
 
 #include <cstdlib>
 
-ConsolaOperacionesDataset::ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue):
-    colaDeEjecuciones(protecetedQueue){
+ConsolaOperacionesDataset::ConsolaOperacionesDataset(
+		ProtecetedQueue &protecetedQueue) :
+		colaDeEjecuciones(protecetedQueue) {
 }
 
 void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
@@ -21,19 +22,22 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 	std::string line;
 	ParserSolicitudUsuario solicitudUsuario;
 	MensajeroDeParticiones mensajero(solicitudUsuario);
-	while (std::getline(std::cin,line)) {
+	while (std::getline(std::cin, line)) {
 		solicitudUsuario.parsearInputDeUsuario(line);
-		LectorDeArchivo* gestorDeDatos = new LectorDeArchivo(nombreDataset,columnas,solicitudUsuario.obtenerColumnaPorUsarDelInputRecibido());
+		LectorDeArchivo *gestorDeDatos = new LectorDeArchivo(nombreDataset,
+				columnas,
+				solicitudUsuario.obtenerColumnaPorUsarDelInputRecibido());
 		mensajero.prepararMonitorConValoresIngresadosPorUsuario(operacion);
-		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,operacion,gestorDeDatos,nroSolicitudUsuario);
+		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
+				operacion, gestorDeDatos, nroSolicitudUsuario);
 		solicitudUsuario.prepararValoresParaNuevaSolicitud();
 		nroSolicitudUsuario++;
 	}
-	mensajero.enviarToken(this->colaDeEjecuciones,operacion,NULL);
+	mensajero.enviarToken(this->colaDeEjecuciones, operacion, NULL);
 
 }
 
-void ConsolaOperacionesDataset::imprimir(){
+void ConsolaOperacionesDataset::imprimir() {
 	this->operacion.imprimirResultado();
 }
 

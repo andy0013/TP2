@@ -13,21 +13,30 @@
 #include "ParserSolicitudUsuario.h"
 
 class MensajeroDeParticiones {
-	ParserSolicitudUsuario& infoIngreasadaPorUsuario;
+	ParserSolicitudUsuario &infoIngreasadaPorUsuario;
 public:
-	MensajeroDeParticiones(ParserSolicitudUsuario& infoIngreasadaPorUsuario);
+	MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
 
-	void enviarToken(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos);
+	void enviarToken(ProtecetedQueue &colaDeEjecuciones,
+			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos);
 
-	void prepararMonitorConValoresIngresadosPorUsuario(OperacionMonitor& operacion);
+	void prepararMonitorConValoresIngresadosPorUsuario(
+			OperacionMonitor &operacion);
 
-	void crearParticionesYEnviarALaQueue(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion,LectorDeArchivo *gestorDeDatos,int i);
+	void crearParticionesYEnviarALaQueue(ProtecetedQueue &colaDeEjecuciones,
+			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
+			int nroParticion);
 
 	virtual ~MensajeroDeParticiones();
 private:
-	void enviarParticiones(int nroParticionesPorUsar,bool agregarParticionIncompleta,ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int i);
+	void enviarParticiones(int nroParticionesPorUsar,
+			bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
+			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
+			int nroParticion);
 
-	void enviarParticionIncompleta(ProtecetedQueue& colaDeEjecuciones,OperacionMonitor& operacion, LectorDeArchivo *gestorDeDatos, int i);
+	void enviarParticionIncompleta(ProtecetedQueue &colaDeEjecuciones,
+			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
+			int nroParticion);
 
 };
 

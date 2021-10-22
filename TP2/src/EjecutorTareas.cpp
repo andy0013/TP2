@@ -10,21 +10,22 @@
 //EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando) :
 //	colaCompartidaConTareas(colaPorUsar),hilosSiguenEjecutando(hilosSiguenEjecutando){}
 
-EjecutorTareas::EjecutorTareas(ProtecetedQueue& colaPorUsar) :
-	colaCompartidaConTareas(colaPorUsar){}
+EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar) :
+		colaCompartidaConTareas(colaPorUsar) {
+}
 
 void EjecutorTareas::operator()() {
 	bool hilosSiguenEjecutando = true;
-	while(hilosSiguenEjecutando){
-		Particion particionPorEjecutar = this->colaCompartidaConTareas.consumeTaskIfPosible();
-		if(!particionPorEjecutar.isToken()){
+	while (hilosSiguenEjecutando) {
+		Particion particionPorEjecutar =
+				this->colaCompartidaConTareas.consumeTaskIfPosible();
+		if (!particionPorEjecutar.isToken()) {
 			particionPorEjecutar.execute();
-		}else{
+		} else {
 			hilosSiguenEjecutando = false;
 		}
 	}
 }
-
 
 EjecutorTareas::~EjecutorTareas() {
 	// TODO Auto-generated destructor stub

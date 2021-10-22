@@ -14,10 +14,10 @@
 
 class ParserSolicitudUsuario {
 	std::string filaInicio;
-	std::string  filaFin;
-	std::string  operacion;
-	std::string  nroFilasPorParticion;
-	std::string  columnaPorUsar;
+	std::string filaFin;
+	std::string operacion;
+	std::string nroFilasPorParticion;
+	std::string columnaPorUsar;
 
 public:
 
@@ -53,7 +53,7 @@ private:
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo
 	 * de donde se van opteniendo valores separados por '\n'
 	 */
-	int obtenerValor(std::string* value, std::string input, int inicio);
+	int obtenerValor(std::string *value, std::string input, int inicio);
 };
 
 #endif /* PARSERSOLICITUDUSUARIO_H_ */

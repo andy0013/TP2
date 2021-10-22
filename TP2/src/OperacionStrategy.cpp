@@ -12,7 +12,6 @@ OperacionStrategy::OperacionStrategy() {
 }
 
 void OperacionStrategy::StrategyCrearOperacion(std::string operacion) {
-	//no puedo usar un switch
 	if (!strcmp("max", operacion.c_str())) {
 		this->operacion = new OperacionMax();
 	}
@@ -23,7 +22,7 @@ void OperacionStrategy::StrategyCrearOperacion(std::string operacion) {
 		this->operacion = new OperacionMean();
 	}
 	if (!strcmp("sum", operacion.c_str())) {
-		this->operacion = new OperacionSuma();
+		this->operacion = new OperacionSum();
 	}
 }
 
@@ -39,14 +38,15 @@ int OperacionStrategy::StrategyObtenerValorFinalOperacion() {
 	return this->operacion->obtenerValorFinal();
 }
 
-int OperacionStrategy::StrategyObtenerCantidadDeFilasUsadasParcial(){
+int OperacionStrategy::StrategyObtenerCantidadDeFilasUsadasParcial() {
 	return this->operacion->obtenerCantiadDeVAloresActual();
 }
 
 void OperacionStrategy::StrategyCombineOperacion(
 		OperacionStrategy *particionNueva) {
 	this->operacion->combineOperacion(
-			particionNueva->StrategyObtenerValorOperacion(), particionNueva->StrategyObtenerCantidadDeFilasUsadasParcial());
+			particionNueva->StrategyObtenerValorOperacion(),
+			particionNueva->StrategyObtenerCantidadDeFilasUsadasParcial());
 }
 
 OperacionStrategy::~OperacionStrategy() {

@@ -7,7 +7,8 @@
 
 #include "Particion.h"
 
-Particion::Particion(OperacionMonitor& operacionMonitor):monitor(operacionMonitor){
+Particion::Particion(OperacionMonitor &operacionMonitor) :
+		monitor(operacionMonitor) {
 	this->archivo = NULL;
 	this->i = (-1);
 	this->filasPorParticiones = 0;
@@ -15,9 +16,10 @@ Particion::Particion(OperacionMonitor& operacionMonitor):monitor(operacionMonito
 	this->filaInicial = 0;
 }
 
-
-Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones,int ii,int filaFinal,int filaInicial):
-	monitor(operacionMonitor){
+Particion::Particion(OperacionMonitor &operacionMonitor,
+		LectorDeArchivo *archivo, int filasPorParticiones, int ii,
+		int filaFinal, int filaInicial) :
+		monitor(operacionMonitor) {
 	this->archivo = archivo;
 	this->i = ii;
 	this->filasPorParticiones = filasPorParticiones;
@@ -25,18 +27,15 @@ Particion::Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo
 	this->filaInicial = filaInicial;
 }
 
-
 void Particion::execute() {
-	this->monitor.splitApplyCombine(this->archivo,this->filasPorParticiones,this->filaInicial,this->i,this->filaFinal);
+	this->monitor.splitApplyCombine(this->archivo, this->filasPorParticiones,
+			this->filaInicial, this->i, this->filaFinal);
 }
 
-bool Particion::isToken(){
+bool Particion::isToken() {
 	return this->i == (-1) ? true : false;
 }
 
-
-
 Particion::~Particion() {
-	// TODO Auto-generated destructor stub
 }
 

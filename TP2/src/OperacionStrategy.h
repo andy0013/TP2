@@ -8,6 +8,10 @@
 #ifndef OPERACIONSTRATEGY_H_
 #define OPERACIONSTRATEGY_H_
 #include "Operacion.h"
+#include "OperacionMax.h"
+#include "OperacionMin.h"
+#include "OperacionMean.h"
+#include "OperacionSum.h"
 #include <string>
 #include <cstring>
 

@@ -8,25 +8,18 @@
 #ifndef CONSOLAOPERACIONESDATASET_H_
 #define CONSOLAOPERACIONESDATASET_H_
 
-#include <string.h>
-#include <iostream>
-#include "EjecutorTareas.h"
-#include "ParserSolicitudUsuario.h"
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
+#include "ParserSolicitudUsuario.h"
 #include "MensajeroDeParticiones.h"
 #include "LectorDeArchivo.h"
-#include <string>
-#include <vector>
-
-#include "GestorHilos.h"
 
 class ConsolaOperacionesDataset {
-	ProtecetedQueue& colaDeEjecuciones;
+	ProtecetedQueue &colaDeEjecuciones;
 	OperacionMonitor operacion;
 
 public:
-	ConsolaOperacionesDataset(ProtecetedQueue& protecetedQueue);
+	ConsolaOperacionesDataset(ProtecetedQueue &protecetedQueue);
 	/*
 	 * Manda a solicitar valores a usuario
 	 * Mientras el usuario solicite, envia

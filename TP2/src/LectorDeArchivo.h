@@ -13,14 +13,12 @@
 #include <iostream>
 #include "LectorDeArchivo.h"
 
-
 class LectorDeArchivo {
 private:
 	std::string pathDeArchivo;
 	std::fstream archivo;
 	int cantidadDeColumnas;
 	int numeroDeColumna;
-
 
 public:
 	LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols);

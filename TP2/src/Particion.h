@@ -10,22 +10,24 @@
 #include "LectorDeArchivo.h"
 #include "OperacionMonitor.h"
 
-
 class Particion {
 private:
-	OperacionMonitor& monitor;
-	LectorDeArchivo* archivo;
+	OperacionMonitor &monitor;
+	LectorDeArchivo *archivo;
 	int filasPorParticiones;
 	int i;
 	int filaFinal;
 	int filaInicial;
-
 public:
-	Particion(OperacionMonitor& operacionMonitor);
+	Particion(OperacionMonitor &operacionMonitor);
 
-	Particion(OperacionMonitor& operacionMonitor,LectorDeArchivo* archivo,int filasPorParticiones, int ii,int filaFinal,int filaInicial);
+	Particion(OperacionMonitor &operacionMonitor, LectorDeArchivo *archivo,
+			int filasPorParticiones, int ii, int filaFinal, int filaInicial);
+
 	void execute();
+
 	bool isToken();
+
 	virtual ~Particion();
 };
 
