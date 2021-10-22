@@ -31,7 +31,7 @@ void ProtecetedQueue::closeTask() {
 Particion ProtecetedQueue::consumeTaskIfPosible() {
 	 std::unique_lock<std::mutex> unique_lock(this->m);
 	 while (this->threads.empty()){
-		 if(this->terminamos){
+		 if (this->terminamos){
 			 OperacionMonitor gg;
 			 Particion token(gg);
 			 return token;

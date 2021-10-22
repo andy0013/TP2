@@ -15,6 +15,6 @@ public:
 	virtual int obtenerValorActual() = 0;
 	virtual int obtenerCantiadDeVAloresActual() = 0;
 	virtual int obtenerValorFinal() = 0;
-	virtual ~Operacion(){};
+	virtual ~Operacion(){}
 };
 #endif /* OPERACION_H_ */

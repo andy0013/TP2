@@ -8,6 +8,8 @@
 #ifndef CONSOLAOPERACIONESDATASET_H_
 #define CONSOLAOPERACIONESDATASET_H_
 
+#include <cstdlib>
+#include <string>
 #include "OperacionMonitor.h"
 #include "ProtecetedQueue.h"
 #include "ParserSolicitudUsuario.h"
@@ -19,7 +21,7 @@ class ConsolaOperacionesDataset {
 	OperacionMonitor operacion;
 
 public:
-	ConsolaOperacionesDataset(ProtecetedQueue &protecetedQueue);
+	explicit ConsolaOperacionesDataset(ProtecetedQueue &protecetedQueue);
 	/*
 	 * Manda a solicitar valores a usuario
 	 * Mientras el usuario solicite, envia

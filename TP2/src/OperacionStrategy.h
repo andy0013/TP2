@@ -20,6 +20,7 @@
 class OperacionStrategy {
 private:
 	Operacion *operacion;
+
 public:
 	OperacionStrategy();
 	/*
@@ -42,6 +43,7 @@ public:
 	 */
 	void StrategyCombineOperacion(OperacionStrategy* particionNueva);
 	virtual ~OperacionStrategy();
+
 private:
 	/*
 	 * POST: Valor de la operacion que contiene.

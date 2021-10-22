@@ -18,7 +18,7 @@ private:
 
 public:
 //	EjecutorTareas(ProtecetedQueue& colaPorUsar,bool& hilosSiguenEjecutando);
-	EjecutorTareas(ProtecetedQueue& colaPorUsar);
+	explicit EjecutorTareas(ProtecetedQueue& colaPorUsar);
 
 	void operator()();
 

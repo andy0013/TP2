@@ -13,28 +13,30 @@
 #include "OperacionStrategy.h"
 #include <mutex>
 #include <vector>
+#include <string>
 
 class OperacionMonitor {
 private:
 	std::vector<OperacionStrategy> operacionCompartida;
 //	OperacionStrategy operacionCompartida;
-    std::mutex m;
-    bool lecturaValida;
-    std::string operacion;
-    int filaFinal;
+	std::mutex m;
+	bool lecturaValida;
+	std::string operacion;
+	int filaFinal;
 
-	void splitApply(int filasPorParticiones, OperacionStrategy& operacionParcial,
-			LectorDeArchivo *archivoPorUsar,int filaFinal,int filaInicial);
+	void splitApply(int filasPorParticiones,
+			OperacionStrategy &operacionParcial,
+			LectorDeArchivo *archivoPorUsar, int filaFinal, int filaInicial);
 
-	void combine(OperacionStrategy& operacionParcial,int ii);
+	void combine(OperacionStrategy &operacionParcial, int ii);
 
 public:
-
 	OperacionMonitor();
 
-	void datosIngresadosPorUser(int filaFinal,std::string operacion);
+	void datosIngresadosPorUser(int filaFinal, std::string operacion);
 
-	void splitApplyCombine(LectorDeArchivo* archivoPorUsar, int filasPorParticiones,int filaInicial,int ii,int filaFinal);
+	void splitApplyCombine(LectorDeArchivo *archivoPorUsar,
+			int filasPorParticiones, int filaInicial, int ii, int filaFinal);
 
 	void imprimirResultado();
 

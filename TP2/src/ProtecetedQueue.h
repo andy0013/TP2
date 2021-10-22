@@ -25,7 +25,7 @@ private:
     std::condition_variable taskVoid;
     std::condition_variable taskFull;
 public:
-	ProtecetedQueue(int threadsToUse);
+	explicit ProtecetedQueue(int threadsToUse);
 
 	void closeTask();
 

@@ -7,8 +7,6 @@
 
 #include "ConsolaOperacionesDataset.h"
 
-#include <cstdlib>
-
 ConsolaOperacionesDataset::ConsolaOperacionesDataset(
 		ProtecetedQueue &protecetedQueue) :
 		colaDeEjecuciones(protecetedQueue) {
@@ -34,7 +32,6 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		nroSolicitudUsuario++;
 	}
 	mensajero.enviarToken(this->colaDeEjecuciones, operacion, NULL);
-
 }
 
 void ConsolaOperacionesDataset::imprimir() {

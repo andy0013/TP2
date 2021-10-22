@@ -20,7 +20,6 @@ class ParserSolicitudUsuario {
 	std::string columnaPorUsar;
 
 public:
-
 	ParserSolicitudUsuario();
 	/*
 	 * POST: Bool que indica si el usuario dejo de ingresar
@@ -41,6 +40,7 @@ public:
 	void prepararValoresParaNuevaSolicitud();
 
 	virtual ~ParserSolicitudUsuario();
+
 private:
 	/*
 	 * PRE: Input user.

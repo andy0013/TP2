@@ -19,7 +19,7 @@ private:
 	int filaFinal;
 	int filaInicial;
 public:
-	Particion(OperacionMonitor &operacionMonitor);
+	explicit Particion(OperacionMonitor &operacionMonitor);
 
 	Particion(OperacionMonitor &operacionMonitor, LectorDeArchivo *archivo,
 			int filasPorParticiones, int ii, int filaFinal, int filaInicial);

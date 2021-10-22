@@ -14,8 +14,9 @@
 
 class MensajeroDeParticiones {
 	ParserSolicitudUsuario &infoIngreasadaPorUsuario;
+
 public:
-	MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
+	explicit MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
 
 	void enviarToken(ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos);
@@ -28,6 +29,7 @@ public:
 			int nroParticion);
 
 	virtual ~MensajeroDeParticiones();
+
 private:
 	void enviarParticiones(int nroParticionesPorUsar,
 			bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
@@ -37,7 +39,6 @@ private:
 	void enviarParticionIncompleta(ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
 			int nroParticion);
-
 };
 
 #endif /* MENSAJERODEPARTICIONES_H_ */
