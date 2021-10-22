@@ -8,8 +8,8 @@
 #include "EjecutorTareas.h"
 
 EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar,
-		const std::string dataset , int columnas,std::mutex& mutex) :
-		colaCompartidaConTareas(colaPorUsar),mutex(mutex) {
+		const std::string dataset , int columnas) :
+		colaCompartidaConTareas(colaPorUsar){
 	this->columnas = columnas;
 	this->dataset = dataset;
 }
@@ -20,9 +20,7 @@ void EjecutorTareas::operator()() {
 		Particion particionPorEjecutar =
 				this->colaCompartidaConTareas.consumeTaskIfPosible();
 		if (!particionPorEjecutar.isToken()) {
-			mutex.lock();
 			particionPorEjecutar.execute(this->dataset,this->columnas);
-			mutex.unlock();
 		} else {
 			hilosSiguenEjecutando = false;
 		}

@@ -14,7 +14,7 @@
 class GestorHilos {
 private:
 	int cantidadHilos;
-	std::mutex mutex;
+
 	ProtecetedQueue& colaCompartida;
 
 	std::vector<std::thread*> hilosEnCurso;

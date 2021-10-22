@@ -14,6 +14,7 @@ OperacionMonitor::OperacionMonitor() {
 
 void OperacionMonitor::datosIngresadosPorUser(int filaFinal,
 		std::string operacion) {
+	std::lock_guard<std::mutex> l(m);
 	this->filaFinal = filaFinal;
 	this->operacion = operacion;
 	OperacionStrategy* operacionPorGuardar = new OperacionStrategy();

@@ -17,11 +17,10 @@ private:
 	ProtecetedQueue& colaCompartidaConTareas;
 	std::string dataset;
 	int columnas;
-	std::mutex& mutex;
 
 public:
 	EjecutorTareas(ProtecetedQueue& colaPorUsar,std::string dataset
-			, int columnas,std::mutex& mutex);
+			, int columnas);
 
 	void operator()();
 

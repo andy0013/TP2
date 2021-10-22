@@ -9,7 +9,7 @@ void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dat
 		, int columnas) {
 
 	for (int i = 0; i < this->cantidadHilos; i++) {
-		EjecutorTareas hilo(this->colaCompartida,dataset,columnas,mutex);
+		EjecutorTareas hilo(this->colaCompartida,dataset,columnas);
 		this->operacionPorDisparar.push_back(hilo);
 	}
 
