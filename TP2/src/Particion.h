@@ -9,6 +9,7 @@
 #define PARTICION_H_
 #include "LectorDeArchivo.h"
 #include "OperacionMonitor.h"
+#include <string>
 
 class Particion {
 private:

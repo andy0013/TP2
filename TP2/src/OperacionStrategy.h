@@ -21,6 +21,7 @@ class OperacionStrategy {
 private:
 	Operacion *operacion;
 	std::string tipoDeOperacion;
+
 public:
 	OperacionStrategy();
 	/*

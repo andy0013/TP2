@@ -8,7 +8,7 @@
 #include "EjecutorTareas.h"
 
 EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar,
-		std::string dataset , int columnas) :
+		const std::string dataset , int columnas) :
 		colaCompartidaConTareas(colaPorUsar) {
 	this->columnas = columnas;
 	this->dataset = dataset;

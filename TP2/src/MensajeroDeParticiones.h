@@ -34,7 +34,6 @@ private:
 			bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion,
 			int nroParticion, int columna);
-
 };
 
 #endif /* MENSAJERODEPARTICIONES_H_ */
