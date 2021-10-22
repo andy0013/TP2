@@ -18,10 +18,9 @@ private:
 	std::string pathDeArchivo;
 	std::fstream archivo;
 	int cantidadDeColumnas;
-	int numeroDeColumna;
 
 public:
-	LectorDeArchivo(std::string pathPorLeer, int cantidadCols, int nroCols);
+	LectorDeArchivo(std::string pathPorLeer, int cantidadCols);
 	/*
 	 * Situa el puntero de lectura en la ubicacion de la
 	 * fila inicial de donde leer valores.
@@ -30,7 +29,7 @@ public:
 	/*
 	 * POST: el valor de la columna leido.
 	 */
-	int obtenerDatosDeArchivo();
+	int obtenerDatosDeArchivo(int numeroDeColumna);
 
 	virtual ~LectorDeArchivo();
 };

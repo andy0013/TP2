@@ -10,14 +10,12 @@
 OperacionMonitor::OperacionMonitor() {
 	this->lecturaValida = true;
 	this->filaFinal = 0;
-//	this->operacionCompartida = OperacionStrategy();
 }
 
 void OperacionMonitor::datosIngresadosPorUser(int filaFinal,
 		std::string operacion) {
 	this->filaFinal = filaFinal;
 	this->operacion = operacion;
-//	this->operacionCompartida.StrategyCrearOperacion(operacion);
 	OperacionStrategy operacionPorGuardar;
 	operacionPorGuardar.StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
@@ -25,24 +23,24 @@ void OperacionMonitor::datosIngresadosPorUser(int filaFinal,
 
 void OperacionMonitor::splitApply(int filasPorParticiones,
 		OperacionStrategy &operacionParcial, LectorDeArchivo *archivoPorUsar,
-		int filaFinal, int filaInicial) {
+		int filaFinal, int filaInicial,int columna) {
 	archivoPorUsar->situarLectorEnFilaInicial(filaInicial);
 	for (int i = 0; i < filasPorParticiones; i++) {
 		int fila = i + filaInicial;
 		if (fila < filaFinal)
 			operacionParcial.StrategyRealizarOperacion(
-					archivoPorUsar->obtenerDatosDeArchivo());
+					archivoPorUsar->obtenerDatosDeArchivo(columna));
 	}
 }
 
 void OperacionMonitor::splitApplyCombine(LectorDeArchivo *archivoPorUsar,
 		int filasPorParticiones, int filaInicial, int particion,
-		int filaFinal) {
+		int filaFinal,int columna) {
 	std::lock_guard<std::mutex> l(m);
 	OperacionStrategy operacionParcial;
 	this->operacionCompartida[particion].StrategyCrearOperacionParcial(&operacionParcial);
 	this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar,
-			filaFinal, filaInicial);
+			filaFinal, filaInicial,columna);
 	this->combine(operacionParcial, particion);
 }
 

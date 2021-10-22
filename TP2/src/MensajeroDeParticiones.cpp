@@ -15,7 +15,7 @@ MensajeroDeParticiones::MensajeroDeParticiones(
 void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 		bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
 		OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
-		int nroParticion) {
+		int nroParticion, int columna) {
 	int filaInicial =
 			this->infoIngreasadaPorUsuario
 			.obtenerFilaInicioDelInputRecibido();
@@ -24,7 +24,7 @@ void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 			.obtenerNroFilasPorParticionDelInputRecibido();
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
 		Particion particion(operacion, gestorDeDatos, salto, nroParticion,
-				filaInicial + salto, filaInicial);
+				filaInicial + salto, filaInicial,columna);
 		colaDeEjecuciones.addTaskIfPossible(particion);
 		filaInicial = filaInicial + salto;
 	}
@@ -32,7 +32,7 @@ void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 		Particion particion(operacion, gestorDeDatos, salto, nroParticion,
 				this->infoIngreasadaPorUsuario
 				.obtenerFilaFinDelInputRecibido(),
-				filaInicial);
+				filaInicial,columna);
 		colaDeEjecuciones.addTaskIfPossible(particion);
 	}
 }
@@ -51,7 +51,7 @@ void MensajeroDeParticiones::enviarToken(ProtecetedQueue &colaDeEjecuciones,
 
 void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
 		ProtecetedQueue &colaDeEjecuciones, OperacionMonitor &operacion,
-		LectorDeArchivo *gestorDeDatos, int nroParticion) {
+		LectorDeArchivo *gestorDeDatos, int nroParticion, int columna) {
 	int filasPorUsar =
 			this->infoIngreasadaPorUsuario.obtenerFilaFinDelInputRecibido()
 					- this->infoIngreasadaPorUsuario
@@ -69,7 +69,7 @@ void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
 		enviarParticionIncompleta = false;
 	}
 	enviarParticiones(nroParticionesPorUsar, enviarParticionIncompleta,
-			colaDeEjecuciones, operacion, gestorDeDatos, nroParticion);
+			colaDeEjecuciones, operacion, gestorDeDatos, nroParticion,columna);
 }
 
 MensajeroDeParticiones::~MensajeroDeParticiones() {

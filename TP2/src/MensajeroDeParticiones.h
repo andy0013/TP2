@@ -26,7 +26,7 @@ public:
 
 	void crearParticionesYEnviarALaQueue(ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
-			int nroParticion);
+			int nroParticion, int columna);
 
 	virtual ~MensajeroDeParticiones();
 
@@ -34,11 +34,8 @@ private:
 	void enviarParticiones(int nroParticionesPorUsar,
 			bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
-			int nroParticion);
+			int nroParticion, int columna);
 
-	void enviarParticionIncompleta(ProtecetedQueue &colaDeEjecuciones,
-			OperacionMonitor &operacion, LectorDeArchivo *gestorDeDatos,
-			int nroParticion);
 };
 
 #endif /* MENSAJERODEPARTICIONES_H_ */

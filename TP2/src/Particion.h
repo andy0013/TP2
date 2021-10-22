@@ -17,13 +17,14 @@ private:
 	int filasPorParticiones;
 	int nroParticion;
 	int filaFinal;
+	int columna;
 	int filaInicial;
 public:
 	explicit Particion(OperacionMonitor &operacionMonitor);
 
 	Particion(OperacionMonitor &operacionMonitor, LectorDeArchivo *archivo,
 			int filasPorParticiones, int nroParticion, int filaFinal,
-			int filaInicial);
+			int filaInicial,int columna);
 
 	void execute();
 

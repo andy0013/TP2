@@ -26,7 +26,8 @@ private:
 
 	void splitApply(int filasPorParticiones,
 			OperacionStrategy &operacionParcial,
-			LectorDeArchivo *archivoPorUsar, int filaFinal, int filaInicial);
+			LectorDeArchivo *archivoPorUsar, int filaFinal, int filaInicial,
+			int columna);
 
 	void combine(OperacionStrategy &operacionParcial, int ii);
 
@@ -36,7 +37,8 @@ public:
 	void datosIngresadosPorUser(int filaFinal, std::string operacion);
 
 	void splitApplyCombine(LectorDeArchivo *archivoPorUsar,
-			int filasPorParticiones, int filaInicial, int ii, int filaFinal);
+			int filasPorParticiones, int filaInicial, int ii, int filaFinal
+			,int columna);
 
 	void imprimirResultado();
 
