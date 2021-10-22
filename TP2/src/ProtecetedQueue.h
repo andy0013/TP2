@@ -21,7 +21,7 @@ private:
 	std::queue<Particion> threads;
     std::mutex m;
     bool terminamos;
-    int limitThreads;
+    size_t limitThreads;
     std::condition_variable taskVoid;
     std::condition_variable taskFull;
 public:

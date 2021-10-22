@@ -44,7 +44,6 @@ std::string ParserSolicitudUsuario::obtenerOperacionDelInputRecibido(){
 void ParserSolicitudUsuario::identificarInformacionIngresadaStdin
 	(std::string input) {
 	int i = 0;
-	int x = input.length();
 	this->prepararValoresParaNuevaSolicitud();
 	i = this->obtenerValor(&this->filaInicio, input, i);
 	i = this->obtenerValor(&this->filaFin, input, i);

@@ -15,7 +15,7 @@ class GestorHilos {
 private:
 	int cantidadHilos;
 
-	bool hilosSiguenEjecutando;
+//	bool hilosSiguenEjecutando;
 
 	ProtecetedQueue& colaCompartida;
 

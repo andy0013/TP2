@@ -28,8 +28,6 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,operacion,gestorDeDatos,nroSolicitudUsuario);
 		solicitudUsuario.prepararValoresParaNuevaSolicitud();
 		nroSolicitudUsuario++;
-		if(nroSolicitudUsuario == 4)
-			break;
 	}
 	mensajero.enviarToken(this->colaDeEjecuciones,operacion,NULL);
 
