@@ -33,13 +33,14 @@ void OperacionMonitor::splitApply(int filasPorParticiones,
 	}
 }
 
-void OperacionMonitor::splitApplyCombine(LectorDeArchivo *archivoPorUsar,
+void OperacionMonitor::splitApplyCombine(std::string dataset,int columnas,
 		int filasPorParticiones, int filaInicial, int particion,
 		int filaFinal,int columna) {
 	std::lock_guard<std::mutex> l(m);
 	OperacionStrategy operacionParcial;
+	LectorDeArchivo archivoPorUsar(dataset, columnas);
 	this->operacionCompartida[particion]->StrategyCrearOperacionParcial(&operacionParcial);
-	this->splitApply(filasPorParticiones, operacionParcial, archivoPorUsar,
+	this->splitApply(filasPorParticiones, operacionParcial, &archivoPorUsar,
 			filaFinal, filaInicial,columna);
 	this->combine(operacionParcial, particion);
 }

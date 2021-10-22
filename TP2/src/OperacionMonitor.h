@@ -35,7 +35,7 @@ public:
 
 	void datosIngresadosPorUser(int filaFinal, std::string operacion);
 
-	void splitApplyCombine(LectorDeArchivo *archivoPorUsar,
+	void splitApplyCombine(std::string dataset,int columnas,
 			int filasPorParticiones, int filaInicial, int ii, int filaFinal
 			,int columna);
 

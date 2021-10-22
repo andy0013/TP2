@@ -28,8 +28,7 @@ Particion::Particion(OperacionMonitor &operacionMonitor,
 }
 
 void Particion::execute(std::string dataset , int columnas) {
-	LectorDeArchivo lector(dataset, columnas);
-	this->monitor.splitApplyCombine(&lector, this->filasPorParticiones,
+	this->monitor.splitApplyCombine(dataset,columnas, this->filasPorParticiones,
 			this->filaInicial, this->nroParticion, this->filaFinal,
 			this->columna);
 }
