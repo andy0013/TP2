@@ -89,7 +89,7 @@ Link : https://github.com/andy0013/TP2.git
 # DIAGRAMA SECUENCIA
 
 
- ![sec_rentre](imagenes/DSEC.png)
+ ![secrentre](imagenes/DSEC.png)
  
 De forma simplificada se muestra la ejecucion principal, en donde el usuario envia su input, y nosotros cargamos la Queue, adicional al grafico, se hace mencion que en este Loop se hace uso de las clases *ParserSolicitudUsuario*; la cual se encarga de decodificar el input y obtener los valores numericos recibidos y la clase *MensajeroDeParticiones*, la cual se encarga de enviar las particiones, es quien sabe que datos deben ser enviados; por ejemplo: la cantidad de particiones por solicutud.
  
