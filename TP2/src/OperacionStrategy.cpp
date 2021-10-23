@@ -11,6 +11,14 @@ OperacionStrategy::OperacionStrategy() {
 	this->operacion = NULL;
 }
 
+OperacionStrategy::OperacionStrategy(OperacionStrategy&& other){
+	this->operacion = other.operacion;
+	this->tipoDeOperacion = other.tipoDeOperacion;
+
+	other.operacion = nullptr;
+}
+
+
 void OperacionStrategy::StrategyCrearOperacion(std::string operacion) {
 	this->tipoDeOperacion = operacion;
 	if (!strcmp("max", operacion.c_str())) {
@@ -56,6 +64,7 @@ void OperacionStrategy::StrategyCombineOperacion(
 }
 
 OperacionStrategy::~OperacionStrategy() {
-	delete this->operacion;
+	if(this->operacion)
+		delete this->operacion;
 }
 

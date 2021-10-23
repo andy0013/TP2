@@ -22,8 +22,7 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		solicitudUsuario.parsearInputDeUsuario(line);
 		mensajero.prepararMonitorConValoresIngresadosPorUsuario(operacion);
 		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
-				operacion, nroSolicitudUsuario
-				,solicitudUsuario.obtenerColumnaPorUsarDelInputRecibido());
+				operacion, nroSolicitudUsuario);
 		nroSolicitudUsuario++;
 	}
 	mensajero.enviarToken(this->colaDeEjecuciones);

@@ -7,6 +7,7 @@
 
 #include "Particion.h"
 
+
 Particion::Particion(OperacionMonitor &operacionMonitor) :
 		monitor(operacionMonitor) {
 	this->nroParticion = (-1);
@@ -27,13 +28,15 @@ Particion::Particion(OperacionMonitor &operacionMonitor,
 	this->filaInicial = filaInicial;
 }
 
-void Particion::execute(std::string dataset , int columnas) {
-	this->monitor.splitApplyCombine(dataset,columnas, this->filasPorParticiones,
-			this->filaInicial, this->nroParticion, this->filaFinal,
-			this->columna);
+void Particion::ejecutar(std::string dataset , int columnas) {
+	this->monitor.splitApplyCombine(std::move(dataset),std::move(columnas)
+	, std::move(this->filasPorParticiones),
+			std::move(this->filaInicial), std::move(this->nroParticion)
+	, std::move(this->filaFinal),
+			std::move(this->columna));
 }
 
-bool Particion::isToken() {
+bool Particion::esElToken() {
 	return this->nroParticion == (-1) ? true : false;
 }
 

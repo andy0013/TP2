@@ -7,6 +7,7 @@
 
 #include "LectorDeArchivo.h"
 
+
 LectorDeArchivo::LectorDeArchivo(const std::string pathPorLeer,
 		int cantidadCols) {
 	this->pathDeArchivo = pathPorLeer;
@@ -33,6 +34,7 @@ int LectorDeArchivo::obtenerDatosDeArchivo(int numeroDeColumna) {
 	return numeroLeido;
 }
 LectorDeArchivo::~LectorDeArchivo() {
-	this->archivo.close();
+	if(this->archivo)
+		this->archivo.close();
 }
 

@@ -17,8 +17,15 @@
 #include "LectorDeArchivo.h"
 
 class ConsolaOperacionesDataset {
+
 	ProtecetedQueue &colaDeEjecuciones;
+
 	OperacionMonitor operacion;
+
+	ConsolaOperacionesDataset(const ConsolaOperacionesDataset &other) = delete;
+
+	ConsolaOperacionesDataset& operator=(const ConsolaOperacionesDataset &other) = delete;
+
 
 public:
 	explicit ConsolaOperacionesDataset(ProtecetedQueue &protecetedQueue);

@@ -25,10 +25,15 @@ private:
 
 	void splitApply(int filasPorParticiones,
 			OperacionStrategy &operacionParcial,
-			LectorDeArchivo *archivoPorUsar, int filaFinal, int filaInicial,
-			int columna);
+			 int filaFinal, int filaInicial,
+			int columna,std::string dataset,int columnas);
 
-	void combine(OperacionStrategy &operacionParcial, int ii);
+	void combine(OperacionStrategy operacionParcial, int nroParticion);
+
+	OperacionMonitor(const OperacionMonitor &other) = delete;
+
+	OperacionMonitor& operator=(const OperacionMonitor &other) = delete;
+
 
 public:
 	OperacionMonitor();
@@ -36,7 +41,7 @@ public:
 	void datosIngresadosPorUser(int filaFinal, std::string operacion);
 
 	void splitApplyCombine(std::string dataset,int columnas,
-			int filasPorParticiones, int filaInicial, int ii, int filaFinal
+			int filasPorParticiones, int filaInicial, int nroParticion, int filaFinal
 			,int columna);
 
 	void imprimirResultado();

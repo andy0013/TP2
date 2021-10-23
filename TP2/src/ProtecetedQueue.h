@@ -24,14 +24,19 @@ private:
     size_t limitThreads;
     std::condition_variable taskVoid;
     std::condition_variable taskFull;
+
+    ProtecetedQueue(const ProtecetedQueue &other) = delete;
+
+    ProtecetedQueue& operator=(const ProtecetedQueue &other) = delete;
+
 public:
 	explicit ProtecetedQueue(int threadsToUse);
 
-	void closeTask();
+	void terminarQueue();
 
-	void addTaskIfPossible(Particion particion);
+	void agregarParticionSiEsPosible(Particion particion);
 
-	Particion consumeTaskIfPosible();
+	Particion obtenerParticionSiEsPosible();
 
 	virtual ~ProtecetedQueue();
 };

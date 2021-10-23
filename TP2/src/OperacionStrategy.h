@@ -22,7 +22,15 @@ private:
 	Operacion *operacion;
 	std::string tipoDeOperacion;
 
+	OperacionStrategy(const OperacionStrategy &other) = delete;
+
+	OperacionStrategy& operator=(const OperacionStrategy &other) = delete;
+
+
 public:
+
+	OperacionStrategy(OperacionStrategy&& other);
+
 	OperacionStrategy();
 	/*
 	 * Inicializa la operacion adecuada en base

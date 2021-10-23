@@ -7,10 +7,9 @@ GestorHilos::GestorHilos(ProtecetedQueue &colaCompartida, int cantidadHilos) :
 
 void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
 		, int columnas) {
-
 	for (int i = 0; i < this->cantidadHilos; i++) {
 		EjecutorTareas hilo(this->colaCompartida,dataset,columnas);
-		this->operacionPorDisparar.push_back(hilo);
+		this->operacionPorDisparar.push_back(std::move(hilo));
 	}
 
 	for (int i = 0; i < this->cantidadHilos; i++) {

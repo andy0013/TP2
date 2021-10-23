@@ -15,7 +15,7 @@ ParserSolicitudUsuario::ParserSolicitudUsuario() {
 	this->operacion = "";
 }
 
-void ParserSolicitudUsuario::parsearInputDeUsuario(std::string input) {
+void ParserSolicitudUsuario::parsearInputDeUsuario(std::string &input) {
 	this->identificarInformacionIngresadaStdin(input);
 }
 
@@ -40,7 +40,7 @@ std::string ParserSolicitudUsuario::obtenerOperacionDelInputRecibido() {
 }
 
 void ParserSolicitudUsuario::identificarInformacionIngresadaStdin(
-		std::string input) {
+		std::string &input) {
 	int i = 0;
 	this->prepararValoresParaNuevaSolicitud();
 	i = this->obtenerValor(&this->filaInicio, input, i);

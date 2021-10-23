@@ -18,9 +18,9 @@ void EjecutorTareas::operator()() {
 	bool hilosSiguenEjecutando = true;
 	while (hilosSiguenEjecutando) {
 		Particion particionPorEjecutar =
-				this->colaCompartidaConTareas.consumeTaskIfPosible();
-		if (!particionPorEjecutar.isToken()) {
-			particionPorEjecutar.execute(this->dataset,this->columnas);
+				this->colaCompartidaConTareas.obtenerParticionSiEsPosible();
+		if (!particionPorEjecutar.esElToken()) {
+			particionPorEjecutar.ejecutar(this->dataset,this->columnas);
 		} else {
 			hilosSiguenEjecutando = false;
 		}

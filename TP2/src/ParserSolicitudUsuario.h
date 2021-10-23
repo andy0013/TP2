@@ -19,18 +19,37 @@ class ParserSolicitudUsuario {
 	std::string nroFilasPorParticion;
 	std::string columnaPorUsar;
 
+	ParserSolicitudUsuario(const ParserSolicitudUsuario &other) = delete;
+
+	ParserSolicitudUsuario& operator=(const ParserSolicitudUsuario &other) = delete;
+
+
 public:
 	ParserSolicitudUsuario();
 	/*
 	 * POST: Bool que indica si el usuario dejo de ingresar
 	 * o ingreso un #EOF
 	 */
-	void parsearInputDeUsuario(std::string input);
-
+	void parsearInputDeUsuario(std::string &input);
+	/*
+	 * POST: Fila Inicio obtenida.
+	 */
 	int obtenerFilaInicioDelInputRecibido();
+	/*
+	 * POST: Fila Fin obtenida.
+	 */
 	int obtenerFilaFinDelInputRecibido();
+	/*
+	 * POST: Nro filas por particion obtenida.
+	 */
 	int obtenerNroFilasPorParticionDelInputRecibido();
+	/*
+	 * POST: Columna por usar obtenida.
+	 */
 	int obtenerColumnaPorUsarDelInputRecibido();
+	/*
+	 * POST: Operacion obtenida.
+	 */
 	std::string obtenerOperacionDelInputRecibido();
 
 	/*
@@ -47,7 +66,7 @@ private:
 	 * POST: parsea el string recibido por input
 	 * y lo guarda en los atributos de la clase.
 	 */
-	void identificarInformacionIngresadaStdin(std::string input);
+	void identificarInformacionIngresadaStdin(std::string &input);
 
 	/*
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo

@@ -21,6 +21,11 @@ private:
 
 	std::vector<EjecutorTareas> operacionPorDisparar;
 
+	GestorHilos(const GestorHilos &other) = delete;
+
+	GestorHilos& operator=(const GestorHilos &other) = delete;
+
+
 public:
 	/*
 	 * Iniciamos clase, recibe como parametro sus atributos.

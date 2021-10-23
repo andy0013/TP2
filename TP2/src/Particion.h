@@ -26,9 +26,9 @@ public:
 			int filasPorParticiones, int nroParticion, int filaFinal,
 			int filaInicial,int columna);
 
-	void execute(std::string dataset , int columnas);
+	void ejecutar(std::string dataset , int columnas);
 
-	bool isToken();
+	bool esElToken();
 
 	virtual ~Particion();
 };

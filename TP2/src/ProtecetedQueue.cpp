@@ -13,7 +13,7 @@ ProtecetedQueue::ProtecetedQueue(int threadsToUse) {
 	this->terminamos = false;
 }
 
-void ProtecetedQueue::addTaskIfPossible(Particion party) {
+void ProtecetedQueue::agregarParticionSiEsPosible(Particion party) {
 	std::unique_lock<std::mutex> unique_lock(this->m);
 	 while (this->threads.size() == this->limitThreads){
 		 this->taskFull.wait(unique_lock);
@@ -22,13 +22,13 @@ void ProtecetedQueue::addTaskIfPossible(Particion party) {
 	 this->taskVoid.notify_all();
 }
 
-void ProtecetedQueue::closeTask() {
+void ProtecetedQueue::terminarQueue() {
 	std::unique_lock<std::mutex> unique_lock(this->m);
 	this->terminamos = true;
 	this->taskVoid.notify_all();
 }
 
-Particion ProtecetedQueue::consumeTaskIfPosible() {
+Particion ProtecetedQueue::obtenerParticionSiEsPosible() {
 	 std::unique_lock<std::mutex> unique_lock(this->m);
 	 while (this->threads.empty()){
 		 if (this->terminamos){

@@ -19,6 +19,12 @@ private:
 	std::fstream archivo;
 	int cantidadDeColumnas;
 
+	LectorDeArchivo(const LectorDeArchivo &other) = delete;
+
+	LectorDeArchivo& operator=(const LectorDeArchivo &other) = delete;
+
+
+
 public:
 	LectorDeArchivo(std::string pathPorLeer, int cantidadCols);
 	/*

@@ -13,7 +13,13 @@
 #include "ParserSolicitudUsuario.h"
 
 class MensajeroDeParticiones {
+
 	ParserSolicitudUsuario &infoIngreasadaPorUsuario;
+
+	MensajeroDeParticiones(const MensajeroDeParticiones &other) = delete;
+
+	MensajeroDeParticiones& operator=(const MensajeroDeParticiones &other) = delete;
+
 
 public:
 	explicit MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
@@ -25,7 +31,7 @@ public:
 
 	void crearParticionesYEnviarALaQueue(ProtecetedQueue &colaDeEjecuciones,
 			OperacionMonitor &operacion,
-			int nroParticion, int columna);
+			int nroParticion);
 
 	virtual ~MensajeroDeParticiones();
 

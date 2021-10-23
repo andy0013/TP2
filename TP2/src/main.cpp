@@ -20,6 +20,8 @@
 #include "Particion.h"
 
 int main(int argc, char *argv[]) {
+	if(argc != 4)
+		return 1;
 	int columnas = atoi(argv[2]);
 	std::string nombreDataset = argv[1];
 	int hilos = atoi(argv[3]);
