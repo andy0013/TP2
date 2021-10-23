@@ -101,5 +101,20 @@ Luego de la finalizacion del tp, vamos a relatar cuales fueron principalmente lo
 
 Como entorno de trabajo se utilizo __eclipse__, este entorno tiene un Bug hasta el dia de hoy sin solucion, que es el hecho de que no detecta el #EOF, aun cuando estamos utilizando una sentencia que debe detectarlo. Este bug que se me daba en local al realizar pruebas hizo que tenga que usar un for para recibir el stdin, ya que si lo hacia mediante un while, en algun punto se quedaba bloqueado esperando la entrada de input. Como consecuencia de esta lectura me vi en la obligacion de usar numeros hardcodeados en algunas sentencias en las que no deberia. Sin embargo, hasta el momento de pushear el codigo al sercom, ya que tenia todo hardcodead no me resulto problematico, sin embargo, en el momento de enviarlo el Sercom me marco un Segmentation Fault, y, este error que me llevo varias horas de debbuging fue un resultante del hardcode, ya que en el "multiops" se envian 4 operaciones, y tenia como consecuencia del error inicial harcodeado que se revise 5 operaciones.
 
+## DATA RACE
+
+Si bien tenia implementado el monitor desde un principio, estaba haciendo un lock(m) solo en el momento en el cual se hacia la operacion de split-apply-combine.
+El problema fue que mientras se estaban realizando esas operaciones, el hilo main, avanza pusheando particiones, y en un momento actualizaba la informacion del Monitor, para
+continuar con la siguiente operacion solicitada por el user. Para esto tuvimos que hacer un lock(m) en el update de estos datos, de otra forma, estaria interfiriendo con los hilos que estan funcionando en paralelo.
+
+## HILOS
+
+Sin embargo, creo que el verdadero desafio fue entender el funcionamiento y la interaccion de los Hilos que son lanzados para obtener los datos de la Queue y ejecutar la tarea, y el hilo main, entender como es que estos funcionan y la importancia del mutex. 
+
+En varias ocasiones durante el desarrollo me quede pensando: 
+¿Como puedo garantizar 'x' cosa, si no se si los hilos terminaron de sacar las particiones de la cola?
+¿Como puedo enviar el token de fin de ejecucion, y si terminan mis hilos en simultaneo y no terminan de leer todas las particiones de la cola?
+
+Cuestiones que en este momento me parecen completamente logicas y entendibles, en ese momento se me plantearon como un gran dilema, para el cual me toco ejecutar una y otra vez en modo debbug, agregar endpoints, y revisar el codigo - modificaciones agregadas.
 
 
