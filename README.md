@@ -70,3 +70,15 @@ Link : https://github.com/andy0013/TP2.git
   * Refactor.
   
   
+# REENTREGA
+
+
+# MODELO
+
+ Como era de esperarse, posterior a agregar hilos, y siguiendo con las sugerencias hechas en los ISSUES, se hizo varios cambios en el modelo propuesto, es importante aclarar que en el esqueleto que sera presentado no estan todas las clases que interactuan en el flujo completo, ya que en caso de hacer un diagrama con todas las interacciones seria confuso.
+ 
+ 
+ 
+ Como se puede observar en el nuevo modelo, ahora las operaciones forman parte del monitor *OperacionMonitor()*, el mismo, tiene la responsabilidad de la seguridad de las modificaciones, ya que sera una clase que contenga el valor final de las operaciones, y, ya que contiene el valor donde se realizan los cambios de los distintos hilos, debe ser protegido.
+ 
+ Como se expreso previamente, este Monitor se envia en la clase *Particion* a la clase *ProtectedQueue*, que es una cola compartida, en donde se establecio el limite del tamaño de la misma, sujeta a la cantidad de Hilos. Aqui es donde se hacen los Push - Pop con ayuda de __condition_variables__; dependiendo si esta llena o vacia. Las Particiones seran pusheadas "una tras otra" en el hilo main, sin embargo, internamente, tendremos hilos que tomaran estos valores a traves de los threads activos, los podemos reconocer en el diagrama como *EjecutorTares*.
