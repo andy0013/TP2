@@ -93,3 +93,13 @@ Link : https://github.com/andy0013/TP2.git
  
 De forma simplificada se muestra la ejecucion principal, en donde el usuario envia su input, y nosotros cargamos la Queue, adicional al grafico, se hace mencion que en este Loop se hace uso de las clases *ParserSolicitudUsuario*; la cual se encarga de decodificar el input y obtener los valores numericos recibidos y la clase *MensajeroDeParticiones*, la cual se encarga de enviar las particiones, es quien sabe que datos deben ser enviados; por ejemplo: la cantidad de particiones por solicutud.
  
+# DESARROLLO
+
+Luego de la finalizacion del tp, vamos a relatar cuales fueron principalmente los mayores problemas durante el mismo.
+
+## INPUT
+
+Como entorno de trabajo se utilizo __eclipse__, este entorno tiene un Bug hasta el dia de hoy sin solucion, que es el hecho de que no detecta el #EOF, aun cuando estamos utilizando una sentencia que debe detectarlo. Este bug que se me daba en local al realizar pruebas hizo que tenga que usar un for para recibir el stdin, ya que si lo hacia mediante un while, en algun punto se quedaba bloqueado esperando la entrada de input. Como consecuencia de esta lectura me vi en la obligacion de usar numeros hardcodeados en algunas sentencias en las que no deberia. Sin embargo, hasta el momento de pushear el codigo al sercom, ya que tenia todo hardcodead no me resulto problematico, sin embargo, en el momento de enviarlo el Sercom me marco un Segmentation Fault, y, este error que me llevo varias horas de debbuging fue un resultante del hardcode, ya que en el "multiops" se envian 4 operaciones, y tenia como consecuencia del error inicial harcodeado que se revise 5 operaciones.
+
+
+
