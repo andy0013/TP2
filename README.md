@@ -131,11 +131,12 @@ Arrancando por los mas "sencillos" o automaticos, comenzamos por los Leaks de me
 -- *GestorHilos* Esta clase tiene un contenedor de objetos que no pueden ser copiados/movidos que son los threads, por esta razon se reservo memoria en el Heap.
 
 ## COPIAS DE STRING
-En muchas situaciones me paso de estar enviando parametros por copia innecesariamente, en TODOS esos casos se corrigio para enviar referencias o moverlos segun sea necesario, sin embargo hay algunos casos en los que necesitaba que sean copias, voy a nombrar un ejemplo:
+En muchas situaciones me paso de estar enviando parametros por copia innecesariamente, en TODOS esos casos se corrigio para enviar referencias o moverlos segun sea necesario Y EN LOS QUE SEA POSIBLE, hay algunos casos en los que necesitaba que sean copias, voy a nombrar un ejemplo:
 
 -- *MensajeroDeParticiones* Esta clase conociendo el nro de filas por particiones y fila inicio/fin, divide y calcula las particiones por enviar, ya que hay datos que son enviados en las Particiones, pero luego se siguen modificando y reutilizando, no podia moverlos, ya que los sigo usando, pero tampoco podia enviar las referencias, ya que nuevamente, seguiran modificandose. 
 
 ## COPIAS DE CLASES
 
 Luego de dejar el codigo 100% funcionando, se procedio a hacer un refactor, corriguiendo las copias innecesarias, esta cuestion no solo envolvia a nuestros datos primitivos, sino a muchas clases, se hizo a todas las clases NO copiables excepto a 2.
-Las clases de las que hablamos son __Particion__ y __EjecutorTareas__, estas clases, si bien es de mi interes, no logre solucionar que al tratar de hacerlas movibles tenia problemas al pasar de la clase "A" a la clase "B" un atributo en el cual teniamos un monitor que almacenaba objetos compartidos por los hilos.
+
+Las clases de las que hablamos son __Particion__ y __EjecutorTareas__, estas clases, si bien es de mi interes que sean no copiables, no logre solucionar que al tratar de hacerlas movibles tenia problemas al pasar de la clase "A" a la clase "B" un atributo en el cual teniamos un monitor que almacenaba objetos compartidos por los hilos.
