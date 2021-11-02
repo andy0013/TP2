@@ -140,3 +140,16 @@ En muchas situaciones me paso de estar enviando parametros por copia innecesaria
 Luego de dejar el codigo 100% funcionando, se procedio a hacer un refactor, corriguiendo las copias innecesarias, esta cuestion no solo envolvia a nuestros datos primitivos, sino a muchas clases, se hizo a todas las clases NO copiables excepto a 2.
 
 Las clases de las que hablamos son __Particion__ y __EjecutorTareas__, estas clases, si bien es de mi interes que sean no copiables, no logre solucionar que al tratar de hacerlas movibles tenia problemas al pasar de la clase "A" a la clase "B" un atributo en el cual teniamos un monitor que almacenaba objetos compartidos por los hilos.
+
+# CORRECCIONES IMPORTANTES REENTREGA 9/11
+
+## A NIVEL MODELO
+A nivel modelo se hicieron cambios importantes, en la version entregada la fecha anterior, el modelo que teniamos, no tenia paralelismo debido a que mi forma de utilizar los mutex, era protegiendo todo el flujo del hilo, desde que realiza la operacion parcial, hasta que guarda el resultado, por esta razon, el codigo entregado realizaba las operaciones de forma secuencial.
+ Para su correccion lo que se hizo fue, ahora las Particiones popeadas por los hilos, ejecutan la operacion parcial sin lock, por lo que se da el paralelismo. y ademas, reciben del hilo el monitor como parametro, el cual utilizan para guardar su resultado parcial en el mismo, para esto, si se utilizo lock.
+
+Con este cambio, ademas, se soluciono el problema de tener un "MONITOR GIGANTE", ya que ahora, las unicas responsabilidades del monitor son: acumular el resultado parcial - devolver el resultado final. 
+
+Junto con este cambio, tambien se quito de la Particion el atributo "Monitor" que tenia antes, ahora lo recibe al momento de popear en el hilo, entonces, ahora Particion se volvio una clase No copiable y movible, por lo que, no se hacen copias innecesarias.
+
+## MOVE SEMANTICS
+Se elimino el uso excesivo de Move Semantics, se limito a hacer el movimiento solo cuando fuese necesario, 
