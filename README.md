@@ -166,6 +166,8 @@ En la clase "LECTOR DE ARCHIVO" se utilizo MLI para la construccion del archivo,
 Como uno de los primero puntos que se intento de abordar, fue la legibilidad de codigo, para esto, como tarea inicial, se elimino el "spanglish" de mi clase ColaProtegida.
 Ademas, por otro lado, se agrego PRE y POST condiciones de las clases que tienen responsabilidades mas complejas, para un mayor entendimiento del codigo. 
 
-## ATOI FUNCION INSEGURA
+## SSCANF - FUNCION
 Se estaba utilizando la funcion ATOI, la cual, mediante un ejemplo sugerido por el corrector, se corroboro que es bastante insegura, esta misma, fue remplazada con la funcion "sscanf" que aporta seguridad al momento de manejar el tipo de dato.
 
+Por otro lado, se vio el potencial de la funcion "sscanf" que nos permitiria incluso, de un string obtener cada dato, llevandolo a la practica, podriamos haber utilizado esta funcion para obtener los datos del Input, en vez de sumar una clase grande innecesariamente, ya que con esta funcion se solucionaba de forma mas sencilla. 
+ 
