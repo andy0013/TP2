@@ -152,4 +152,14 @@ Con este cambio, ademas, se soluciono el problema de tener un "MONITOR GIGANTE",
 Junto con este cambio, tambien se quito de la Particion el atributo "Monitor" que tenia antes, ahora lo recibe al momento de popear en el hilo, entonces, ahora Particion se volvio una clase No copiable y movible, por lo que, no se hacen copias innecesarias.
 
 ## MOVE SEMANTICS
-Se elimino el uso excesivo de Move Semantics, se limito a hacer el movimiento solo cuando fuese necesario, 
+Se elimino el uso excesivo de Move Semantics, se limito a hacer el movimiento solo cuando fuese necesario, es decir, en casos de movimientos de enteros, se dejo el pasaje por copia, o si es posible, pasaje por referencias.
+
+Con el cambio de modelo, en el Monitor y la informacion de las Particiones, se elimino mucho ruido en codigo, ahora quedo mucho mas legible y se quito movimientos innecesarios.
+
+## COPIAS INNECESARIAS
+Se eliminaron las copias innecesarias del codigo, salvo en casos de datos que no son tan pesados, pero se logro que las clases sean no copiables en su totalidad.
+
+## MLI
+En la clase "LECTOR DE ARCHIVO" se utilizo MLI para la construccion del archivo, de esta forma, se gano performance y ademas, se volvio mucho mas comodo.
+
+
