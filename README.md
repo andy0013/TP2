@@ -162,4 +162,8 @@ Se eliminaron las copias innecesarias del codigo, salvo en casos de datos que no
 ## MLI
 En la clase "LECTOR DE ARCHIVO" se utilizo MLI para la construccion del archivo, de esta forma, se gano performance y ademas, se volvio mucho mas comodo.
 
+## LEGIBILIDAD DE CODIGO
+Como uno de los primero puntos que se intento de abordar, fue la legibilidad de codigo, para esto, como tarea inicial, se elimino el "spanglish" de mi clase ColaProtegida.
+Ademas, por otro lado, se agrego PRE y POST condiciones de las clases que tienen responsabilidades mas complejas, para un mayor entendimiento del codigo. 
+
 
