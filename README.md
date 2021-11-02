@@ -145,16 +145,18 @@ Las clases de las que hablamos son __Particion__ y __EjecutorTareas__, estas cla
 
 ## A NIVEL MODELO
 A nivel modelo se hicieron cambios importantes, en la version entregada la fecha anterior, el modelo que teniamos, no tenia paralelismo debido a que mi forma de utilizar los mutex, era protegiendo todo el flujo del hilo, desde que realiza la operacion parcial, hasta que guarda el resultado, por esta razon, el codigo entregado realizaba las operaciones de forma secuencial.
- Para su correccion lo que se hizo fue, ahora las Particiones popeadas por los hilos, ejecutan la operacion parcial sin lock, por lo que se da el paralelismo. y ademas, reciben del hilo el monitor como parametro, el cual utilizan para guardar su resultado parcial en el mismo, para esto, si se utilizo lock.
+ Para su correccion lo que se hizo fue:
+ 
+ Ahora las Particiones popeadas por los hilos, ejecutan la operacion parcial *sin lock*, por lo que se da el paralelismo. Y ademas, reciben en el hilo el monitor que contiene el resultado compartido como parametro, el cual utilizan para guardar su resultado parcial en el mismo, para esto **si se utilizo lock**.
 
 Con este cambio, ademas, se soluciono el problema de tener un "MONITOR GIGANTE", ya que ahora, las unicas responsabilidades del monitor son: acumular el resultado parcial - devolver el resultado final. 
 
-Junto con este cambio, tambien se quito de la Particion el atributo "Monitor" que tenia antes, ahora lo recibe al momento de popear en el hilo, entonces, ahora Particion se volvio una clase No copiable y movible, por lo que, no se hacen copias innecesarias.
+Junto con este cambio, tambien se quito de la Particion el atributo "Monitor" que tenia antes, ahora lo recibe al momento de popear en el hilo, entonces, ahora Particion se volvio una clase No copiable y movible, por lo que, no se hace esa copia innecesaria.
 
 ## MOVE SEMANTICS
-Se elimino el uso excesivo de Move Semantics, se limito a hacer el movimiento solo cuando fuese necesario, es decir, en casos de movimientos de enteros, se dejo el pasaje por copia, o si es posible, pasaje por referencias.
+Se elimino el uso excesivo de Move Semantics, se limito a hacer el movimiento solo cuando fuese necesario, es decir, en casos de movimientos de enteros se dejo el pasaje por copia, o si es posible, se hace pasaje por referencia.
 
-Con el cambio de modelo, en el Monitor y la informacion de las Particiones, se elimino mucho ruido en codigo, ahora quedo mucho mas legible y se quito movimientos innecesarios.
+Con el cambio de modelo, en el Monitor y la informacion de las Particiones, se elimino mucho ruido en codigo, ahora quedo mucho mas legible y con responsabilidades claras y unicas.
 
 ## COPIAS INNECESARIAS
 Se eliminaron las copias innecesarias del codigo, salvo en casos de datos que no son tan pesados, pero se logro que las clases sean no copiables en su totalidad.
