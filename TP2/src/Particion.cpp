@@ -49,7 +49,7 @@ void Particion::resolverValorParcialDeParticionEnParalelo(int& columnas,
 	}
 }
 
-void Particion::ejecutar(std::string dataset , int columnas, ResultadoCompartidoMonitor& resultadoProtegido) {
+void Particion::ejecutar(std::string &dataset , int &columnas, ResultadoCompartidoMonitor& resultadoProtegido) {
 	OperacionStrategy operacionParcial;
 	operacionParcial.StrategyCrearOperacion(operacionPorEjecutarEnParalelo);
 	resolverValorParcialDeParticionEnParalelo(columnas,

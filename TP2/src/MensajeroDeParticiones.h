@@ -23,9 +23,16 @@ class MensajeroDeParticiones {
 
 public:
 	explicit MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
-
+	/*
+	 * Envia la orden a la cola de terminar y
+	 * en caso de que soliciten un pop, enviar
+	 * el token al hilo correspondiente.
+	 */
 	void cerrarCola(ColaProtegida &colaDeEjecuciones);
-
+	/*
+	 * Crea la particion con los datos necesarios, y los envia a
+	 * la cola compartida para que sea pusheada cuando sea posible.
+	 */
 	void crearParticionesYEnviarALaQueue(ColaProtegida &colaDeEjecuciones,
 			int nroParticion);
 

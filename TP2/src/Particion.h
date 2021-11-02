@@ -36,10 +36,18 @@ public:
 	Particion(const Particion &&other);
 
 	Particion(int filasPorParticiones, int nroParticion, int filaFinal,
-			int filaInicial,int columna,std::string operacionPorEjecutarEnParalelo);
-
-	void ejecutar(std::string dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
-
+			int filaInicial,int columna,
+			std::string operacionPorEjecutarEnParalelo);
+	/*
+	 * PRE: Monitor con resultado compartido.
+	 * - ejecuta la operacion parcial : sin lock.
+	 * - a traves del monitor guarda el resultado parcial en monitor. con lock
+	 */
+	void ejecutar(std::string &dataset , int &columnas,ResultadoCompartidoMonitor& resultadoProtegido);
+	/*
+	 * POST: bool que indica si la Particion es el token
+	 * que indica que el hilo debe terminar.
+	 */
 	bool esElToken();
 
 	virtual ~Particion();

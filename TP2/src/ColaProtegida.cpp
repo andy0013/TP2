@@ -9,23 +9,23 @@
 
 
 ColaProtegida::ColaProtegida(int threadsToUse) {
-	this->limitThreads = threadsToUse;
+	this->limiteDeHilos = threadsToUse;
 	this->terminamos = false;
 }
 
 void ColaProtegida::agregarParticionSiEsPosible(Particion particionPorPushear) {
 	std::unique_lock<std::mutex> unique_lock(this->m);
-	 while (this->informacionCola.size() == this->limitThreads){
-		 this->taskFull.wait(unique_lock);
+	 while (this->informacionCola.size() == this->limiteDeHilos){
+		 this->colaLlena.wait(unique_lock);
 	 }
 	 this->informacionCola.push(std::move(particionPorPushear));
-	 this->taskVoid.notify_all();
+	 this->colaVacia.notify_all();
 }
 
 void ColaProtegida::terminarQueue() {
 	std::unique_lock<std::mutex> unique_lock(this->m);
 	this->terminamos = true;
-	this->taskVoid.notify_all();
+	this->colaVacia.notify_all();
 }
 
 Particion ColaProtegida::obtenerInformacionSiEsPosible() {
@@ -34,11 +34,11 @@ Particion ColaProtegida::obtenerInformacionSiEsPosible() {
 		 if (this->terminamos){
 	     	 return Particion();
 		 }
-		 this->taskVoid.wait(unique_lock);
+		 this->colaVacia.wait(unique_lock);
 	 }
 	 Particion name = std::move(this->informacionCola.front());
 	 this->informacionCola.pop();
-	 this->taskFull.notify_all();
+	 this->colaLlena.notify_all();
 	 return name;
 }
 

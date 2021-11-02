@@ -23,6 +23,10 @@ public:
 	EjecutorTareas(ColaProtegida& colaPorUsar,std::string dataset
 			, int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 
+	/*
+	 * Popea la cola compartida, y luego de popear manda a ejecutar
+	 * lo que ordene la Particion.
+	 */
 	void operator()();
 
 	virtual ~EjecutorTareas();

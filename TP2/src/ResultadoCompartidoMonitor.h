@@ -19,9 +19,6 @@ class ResultadoCompartidoMonitor {
 private:
 	std::vector<OperacionStrategy*> operacionCompartida;
 	std::mutex m;
-	bool lecturaValida;
-	std::string operacion;
-	int filaFinal;
 
 	ResultadoCompartidoMonitor(const ResultadoCompartidoMonitor &other) = delete;
 
@@ -30,11 +27,18 @@ private:
 
 public:
 	ResultadoCompartidoMonitor();
-
+	/*
+	 * Se crea la operacion en donde se guardaran los resultados parciales
+	 * de las Particiones que seran enviadas.
+	 */
 	void crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion);
-
+	/*
+	 * Guarda el resultado parcial de la operacion que se hizo en la Particion.
+	 */
 	void guardarResultadosParciales(OperacionStrategy operacionParcial,int nroParticion);
-
+	/*
+	 * Imprime el resultado final de las distintas operaciones.
+	 */
 	void imprimirResultado();
 
 	virtual ~ResultadoCompartidoMonitor();

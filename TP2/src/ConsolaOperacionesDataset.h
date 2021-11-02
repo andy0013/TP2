@@ -30,8 +30,10 @@ public:
 	explicit ConsolaOperacionesDataset(ColaProtegida &protecetedQueue);
 	/*
 	 * Manda a solicitar valores a usuario
-	 * Mientras el usuario solicite, envia
-	 * a ejecutar el splitApplycombine
+	 * Cuando recibe stdin - toma esa informacion
+	 * a traves de la clase MensajeroDeParticiones y
+	 * De la clase ParserSolicitudUsuario, y luego
+	 * las envia como Particiones a la Cola.
 	 */
 	void solicitarYDispararSolicitudUsuario(char *argv[],ResultadoCompartidoMonitor& resultadoProtegido);
 

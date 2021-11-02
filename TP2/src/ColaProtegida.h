@@ -21,9 +21,9 @@ private:
 	std::queue<Particion> informacionCola;
     std::mutex m;
     bool terminamos;
-    size_t limitThreads;
-    std::condition_variable taskVoid;
-    std::condition_variable taskFull;
+    size_t limiteDeHilos;
+    std::condition_variable colaVacia;
+    std::condition_variable colaLlena;
 
     ColaProtegida(const ColaProtegida &other) = delete;
 
@@ -31,11 +31,19 @@ private:
 
 public:
 	explicit ColaProtegida(int threadsToUse);
-
+	/*
+	 * se modifica el bool terminamos, que se utilizaba como desencadenante
+	 * para enviar una Particion Token que avise a los hilos que
+	 * deben finalizar.
+	 */
 	void terminarQueue();
-
+	/*
+	 * Hace un push a la cola siempre y cuando el limite lo permita.
+	 */
 	void agregarParticionSiEsPosible(Particion particion);
-
+	/*
+	 * Retorna la Particion popeada
+	 */
 	Particion obtenerInformacionSiEsPosible();
 
 	virtual ~ColaProtegida();

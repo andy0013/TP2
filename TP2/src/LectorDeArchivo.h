@@ -25,6 +25,9 @@ private:
 
 
 public:
+	/*
+	 * Ahora respeta RAII
+	 */
 	LectorDeArchivo(const std::string& pathPorLeer, int cantidadCols);
 	/*
 	 * Situa el puntero de lectura en la ubicacion de la

@@ -7,16 +7,9 @@
 
 #include "ResultadoCompartidoMonitor.h"
 
-ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {
-	this->lecturaValida = true;
-	this->filaFinal = 0;
-}
-
-
-
+ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {}
 
 void ResultadoCompartidoMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion) {
-	this->operacion = operacion;
 	OperacionStrategy *operacionPorGuardar = new OperacionStrategy();
 	operacionPorGuardar->StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
