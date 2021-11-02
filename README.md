@@ -117,4 +117,26 @@ En varias ocasiones durante el desarrollo me quede pensando:
 
 Cuestiones que en este momento me parecen completamente logicas y entendibles, en ese momento se me plantearon como un gran dilema, para el cual me toco ejecutar una y otra vez en modo debbug, agregar endpoints, y revisar el codigo - modificaciones agregadas.
 
+# CORRECCION DE ISSUES
 
+En esta seccion se explicara algunos de los Issues en los cuales nos encontramos con errores o cosas mas complicadas, o se requiere documentar algo en particular.
+En referencia a los Issues no mencionados dejo explicito que fueron absolutamente todos revisados y corregidos. 
+
+## LEAKS DE MEMORIA
+Arrancando por los mas "sencillos" o automaticos, comenzamos por los Leaks de memoria, en muchos casos, se realizaron reservas de memoria en el heap injustificadamente, se redujeron todas las solicitudes de memoria salvo en los siguientes casos:
+
+*- *OperacionMonitor*, esta clase almacena la informacion compartida a la que acceden todos los hilos, esta informacion que debe ser modificable desde distintos hilos se almacena en el Heap, ya que los distintos hilos comparten esta seccion.
+
+--  *OperacionStrategy* asi mismo esta clase que forma parte de la anterior mencionada, y aplica polimorfismo, por esto se reserva memoria en el Heap.
+-- *GestorHilos* Esta clase tiene un contenedor de objetos que no pueden ser copiados/movidos que son los threads, por esta razon se reservo memoria en el Heap.
+
+## COPIAS DE STRING
+En muchas situaciones me paso de estar enviando parametros por copia innecesariamente, en TODOS esos casos se corrigio para enviar referencias o moverlos segun sea necesario Y EN LOS QUE SEA POSIBLE, hay algunos casos en los que necesitaba que sean copias, voy a nombrar un ejemplo:
+
+-- *MensajeroDeParticiones* Esta clase conociendo el nro de filas por particiones y fila inicio/fin, divide y calcula las particiones por enviar, ya que hay datos que son enviados en las Particiones, pero luego se siguen modificando y reutilizando, no podia moverlos, ya que los sigo usando, pero tampoco podia enviar las referencias, ya que nuevamente, seguiran modificandose. 
+
+## COPIAS DE CLASES
+
+Luego de dejar el codigo 100% funcionando, se procedio a hacer un refactor, corriguiendo las copias innecesarias, esta cuestion no solo envolvia a nuestros datos primitivos, sino a muchas clases, se hizo a todas las clases NO copiables excepto a 2.
+
+Las clases de las que hablamos son __Particion__ y __EjecutorTareas__, estas clases, si bien es de mi interes que sean no copiables, no logre solucionar que al tratar de hacerlas movibles tenia problemas al pasar de la clase "A" a la clase "B" un atributo en el cual teniamos un monitor que almacenaba objetos compartidos por los hilos.
