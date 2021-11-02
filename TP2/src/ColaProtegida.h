@@ -5,8 +5,8 @@
  *      Author: andres
  */
 
-#ifndef PROTECETEDQUEUE_H_
-#define PROTECETEDQUEUE_H_
+#ifndef COLAPROTEGIDA_H_
+#define COLAPROTEGIDA_H_
 
 #include <queue>
 #include <thread>
@@ -16,29 +16,29 @@
 
 
 
-class ProtecetedQueue {
+class ColaProtegida {
 private:
-	std::queue<Particion> threads;
+	std::queue<Particion> informacionCola;
     std::mutex m;
     bool terminamos;
     size_t limitThreads;
     std::condition_variable taskVoid;
     std::condition_variable taskFull;
 
-    ProtecetedQueue(const ProtecetedQueue &other) = delete;
+    ColaProtegida(const ColaProtegida &other) = delete;
 
-    ProtecetedQueue& operator=(const ProtecetedQueue &other) = delete;
+    ColaProtegida& operator=(const ColaProtegida &other) = delete;
 
 public:
-	explicit ProtecetedQueue(int threadsToUse);
+	explicit ColaProtegida(int threadsToUse);
 
 	void terminarQueue();
 
 	void agregarParticionSiEsPosible(Particion particion);
 
-	Particion obtenerParticionSiEsPosible();
+	Particion obtenerInformacionSiEsPosible();
 
-	virtual ~ProtecetedQueue();
+	virtual ~ColaProtegida();
 };
 
-#endif /* PROTECETEDQUEUE_H_ */
+#endif /* COLAPROTEGIDA_H_ */

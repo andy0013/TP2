@@ -8,29 +8,27 @@
 #include "ConsolaOperacionesDataset.h"
 
 ConsolaOperacionesDataset::ConsolaOperacionesDataset(
-		ProtecetedQueue &protecetedQueue) :
+		ColaProtegida &protecetedQueue) :
 		colaDeEjecuciones(protecetedQueue) {
 }
 
 void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
-		char *argv[]) {
+		char *argv[],OperacionMonitor& resultadoProtegido) {
 	int nroSolicitudUsuario = 0;
 	std::string line;
 	ParserSolicitudUsuario solicitudUsuario;
 	MensajeroDeParticiones mensajero(solicitudUsuario);
 	while (std::getline(std::cin, line)) {
 		solicitudUsuario.parsearInputDeUsuario(line);
-		mensajero.prepararMonitorConValoresIngresadosPorUsuario(operacion);
-		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
-				operacion, nroSolicitudUsuario);
+		resultadoProtegido.crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(solicitudUsuario.obtenerOperacionDelInputRecibido());
+		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones, nroSolicitudUsuario);
 		nroSolicitudUsuario++;
+		if(nroSolicitudUsuario==4)
+			break;
 	}
 	mensajero.enviarToken(this->colaDeEjecuciones);
 }
 
-void ConsolaOperacionesDataset::imprimir() {
-	this->operacion.imprimirResultado();
-}
 
 ConsolaOperacionesDataset::~ConsolaOperacionesDataset() {
 }

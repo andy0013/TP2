@@ -7,20 +7,21 @@
 
 #ifndef EJECUTORTAREAS_H_
 #define EJECUTORTAREAS_H_
-#include "ProtecetedQueue.h"
 #include "Particion.h"
 #include <string>
 #include <mutex>
+#include "ColaProtegida.h"
 
 class EjecutorTareas {
 private:
-	ProtecetedQueue& colaCompartidaConTareas;
+	ColaProtegida& colaCompartidaConTareas;
+	OperacionMonitor& resultadoProtegido;
 	std::string dataset;
 	int columnas;
 
 public:
-	EjecutorTareas(ProtecetedQueue& colaPorUsar,std::string dataset
-			, int columnas);
+	EjecutorTareas(ColaProtegida& colaPorUsar,std::string dataset
+			, int columnas,OperacionMonitor& resultadoProtegido);
 
 	void operator()();
 

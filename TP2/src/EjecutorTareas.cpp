@@ -7,9 +7,9 @@
 
 #include "EjecutorTareas.h"
 
-EjecutorTareas::EjecutorTareas(ProtecetedQueue &colaPorUsar,
-		const std::string dataset , int columnas) :
-		colaCompartidaConTareas(colaPorUsar){
+EjecutorTareas::EjecutorTareas(ColaProtegida &colaPorUsar,
+		const std::string dataset , int columnas,OperacionMonitor& resultadoProtegido) :
+		colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido){
 	this->columnas = columnas;
 	this->dataset = dataset;
 }
@@ -18,9 +18,9 @@ void EjecutorTareas::operator()() {
 	bool hilosSiguenEjecutando = true;
 	while (hilosSiguenEjecutando) {
 		Particion particionPorEjecutar =
-				this->colaCompartidaConTareas.obtenerParticionSiEsPosible();
+				this->colaCompartidaConTareas.obtenerInformacionSiEsPosible();
 		if (!particionPorEjecutar.esElToken()) {
-			particionPorEjecutar.ejecutar(this->dataset,this->columnas);
+			particionPorEjecutar.ejecutar(this->dataset,this->columnas,resultadoProtegido);
 		} else {
 			hilosSiguenEjecutando = false;
 		}

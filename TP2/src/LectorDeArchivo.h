@@ -15,7 +15,6 @@
 
 class LectorDeArchivo {
 private:
-	std::string pathDeArchivo;
 	std::fstream archivo;
 	int cantidadDeColumnas;
 
@@ -26,7 +25,7 @@ private:
 
 
 public:
-	LectorDeArchivo(std::string pathPorLeer, int cantidadCols);
+	LectorDeArchivo(const std::string& pathPorLeer, int cantidadCols);
 	/*
 	 * Situa el puntero de lectura en la ubicacion de la
 	 * fila inicial de donde leer valores.

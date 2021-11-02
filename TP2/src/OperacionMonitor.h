@@ -23,13 +23,6 @@ private:
 	std::string operacion;
 	int filaFinal;
 
-	void splitApply(int filasPorParticiones,
-			OperacionStrategy &operacionParcial,
-			 int filaFinal, int filaInicial,
-			int columna,std::string dataset,int columnas);
-
-	void combine(OperacionStrategy operacionParcial, int nroParticion);
-
 	OperacionMonitor(const OperacionMonitor &other) = delete;
 
 	OperacionMonitor& operator=(const OperacionMonitor &other) = delete;
@@ -38,11 +31,9 @@ private:
 public:
 	OperacionMonitor();
 
-	void datosIngresadosPorUser(int filaFinal, std::string operacion);
+	void crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion);
 
-	void splitApplyCombine(std::string dataset,int columnas,
-			int filasPorParticiones, int filaInicial, int nroParticion, int filaFinal
-			,int columna);
+	void guardarResultadosParciales(OperacionStrategy operacionParcial,int nroParticion);
 
 	void imprimirResultado();
 

@@ -1,14 +1,14 @@
 #include "GestorHilos.h"
 
-GestorHilos::GestorHilos(ProtecetedQueue &colaCompartida, int cantidadHilos) :
+GestorHilos::GestorHilos(ColaProtegida &colaCompartida, int cantidadHilos) :
 		colaCompartida(colaCompartida) {
 	this->cantidadHilos = cantidadHilos;
 }
 
 void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
-		, int columnas) {
+		, int columnas,OperacionMonitor& resultadoProtegido) {
 	for (int i = 0; i < this->cantidadHilos; i++) {
-		EjecutorTareas hilo(this->colaCompartida,dataset,columnas);
+		EjecutorTareas hilo(this->colaCompartida,dataset,columnas,resultadoProtegido);
 		this->operacionPorDisparar.push_back(std::move(hilo));
 	}
 

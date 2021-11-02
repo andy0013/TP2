@@ -2,12 +2,12 @@
 #ifndef GESTORHILOS_H_
 #define GESTORHILOS_H_
 #include <string>
-#include "ProtecetedQueue.h"
 #include "EjecutorTareas.h"
 
 #include <cstdio>
 #include <vector>
 #include <thread>
+#include "ColaProtegida.h"
 
 
 
@@ -15,7 +15,7 @@ class GestorHilos {
 private:
 	int cantidadHilos;
 
-	ProtecetedQueue& colaCompartida;
+	ColaProtegida& colaCompartida;
 
 	std::vector<std::thread*> hilosEnCurso;
 
@@ -30,10 +30,10 @@ public:
 	/*
 	 * Iniciamos clase, recibe como parametro sus atributos.
 	 */
-	GestorHilos(ProtecetedQueue& colaCompartida,int cantidadHilos);
+	GestorHilos(ColaProtegida& colaCompartida,int cantidadHilos);
 
 	void iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
-			, int columnas);
+			, int columnas,OperacionMonitor& resultadoProtegido);
 
 	void verificarFinalizacionHilos();
 

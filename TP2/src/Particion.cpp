@@ -8,8 +8,7 @@
 #include "Particion.h"
 
 
-Particion::Particion(OperacionMonitor &operacionMonitor) :
-		monitor(operacionMonitor) {
+Particion::Particion(){
 	this->nroParticion = (-1);
 	this->filasPorParticiones = 0;
 	this->columna = 0;
@@ -17,10 +16,9 @@ Particion::Particion(OperacionMonitor &operacionMonitor) :
 	this->filaInicial = 0;
 }
 
-Particion::Particion(OperacionMonitor &operacionMonitor,
-		int filasPorParticiones, int nroPart, int filaFinal, int filaInicial,
-		int columna) :
-		monitor(operacionMonitor) {
+Particion::Particion(int filasPorParticiones, int nroPart, int filaFinal, int filaInicial,
+		int columna, std::string operacionPorEjecutarEnParalelo){
+	this->operacionPorEjecutarEnParalelo=(operacionPorEjecutarEnParalelo);
 	this->nroParticion = nroPart;
 	this->columna = columna;
 	this->filasPorParticiones = filasPorParticiones;
@@ -28,12 +26,35 @@ Particion::Particion(OperacionMonitor &operacionMonitor,
 	this->filaInicial = filaInicial;
 }
 
-void Particion::ejecutar(std::string dataset , int columnas) {
-	this->monitor.splitApplyCombine(std::move(dataset),std::move(columnas)
-	, std::move(this->filasPorParticiones),
-			std::move(this->filaInicial), std::move(this->nroParticion)
-	, std::move(this->filaFinal),
-			std::move(this->columna));
+Particion::Particion(const Particion &&other){
+	this->operacionPorEjecutarEnParalelo= other.operacionPorEjecutarEnParalelo;
+	this->nroParticion = other.nroParticion;
+	this->columna = other.columna;
+	this->filasPorParticiones = other.filasPorParticiones;
+	this->filaFinal = other.filaFinal;
+	this->filaInicial = other.filaInicial;
+
+}
+
+
+void Particion::resolverValorParcialDeParticionEnParalelo(int columnas,
+		OperacionStrategy& operacionParcial, std::string &dataset) {
+	LectorDeArchivo archivoPorUsar((dataset), (columnas));
+	archivoPorUsar.situarLectorEnFilaInicial(filaInicial);
+	for (int i = 0; i < filasPorParticiones; i++) {
+		int fila = i + filaInicial;
+		if (fila < filaFinal)
+			operacionParcial.StrategyRealizarOperacion(
+					archivoPorUsar.obtenerDatosDeArchivo(columna));
+	}
+}
+
+void Particion::ejecutar(std::string dataset , int columnas, OperacionMonitor& resultadoProtegido) {
+	OperacionStrategy operacionParcial;
+	operacionParcial.StrategyCrearOperacion(operacionPorEjecutarEnParalelo);
+	resolverValorParcialDeParticionEnParalelo(columnas,
+			operacionParcial, dataset);
+	resultadoProtegido.guardarResultadosParciales(std::move(operacionParcial),this->nroParticion);
 }
 
 bool Particion::esElToken() {

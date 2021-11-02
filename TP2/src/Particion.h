@@ -8,25 +8,37 @@
 #ifndef PARTICION_H_
 #define PARTICION_H_
 #include "LectorDeArchivo.h"
+#include "OperacionStrategy.h"
 #include "OperacionMonitor.h"
 #include <string>
 
 class Particion {
 private:
-	OperacionMonitor &monitor;
+	std::string operacionPorEjecutarEnParalelo;
 	int filasPorParticiones;
 	int nroParticion;
 	int filaFinal;
 	int columna;
 	int filaInicial;
+
+	void resolverValorParcialDeParticionEnParalelo(int columnas,
+			OperacionStrategy& operacionParcial, std::string &dataset);
+
+
+	Particion(const Particion &other) = delete;
+
+	Particion& operator=(const Particion &other) = delete;
+
+
 public:
-	explicit Particion(OperacionMonitor &operacionMonitor);
+	explicit Particion();
 
-	Particion(OperacionMonitor &operacionMonitor,
-			int filasPorParticiones, int nroParticion, int filaFinal,
-			int filaInicial,int columna);
+	Particion(const Particion &&other);
 
-	void ejecutar(std::string dataset , int columnas);
+	Particion(int filasPorParticiones, int nroParticion, int filaFinal,
+			int filaInicial,int columna,std::string operacionPorEjecutarEnParalelo);
+
+	void ejecutar(std::string dataset , int columnas,OperacionMonitor& resultadoProtegido);
 
 	bool esElToken();
 

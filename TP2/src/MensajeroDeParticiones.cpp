@@ -13,8 +13,7 @@ MensajeroDeParticiones::MensajeroDeParticiones(
 }
 
 void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
-		bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
-		OperacionMonitor &operacion,
+		bool agregarParticionIncompleta, ColaProtegida &colaDeEjecuciones,
 		int nroParticion, int columna) {
 	int filaInicial =
 			this->infoIngreasadaPorUsuario
@@ -23,34 +22,26 @@ void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 			this->infoIngreasadaPorUsuario
 			.obtenerNroFilasPorParticionDelInputRecibido();
 	for (int i = 0; i < nroParticionesPorUsar; i++) {
-		Particion particion(operacion, salto, nroParticion,
-				filaInicial + salto, filaInicial,columna);
-		colaDeEjecuciones.agregarParticionSiEsPosible(particion);
+		Particion particion(salto, nroParticion,
+				filaInicial + salto, filaInicial,columna,this->infoIngreasadaPorUsuario.obtenerOperacionDelInputRecibido());
+		colaDeEjecuciones.agregarParticionSiEsPosible(std::move(particion));
 		filaInicial = filaInicial + salto;
 	}
 	if (agregarParticionIncompleta) {
-		Particion particion(operacion, salto, nroParticion,
+		Particion particion(salto, nroParticion,
 				this->infoIngreasadaPorUsuario
 				.obtenerFilaFinDelInputRecibido(),
-				filaInicial,columna);
-		colaDeEjecuciones.agregarParticionSiEsPosible(particion);
+				filaInicial,columna,this->infoIngreasadaPorUsuario.obtenerOperacionDelInputRecibido());
+		colaDeEjecuciones.agregarParticionSiEsPosible(std::move(particion));
 	}
 }
 
-void MensajeroDeParticiones::prepararMonitorConValoresIngresadosPorUsuario(
-		OperacionMonitor &operacion) {
-	operacion.datosIngresadosPorUser(
-			this->infoIngreasadaPorUsuario.obtenerFilaFinDelInputRecibido(),
-			this->infoIngreasadaPorUsuario.obtenerOperacionDelInputRecibido());
-}
-
-void MensajeroDeParticiones::enviarToken(ProtecetedQueue &colaDeEjecuciones) {
+void MensajeroDeParticiones::enviarToken(ColaProtegida &colaDeEjecuciones) {
 	colaDeEjecuciones.terminarQueue();
 }
 
 void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
-		ProtecetedQueue &colaDeEjecuciones, OperacionMonitor &operacion
-		, int nroParticion) {
+		ColaProtegida &colaDeEjecuciones, int nroParticion) {
 	int filasPorUsar =
 			this->infoIngreasadaPorUsuario.obtenerFilaFinDelInputRecibido()
 					- this->infoIngreasadaPorUsuario
@@ -68,7 +59,7 @@ void MensajeroDeParticiones::crearParticionesYEnviarALaQueue(
 		enviarParticionIncompleta = false;
 	}
 	enviarParticiones(nroParticionesPorUsar, enviarParticionIncompleta,
-			colaDeEjecuciones, operacion, nroParticion,
+			colaDeEjecuciones, nroParticion,
 			this->infoIngreasadaPorUsuario.obtenerColumnaPorUsarDelInputRecibido());
 }
 

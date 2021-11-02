@@ -7,8 +7,8 @@
 
 #ifndef MENSAJERODEPARTICIONES_H_
 #define MENSAJERODEPARTICIONES_H_
+#include "ColaProtegida.h"
 #include "GestorHilos.h"
-#include "ProtecetedQueue.h"
 #include "OperacionStrategy.h"
 #include "ParserSolicitudUsuario.h"
 
@@ -24,21 +24,16 @@ class MensajeroDeParticiones {
 public:
 	explicit MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
 
-	void enviarToken(ProtecetedQueue &colaDeEjecuciones);
+	void enviarToken(ColaProtegida &colaDeEjecuciones);
 
-	void prepararMonitorConValoresIngresadosPorUsuario(
-			OperacionMonitor &operacion);
-
-	void crearParticionesYEnviarALaQueue(ProtecetedQueue &colaDeEjecuciones,
-			OperacionMonitor &operacion,
+	void crearParticionesYEnviarALaQueue(ColaProtegida &colaDeEjecuciones,
 			int nroParticion);
 
 	virtual ~MensajeroDeParticiones();
 
 private:
 	void enviarParticiones(int nroParticionesPorUsar,
-			bool agregarParticionIncompleta, ProtecetedQueue &colaDeEjecuciones,
-			OperacionMonitor &operacion,
+			bool agregarParticionIncompleta, ColaProtegida &colaDeEjecuciones,
 			int nroParticion, int columna);
 };
 

@@ -10,17 +10,16 @@
 
 #include <cstdlib>
 #include <string>
+
+#include "ColaProtegida.h"
 #include "OperacionMonitor.h"
-#include "ProtecetedQueue.h"
 #include "ParserSolicitudUsuario.h"
 #include "MensajeroDeParticiones.h"
 #include "LectorDeArchivo.h"
 
 class ConsolaOperacionesDataset {
 
-	ProtecetedQueue &colaDeEjecuciones;
-
-	OperacionMonitor operacion;
+	ColaProtegida &colaDeEjecuciones;
 
 	ConsolaOperacionesDataset(const ConsolaOperacionesDataset &other) = delete;
 
@@ -28,15 +27,13 @@ class ConsolaOperacionesDataset {
 
 
 public:
-	explicit ConsolaOperacionesDataset(ProtecetedQueue &protecetedQueue);
+	explicit ConsolaOperacionesDataset(ColaProtegida &protecetedQueue);
 	/*
 	 * Manda a solicitar valores a usuario
 	 * Mientras el usuario solicite, envia
 	 * a ejecutar el splitApplycombine
 	 */
-	void solicitarYDispararSolicitudUsuario(char *argv[]);
-
-	void imprimir();
+	void solicitarYDispararSolicitudUsuario(char *argv[],OperacionMonitor& resultadoProtegido);
 
 	virtual ~ConsolaOperacionesDataset();
 };

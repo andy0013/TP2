@@ -8,12 +8,10 @@
 #include "LectorDeArchivo.h"
 
 
-LectorDeArchivo::LectorDeArchivo(const std::string pathPorLeer,
-		int cantidadCols) {
-	this->pathDeArchivo = pathPorLeer;
-	this->cantidadDeColumnas = cantidadCols;
-	this->archivo.open(this->pathDeArchivo.c_str(),
-			std::ifstream::in | std::ifstream::out | std::ifstream::binary);
+LectorDeArchivo::LectorDeArchivo(const std::string& pathPorLeer,
+		int cantidadCols) :
+	archivo(pathPorLeer),cantidadDeColumnas(cantidadCols) {
+
 }
 
 void LectorDeArchivo::situarLectorEnFilaInicial(int nroDeFila) {
