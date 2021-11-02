@@ -20,7 +20,7 @@ private:
 	int columnas;
 
 public:
-	EjecutorTareas(ColaProtegida& colaPorUsar,std::string dataset
+	EjecutorTareas(ColaProtegida& colaPorUsar,std::string& dataset
 			, int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 
 	/*

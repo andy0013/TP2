@@ -52,7 +52,6 @@ public:
 	 */
 	void StrategyCombineOperacion(OperacionStrategy* particionNueva);
 
-	void StrategyCrearOperacionParcial(OperacionStrategy* particionNueva);
 
 	virtual ~OperacionStrategy();
 

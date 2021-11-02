@@ -23,8 +23,6 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		resultadoProtegido.crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(solicitudUsuario.obtenerOperacionDelInputRecibido());
 		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones, nroSolicitudUsuario);
 		nroSolicitudUsuario++;
-		if(nroSolicitudUsuario==4)
-			break;
 	}
 	mensajero.cerrarCola(this->colaDeEjecuciones);
 }

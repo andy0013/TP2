@@ -8,10 +8,10 @@
 #include "EjecutorTareas.h"
 
 EjecutorTareas::EjecutorTareas(ColaProtegida &colaPorUsar,
-		const std::string dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido) :
-		colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido){
+		std::string &dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido) :
+		dataset(dataset),colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido){
 	this->columnas = columnas;
-	this->dataset = dataset;
+
 }
 
 void EjecutorTareas::operator()() {

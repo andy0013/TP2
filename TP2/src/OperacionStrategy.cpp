@@ -51,10 +51,6 @@ int OperacionStrategy::StrategyObtenerCantidadDeFilasUsadasParcial() {
 	return this->operacion->obtenerCantiadDeVAloresActual();
 }
 
-void OperacionStrategy::StrategyCrearOperacionParcial(OperacionStrategy* particionNueva){
-	particionNueva->StrategyCrearOperacion(this->tipoDeOperacion);
-}
-
 
 void OperacionStrategy::StrategyCombineOperacion(
 		OperacionStrategy *particionNueva) {

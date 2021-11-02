@@ -36,7 +36,7 @@ public:
 	 * cola reciba la orden "terminarQueue". La cual envia
 	 * la orden de enviar el token.
 	 */
-	void iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
+	void iniciarOperacionHilosHastaQueUserFinaliceInput(std::string& dataset
 			, int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 	/*
 	 * Corrobora que todos los hilos joinearon correctamente.
