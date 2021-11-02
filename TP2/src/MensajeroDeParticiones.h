@@ -24,7 +24,7 @@ class MensajeroDeParticiones {
 public:
 	explicit MensajeroDeParticiones(ParserSolicitudUsuario &infoIngreasadaPorUsuario);
 
-	void enviarToken(ColaProtegida &colaDeEjecuciones);
+	void cerrarCola(ColaProtegida &colaDeEjecuciones);
 
 	void crearParticionesYEnviarALaQueue(ColaProtegida &colaDeEjecuciones,
 			int nroParticion);

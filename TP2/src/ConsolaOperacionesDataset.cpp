@@ -13,7 +13,7 @@ ConsolaOperacionesDataset::ConsolaOperacionesDataset(
 }
 
 void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
-		char *argv[],OperacionMonitor& resultadoProtegido) {
+		char *argv[],ResultadoCompartidoMonitor& resultadoProtegido) {
 	int nroSolicitudUsuario = 0;
 	std::string line;
 	ParserSolicitudUsuario solicitudUsuario;
@@ -26,7 +26,7 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
 		if(nroSolicitudUsuario==4)
 			break;
 	}
-	mensajero.enviarToken(this->colaDeEjecuciones);
+	mensajero.cerrarCola(this->colaDeEjecuciones);
 }
 
 

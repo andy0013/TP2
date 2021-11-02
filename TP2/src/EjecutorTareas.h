@@ -15,13 +15,13 @@
 class EjecutorTareas {
 private:
 	ColaProtegida& colaCompartidaConTareas;
-	OperacionMonitor& resultadoProtegido;
+	ResultadoCompartidoMonitor& resultadoProtegido;
 	std::string dataset;
 	int columnas;
 
 public:
 	EjecutorTareas(ColaProtegida& colaPorUsar,std::string dataset
-			, int columnas,OperacionMonitor& resultadoProtegido);
+			, int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 
 	void operator()();
 

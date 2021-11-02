@@ -33,7 +33,7 @@ public:
 	GestorHilos(ColaProtegida& colaCompartida,int cantidadHilos);
 
 	void iniciarOperacionHilosHastaQueUserFinaliceInput(std::string dataset
-			, int columnas,OperacionMonitor& resultadoProtegido);
+			, int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 
 	void verificarFinalizacionHilos();
 

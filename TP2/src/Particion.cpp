@@ -37,9 +37,9 @@ Particion::Particion(const Particion &&other){
 }
 
 
-void Particion::resolverValorParcialDeParticionEnParalelo(int columnas,
+void Particion::resolverValorParcialDeParticionEnParalelo(int& columnas,
 		OperacionStrategy& operacionParcial, std::string &dataset) {
-	LectorDeArchivo archivoPorUsar((dataset), (columnas));
+	LectorDeArchivo archivoPorUsar(dataset, columnas);
 	archivoPorUsar.situarLectorEnFilaInicial(filaInicial);
 	for (int i = 0; i < filasPorParticiones; i++) {
 		int fila = i + filaInicial;
@@ -49,7 +49,7 @@ void Particion::resolverValorParcialDeParticionEnParalelo(int columnas,
 	}
 }
 
-void Particion::ejecutar(std::string dataset , int columnas, OperacionMonitor& resultadoProtegido) {
+void Particion::ejecutar(std::string dataset , int columnas, ResultadoCompartidoMonitor& resultadoProtegido) {
 	OperacionStrategy operacionParcial;
 	operacionParcial.StrategyCrearOperacion(operacionPorEjecutarEnParalelo);
 	resolverValorParcialDeParticionEnParalelo(columnas,

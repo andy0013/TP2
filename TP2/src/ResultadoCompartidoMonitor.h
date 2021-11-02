@@ -5,8 +5,8 @@
  *      Author: andres
  */
 
-#ifndef OPERACIONMONITOR_H_
-#define OPERACIONMONITOR_H_
+#ifndef RESULTADOCOMPARTIDOMONITOR_H_
+#define RESULTADOCOMPARTIDOMONITOR_H_
 
 #include <iostream>
 #include "LectorDeArchivo.h"
@@ -15,7 +15,7 @@
 #include <vector>
 #include <string>
 
-class OperacionMonitor {
+class ResultadoCompartidoMonitor {
 private:
 	std::vector<OperacionStrategy*> operacionCompartida;
 	std::mutex m;
@@ -23,13 +23,13 @@ private:
 	std::string operacion;
 	int filaFinal;
 
-	OperacionMonitor(const OperacionMonitor &other) = delete;
+	ResultadoCompartidoMonitor(const ResultadoCompartidoMonitor &other) = delete;
 
-	OperacionMonitor& operator=(const OperacionMonitor &other) = delete;
+	ResultadoCompartidoMonitor& operator=(const ResultadoCompartidoMonitor &other) = delete;
 
 
 public:
-	OperacionMonitor();
+	ResultadoCompartidoMonitor();
 
 	void crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion);
 
@@ -37,7 +37,7 @@ public:
 
 	void imprimirResultado();
 
-	virtual ~OperacionMonitor();
+	virtual ~ResultadoCompartidoMonitor();
 };
 
-#endif /* OPERACIONMONITOR_H_ */
+#endif /* RESULTADOCOMPARTIDOMONITOR_H_ */

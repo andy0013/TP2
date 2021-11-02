@@ -12,10 +12,10 @@
 #include <string>
 
 #include "ColaProtegida.h"
-#include "OperacionMonitor.h"
 #include "ParserSolicitudUsuario.h"
 #include "MensajeroDeParticiones.h"
 #include "LectorDeArchivo.h"
+#include "ResultadoCompartidoMonitor.h"
 
 class ConsolaOperacionesDataset {
 
@@ -33,7 +33,7 @@ public:
 	 * Mientras el usuario solicite, envia
 	 * a ejecutar el splitApplycombine
 	 */
-	void solicitarYDispararSolicitudUsuario(char *argv[],OperacionMonitor& resultadoProtegido);
+	void solicitarYDispararSolicitudUsuario(char *argv[],ResultadoCompartidoMonitor& resultadoProtegido);
 
 	virtual ~ConsolaOperacionesDataset();
 };

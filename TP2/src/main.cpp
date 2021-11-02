@@ -23,11 +23,12 @@
 int main(int argc, char *argv[]) {
 	if(argc != 4)
 		return 1;
-	int columnas = atoi(argv[2]);
+	int columnas, hilos;
 	std::string nombreDataset = argv[1];
-	int hilos = atoi(argv[3]);
+	sscanf(argv[2],"%i",&columnas);
+	sscanf(argv[2],"%i",&hilos);
 	ColaProtegida colaDeEjecuciones(hilos);
-	OperacionMonitor resultadoProtegido;
+	ResultadoCompartidoMonitor resultadoProtegido;
 	GestorHilos gestorHilos(colaDeEjecuciones,hilos);
 	ConsolaOperacionesDataset consola(colaDeEjecuciones);
 	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput(nombreDataset,columnas,resultadoProtegido);

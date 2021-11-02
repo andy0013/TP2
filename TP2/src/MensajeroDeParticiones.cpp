@@ -36,7 +36,7 @@ void MensajeroDeParticiones::enviarParticiones(int nroParticionesPorUsar,
 	}
 }
 
-void MensajeroDeParticiones::enviarToken(ColaProtegida &colaDeEjecuciones) {
+void MensajeroDeParticiones::cerrarCola(ColaProtegida &colaDeEjecuciones) {
 	colaDeEjecuciones.terminarQueue();
 }
 

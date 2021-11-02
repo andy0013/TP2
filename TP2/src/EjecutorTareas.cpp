@@ -8,7 +8,7 @@
 #include "EjecutorTareas.h"
 
 EjecutorTareas::EjecutorTareas(ColaProtegida &colaPorUsar,
-		const std::string dataset , int columnas,OperacionMonitor& resultadoProtegido) :
+		const std::string dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido) :
 		colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido){
 	this->columnas = columnas;
 	this->dataset = dataset;

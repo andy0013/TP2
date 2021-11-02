@@ -9,8 +9,8 @@
 #define PARTICION_H_
 #include "LectorDeArchivo.h"
 #include "OperacionStrategy.h"
-#include "OperacionMonitor.h"
 #include <string>
+#include "ResultadoCompartidoMonitor.h"
 
 class Particion {
 private:
@@ -21,7 +21,7 @@ private:
 	int columna;
 	int filaInicial;
 
-	void resolverValorParcialDeParticionEnParalelo(int columnas,
+	void resolverValorParcialDeParticionEnParalelo(int& columnas,
 			OperacionStrategy& operacionParcial, std::string &dataset);
 
 
@@ -38,7 +38,7 @@ public:
 	Particion(int filasPorParticiones, int nroParticion, int filaFinal,
 			int filaInicial,int columna,std::string operacionPorEjecutarEnParalelo);
 
-	void ejecutar(std::string dataset , int columnas,OperacionMonitor& resultadoProtegido);
+	void ejecutar(std::string dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido);
 
 	bool esElToken();
 

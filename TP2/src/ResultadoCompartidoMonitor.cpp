@@ -5,9 +5,9 @@
  *      Author: andres
  */
 
-#include "OperacionMonitor.h"
+#include "ResultadoCompartidoMonitor.h"
 
-OperacionMonitor::OperacionMonitor() {
+ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {
 	this->lecturaValida = true;
 	this->filaFinal = 0;
 }
@@ -15,26 +15,26 @@ OperacionMonitor::OperacionMonitor() {
 
 
 
-void OperacionMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion) {
+void ResultadoCompartidoMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion) {
 	this->operacion = operacion;
 	OperacionStrategy *operacionPorGuardar = new OperacionStrategy();
 	operacionPorGuardar->StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
 }
 
-void OperacionMonitor::guardarResultadosParciales(OperacionStrategy operacionParcial,int nroParticion){
+void ResultadoCompartidoMonitor::guardarResultadosParciales(OperacionStrategy operacionParcial,int nroParticion){
 	std::lock_guard<std::mutex> l(m);
 	this->operacionCompartida[nroParticion]->StrategyCombineOperacion(
 				&operacionParcial);
 }
 
-void OperacionMonitor::imprimirResultado() {
+void ResultadoCompartidoMonitor::imprimirResultado() {
 	for (size_t t = 0; t < this->operacionCompartida.size(); t++) {
 		this->operacionCompartida[t]->StrategyImprimirValorFinalOperacion();
 	}
 }
 
-OperacionMonitor::~OperacionMonitor() {
+ResultadoCompartidoMonitor::~ResultadoCompartidoMonitor() {
 	for (size_t t = 0; t < this->operacionCompartida.size(); t++) {
 		delete this->operacionCompartida[t];
 	}

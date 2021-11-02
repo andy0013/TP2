@@ -10,9 +10,7 @@
 
 LectorDeArchivo::LectorDeArchivo(const std::string& pathPorLeer,
 		int cantidadCols) :
-	archivo(pathPorLeer),cantidadDeColumnas(cantidadCols) {
-
-}
+	archivo(pathPorLeer),cantidadDeColumnas(cantidadCols) {}
 
 void LectorDeArchivo::situarLectorEnFilaInicial(int nroDeFila) {
 	int fila = nroDeFila * this->cantidadDeColumnas * 2;
