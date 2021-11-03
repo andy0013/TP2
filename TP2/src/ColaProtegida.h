@@ -9,6 +9,7 @@
 #define COLAPROTEGIDA_H_
 
 #include <queue>
+#include <utility>
 #include <thread>
 #include "Particion.h"
 #include <mutex>
