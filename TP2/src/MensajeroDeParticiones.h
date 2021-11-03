@@ -11,7 +11,7 @@
 #include "GestorHilos.h"
 #include "OperacionStrategy.h"
 #include "ParserSolicitudUsuario.h"
-
+#include <utility>
 class MensajeroDeParticiones {
 	ParserSolicitudUsuario &infoIngreasadaPorUsuario;
 

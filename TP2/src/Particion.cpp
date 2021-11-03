@@ -35,8 +35,8 @@ Particion::Particion(const Particion &&other) {
 	this->filaInicial = other.filaInicial;
 }
 
-void Particion::resolverValorParcialDeParticionEnParalelo(int &columnas,
-		OperacionStrategy &operacionParcial, std::string &dataset) {
+void Particion::resolverValorParcialDeParticionEnParalelo(const int &columnas,
+		OperacionStrategy &operacionParcial, const std::string &dataset) {
 	LectorDeArchivo archivoPorUsar(dataset, columnas);
 	archivoPorUsar.situarLectorEnFilaInicial(filaInicial);
 	for (int i = 0; i < filasPorParticiones; i++) {

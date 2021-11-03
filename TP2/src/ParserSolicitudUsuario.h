@@ -30,7 +30,7 @@ public:
 	 * POST: Bool que indica si el usuario dejo de ingresar
 	 * o ingreso un #EOF
 	 */
-	void parsearInputDeUsuario(std::string &input);
+	void parsearInputDeUsuario(const std::string &input);
 	/*
 	 * POST: Fila Inicio obtenida.
 	 */
@@ -66,13 +66,13 @@ private:
 	 * POST: parsea el string recibido por input
 	 * y lo guarda en los atributos de la clase.
 	 */
-	void identificarInformacionIngresadaStdin(std::string &input);
+	void identificarInformacionIngresadaStdin(const std::string &input);
 
 	/*
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo
 	 * de donde se van opteniendo valores separados por '\n'
 	 */
-	int obtenerValor(std::string *value, std::string input, int inicio);
+	int obtenerValor(std::string *value, const std::string input, int inicio);
 };
 
 #endif /* PARSERSOLICITUDUSUARIO_H_ */

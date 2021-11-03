@@ -11,7 +11,7 @@
 #include "OperacionStrategy.h"
 #include <string>
 #include "ResultadoCompartidoMonitor.h"
-
+#include <utility>
 class Particion {
 private:
 	std::string operacionPorEjecutarEnParalelo;
@@ -21,8 +21,8 @@ private:
 	int columna;
 	int filaInicial;
 
-	void resolverValorParcialDeParticionEnParalelo(int& columnas,
-			OperacionStrategy& operacionParcial, std::string &dataset);
+	void resolverValorParcialDeParticionEnParalelo(const int& columnas,
+			OperacionStrategy& operacionParcial,const std::string &dataset);
 
 
 	Particion(const Particion &other) = delete;
@@ -31,7 +31,7 @@ private:
 
 
 public:
-	explicit Particion();
+	Particion();
 
 	Particion(const Particion &&other);
 
