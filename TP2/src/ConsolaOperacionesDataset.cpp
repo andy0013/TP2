@@ -26,8 +26,6 @@ void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(char *argv[],
 		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
 				nroSolicitudUsuario);
 		nroSolicitudUsuario++;
-		if (nroSolicitudUsuario == 3)
-			break;
 	}
 	mensajero.cerrarCola(this->colaDeEjecuciones);
 }
