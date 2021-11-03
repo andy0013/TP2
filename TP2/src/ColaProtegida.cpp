@@ -7,7 +7,6 @@
 
 #include "ColaProtegida.h"
 
-
 ColaProtegida::ColaProtegida(int threadsToUse) {
 	this->limiteDeHilos = threadsToUse;
 	this->terminamos = false;
@@ -15,11 +14,11 @@ ColaProtegida::ColaProtegida(int threadsToUse) {
 
 void ColaProtegida::agregarParticionSiEsPosible(Particion particionPorPushear) {
 	std::unique_lock<std::mutex> unique_lock(this->m);
-	 while (this->informacionCola.size() == this->limiteDeHilos){
-		 this->colaLlena.wait(unique_lock);
-	 }
-	 this->informacionCola.push(std::move(particionPorPushear));
-	 this->colaVacia.notify_all();
+	while (this->informacionCola.size() == this->limiteDeHilos) {
+		this->colaLlena.wait(unique_lock);
+	}
+	this->informacionCola.push(std::move(particionPorPushear));
+	this->colaVacia.notify_all();
 }
 
 void ColaProtegida::terminarQueue() {
@@ -29,18 +28,18 @@ void ColaProtegida::terminarQueue() {
 }
 
 Particion ColaProtegida::obtenerInformacionSiEsPosible() {
-	 std::unique_lock<std::mutex> unique_lock(this->m);
-	 while (this->informacionCola.empty()){
-		 if (this->terminamos){
-	     	 return Particion();
-		 }
-		 this->colaVacia.wait(unique_lock);
-	 }
-	 Particion name = std::move(this->informacionCola.front());
-	 this->informacionCola.pop();
-	 this->colaLlena.notify_all();
-	 return name;
+	std::unique_lock<std::mutex> unique_lock(this->m);
+	while (this->informacionCola.empty()) {
+		if (this->terminamos) {
+			return Particion();
+		}
+		this->colaVacia.wait(unique_lock);
+	}
+	Particion name = std::move(this->informacionCola.front());
+	this->informacionCola.pop();
+	this->colaLlena.notify_all();
+	return name;
 }
 
-
-ColaProtegida::~ColaProtegida(){}
+ColaProtegida::~ColaProtegida() {
+}

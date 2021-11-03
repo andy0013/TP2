@@ -7,8 +7,7 @@
 
 #include "Particion.h"
 
-
-Particion::Particion(){
+Particion::Particion() {
 	this->nroParticion = (-1);
 	this->filasPorParticiones = 0;
 	this->columna = 0;
@@ -16,9 +15,10 @@ Particion::Particion(){
 	this->filaInicial = 0;
 }
 
-Particion::Particion(int filasPorParticiones, int nroPart, int filaFinal, int filaInicial,
-		int columna, std::string operacionPorEjecutarEnParalelo){
-	this->operacionPorEjecutarEnParalelo=(operacionPorEjecutarEnParalelo);
+Particion::Particion(int filasPorParticiones, int nroPart, int filaFinal,
+		int filaInicial, int columna,
+		std::string operacionPorEjecutarEnParalelo) {
+	this->operacionPorEjecutarEnParalelo = (operacionPorEjecutarEnParalelo);
 	this->nroParticion = nroPart;
 	this->columna = columna;
 	this->filasPorParticiones = filasPorParticiones;
@@ -26,19 +26,17 @@ Particion::Particion(int filasPorParticiones, int nroPart, int filaFinal, int fi
 	this->filaInicial = filaInicial;
 }
 
-Particion::Particion(const Particion &&other){
-	this->operacionPorEjecutarEnParalelo= other.operacionPorEjecutarEnParalelo;
+Particion::Particion(const Particion &&other) {
+	this->operacionPorEjecutarEnParalelo = other.operacionPorEjecutarEnParalelo;
 	this->nroParticion = other.nroParticion;
 	this->columna = other.columna;
 	this->filasPorParticiones = other.filasPorParticiones;
 	this->filaFinal = other.filaFinal;
 	this->filaInicial = other.filaInicial;
-
 }
 
-
-void Particion::resolverValorParcialDeParticionEnParalelo(int& columnas,
-		OperacionStrategy& operacionParcial, std::string &dataset) {
+void Particion::resolverValorParcialDeParticionEnParalelo(int &columnas,
+		OperacionStrategy &operacionParcial, std::string &dataset) {
 	LectorDeArchivo archivoPorUsar(dataset, columnas);
 	archivoPorUsar.situarLectorEnFilaInicial(filaInicial);
 	for (int i = 0; i < filasPorParticiones; i++) {
@@ -49,12 +47,14 @@ void Particion::resolverValorParcialDeParticionEnParalelo(int& columnas,
 	}
 }
 
-void Particion::ejecutar(std::string &dataset , int &columnas, ResultadoCompartidoMonitor& resultadoProtegido) {
+void Particion::ejecutar(std::string &dataset, int &columnas,
+		ResultadoCompartidoMonitor &resultadoProtegido) {
 	OperacionStrategy operacionParcial;
 	operacionParcial.StrategyCrearOperacion(operacionPorEjecutarEnParalelo);
-	resolverValorParcialDeParticionEnParalelo(columnas,
-			operacionParcial, dataset);
-	resultadoProtegido.guardarResultadosParciales(std::move(operacionParcial),this->nroParticion);
+	resolverValorParcialDeParticionEnParalelo(columnas, operacionParcial,
+			dataset);
+	resultadoProtegido.guardarResultadosParciales(std::move(operacionParcial),
+			this->nroParticion);
 }
 
 bool Particion::esElToken() {

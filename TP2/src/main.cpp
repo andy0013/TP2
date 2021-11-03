@@ -21,18 +21,19 @@
 #include "Particion.h"
 
 int main(int argc, char *argv[]) {
-	if(argc != 4)
+	if (argc != 4)
 		return 1;
 	int columnas, hilos;
 	std::string nombreDataset = argv[1];
-	sscanf(argv[2],"%i",&columnas);
-	sscanf(argv[2],"%i",&hilos);
+	sscanf(argv[2], "%i", &columnas);
+	sscanf(argv[2], "%i", &hilos);
 	ColaProtegida colaDeEjecuciones(hilos);
 	ResultadoCompartidoMonitor resultadoProtegido;
-	GestorHilos gestorHilos(colaDeEjecuciones,hilos);
+	GestorHilos gestorHilos(colaDeEjecuciones, hilos);
 	ConsolaOperacionesDataset consola(colaDeEjecuciones);
-	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput(nombreDataset,columnas,resultadoProtegido);
-	consola.solicitarYDispararSolicitudUsuario(argv,resultadoProtegido);
+	gestorHilos.iniciarOperacionHilosHastaQueUserFinaliceInput(nombreDataset,
+			columnas, resultadoProtegido);
+	consola.solicitarYDispararSolicitudUsuario(argv, resultadoProtegido);
 	gestorHilos.verificarFinalizacionHilos();
 	resultadoProtegido.imprimirResultado();
 	return 0;

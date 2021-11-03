@@ -18,7 +18,6 @@
 #include "ResultadoCompartidoMonitor.h"
 
 class ConsolaOperacionesDataset {
-
 	ColaProtegida &colaDeEjecuciones;
 
 	ConsolaOperacionesDataset(const ConsolaOperacionesDataset &other) = delete;
@@ -35,7 +34,8 @@ public:
 	 * De la clase ParserSolicitudUsuario, y luego
 	 * las envia como Particiones a la Cola.
 	 */
-	void solicitarYDispararSolicitudUsuario(char *argv[],ResultadoCompartidoMonitor& resultadoProtegido);
+	void solicitarYDispararSolicitudUsuario(char *argv[],
+			ResultadoCompartidoMonitor& resultadoProtegido);
 
 	virtual ~ConsolaOperacionesDataset();
 };

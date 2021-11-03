@@ -28,7 +28,6 @@ private:
 
 
 public:
-
 	OperacionStrategy(OperacionStrategy&& other);
 
 	OperacionStrategy();

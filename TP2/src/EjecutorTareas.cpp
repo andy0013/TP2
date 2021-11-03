@@ -9,9 +9,8 @@
 
 EjecutorTareas::EjecutorTareas(ColaProtegida &colaPorUsar,
 		std::string &dataset , int columnas,ResultadoCompartidoMonitor& resultadoProtegido) :
-		dataset(dataset),colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido){
+		colaCompartidaConTareas(colaPorUsar), resultadoProtegido(resultadoProtegido),dataset(dataset){
 	this->columnas = columnas;
-
 }
 
 void EjecutorTareas::operator()() {

@@ -7,18 +7,21 @@
 
 #include "ResultadoCompartidoMonitor.h"
 
-ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {}
+ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {
+}
 
-void ResultadoCompartidoMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(std::string operacion) {
+void ResultadoCompartidoMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(
+		std::string operacion) {
 	OperacionStrategy *operacionPorGuardar = new OperacionStrategy();
 	operacionPorGuardar->StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
 }
 
-void ResultadoCompartidoMonitor::guardarResultadosParciales(OperacionStrategy operacionParcial,int nroParticion){
+void ResultadoCompartidoMonitor::guardarResultadosParciales(
+		OperacionStrategy operacionParcial, int nroParticion) {
 	std::lock_guard<std::mutex> l(m);
 	this->operacionCompartida[nroParticion]->StrategyCombineOperacion(
-				&operacionParcial);
+			&operacionParcial);
 }
 
 void ResultadoCompartidoMonitor::imprimirResultado() {

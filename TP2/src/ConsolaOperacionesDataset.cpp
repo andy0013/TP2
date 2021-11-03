@@ -12,21 +12,25 @@ ConsolaOperacionesDataset::ConsolaOperacionesDataset(
 		colaDeEjecuciones(protecetedQueue) {
 }
 
-void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(
-		char *argv[],ResultadoCompartidoMonitor& resultadoProtegido) {
+void ConsolaOperacionesDataset::solicitarYDispararSolicitudUsuario(char *argv[],
+		ResultadoCompartidoMonitor &resultadoProtegido) {
 	int nroSolicitudUsuario = 0;
 	std::string line;
 	ParserSolicitudUsuario solicitudUsuario;
 	MensajeroDeParticiones mensajero(solicitudUsuario);
 	while (std::getline(std::cin, line)) {
 		solicitudUsuario.parsearInputDeUsuario(line);
-		resultadoProtegido.crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(solicitudUsuario.obtenerOperacionDelInputRecibido());
-		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones, nroSolicitudUsuario);
+		resultadoProtegido.
+		crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(
+				solicitudUsuario.obtenerOperacionDelInputRecibido());
+		mensajero.crearParticionesYEnviarALaQueue(this->colaDeEjecuciones,
+				nroSolicitudUsuario);
 		nroSolicitudUsuario++;
+		if (nroSolicitudUsuario == 3)
+			break;
 	}
 	mensajero.cerrarCola(this->colaDeEjecuciones);
 }
-
 
 ConsolaOperacionesDataset::~ConsolaOperacionesDataset() {
 }
