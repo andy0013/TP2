@@ -12,6 +12,7 @@ ResultadoCompartidoMonitor::ResultadoCompartidoMonitor() {
 
 void ResultadoCompartidoMonitor::crearInstanciaDeResultadoProtegidoParaLaSolicitudDeUsuario(
 		std::string operacion) {
+	std::lock_guard<std::mutex> l(m);
 	OperacionStrategy *operacionPorGuardar = new OperacionStrategy();
 	operacionPorGuardar->StrategyCrearOperacion(operacion);
 	this->operacionCompartida.push_back(operacionPorGuardar);
