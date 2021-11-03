@@ -50,7 +50,7 @@ void ParserSolicitudUsuario::identificarInformacionIngresadaStdin(
 	this->obtenerValor(&this->operacion, input, i);
 }
 
-int ParserSolicitudUsuario::obtenerValor(std::string *value, const std::string input,
+int ParserSolicitudUsuario::obtenerValor(std::string *value, const std::string &input,
 		int inicio) {
 	int i;
 	for (i = inicio; inicio < (int) ((input.length()) - 1); i++) {

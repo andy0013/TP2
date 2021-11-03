@@ -5,7 +5,7 @@ GestorHilos::GestorHilos(ColaProtegida &colaCompartida, int cantidadHilos) :
 	this->cantidadHilos = cantidadHilos;
 }
 
-void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(std::string& dataset
+void GestorHilos::iniciarOperacionHilosHastaQueUserFinaliceInput(const std::string& dataset
 		, int columnas,ResultadoCompartidoMonitor& resultadoProtegido) {
 	for (int i = 0; i < this->cantidadHilos; i++) {
 		EjecutorTareas hilo(this->colaCompartida,dataset,columnas,resultadoProtegido);

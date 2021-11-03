@@ -17,7 +17,7 @@ Particion::Particion() {
 
 Particion::Particion(int filasPorParticiones, int nroPart, int filaFinal,
 		int filaInicial, int columna,
-		std::string operacionPorEjecutarEnParalelo) {
+		const std::string &operacionPorEjecutarEnParalelo) {
 	this->operacionPorEjecutarEnParalelo = (operacionPorEjecutarEnParalelo);
 	this->nroParticion = nroPart;
 	this->columna = columna;
@@ -47,7 +47,7 @@ void Particion::resolverValorParcialDeParticionEnParalelo(const int &columnas,
 	}
 }
 
-void Particion::ejecutar(std::string &dataset, int &columnas,
+void Particion::ejecutar(const std::string &dataset,const  int &columnas,
 		ResultadoCompartidoMonitor &resultadoProtegido) {
 	OperacionStrategy operacionParcial;
 	operacionParcial.StrategyCrearOperacion(operacionPorEjecutarEnParalelo);

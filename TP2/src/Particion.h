@@ -21,14 +21,12 @@ private:
 	int columna;
 	int filaInicial;
 
-	void resolverValorParcialDeParticionEnParalelo(const int& columnas,
-			OperacionStrategy& operacionParcial,const std::string &dataset);
-
+	void resolverValorParcialDeParticionEnParalelo(const int &columnas,
+			OperacionStrategy &operacionParcial, const std::string &dataset);
 
 	Particion(const Particion &other) = delete;
 
 	Particion& operator=(const Particion &other) = delete;
-
 
 public:
 	Particion();
@@ -36,14 +34,15 @@ public:
 	Particion(const Particion &&other);
 
 	Particion(int filasPorParticiones, int nroParticion, int filaFinal,
-			int filaInicial,int columna,
-			std::string operacionPorEjecutarEnParalelo);
+			int filaInicial, int columna,
+			const std::string &operacionPorEjecutarEnParalelo);
 	/*
 	 * PRE: Monitor con resultado compartido.
 	 * - ejecuta la operacion parcial : sin lock.
 	 * - a traves del monitor guarda el resultado parcial en monitor. con lock
 	 */
-	void ejecutar(std::string &dataset , int &columnas,ResultadoCompartidoMonitor& resultadoProtegido);
+	void ejecutar(const std::string &dataset, const int &columnas,
+			ResultadoCompartidoMonitor &resultadoProtegido);
 	/*
 	 * POST: bool que indica si la Particion es el token
 	 * que indica que el hilo debe terminar.

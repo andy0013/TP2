@@ -72,7 +72,7 @@ private:
 	 * POST: Retorna la ubicacion en el input en la que se esta leyendo
 	 * de donde se van opteniendo valores separados por '\n'
 	 */
-	int obtenerValor(std::string *value, const std::string input, int inicio);
+	int obtenerValor(std::string *value, const std::string &input, int inicio);
 };
 
 #endif /* PARSERSOLICITUDUSUARIO_H_ */
