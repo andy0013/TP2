@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 	int columnas, hilos;
 	std::string nombreDataset = argv[1];
 	sscanf(argv[2], "%i", &columnas);
-	sscanf(argv[2], "%i", &hilos);
+	sscanf(argv[3], "%i", &hilos);
 	ColaProtegida colaDeEjecuciones(hilos);
 	ResultadoCompartidoMonitor resultadoProtegido;
 	GestorHilos gestorHilos(colaDeEjecuciones, hilos);
